@@ -8,14 +8,28 @@
     <style>
         body {
             background-color: white;
-            color: #55565B;
+            color:rgb(115, 114, 114);
         }
-        .navbar {
-            background-color: #B6252A;
-        }
-        .navbar-brand, .nav-link {
-            color: white !important;
-        }
+        nav {
+        background-color: #58A3FC;
+        padding: 10px;
+        font-family: sans-serif;
+        font-weight: bold;
+    }
+
+    nav ul {
+        list-style-type: none;
+    }
+
+    nav ul li {
+        display: inline;
+        margin-right: 20px;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+    }
         footer {
             background-color: #58A3FC; 
             color: white;
