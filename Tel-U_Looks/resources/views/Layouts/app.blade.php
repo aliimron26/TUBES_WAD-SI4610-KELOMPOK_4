@@ -17,22 +17,22 @@
             color: white !important;
         }
         footer {
-            background-color: #58A3FC; /* Updated background color */
+            background-color: #58A3FC; 
             color: white;
-            padding: 20px 0; /* Increased padding for better spacing */
+            padding: 20px 0; 
             text-align: center;
-            font-family: sans-serif; /* Added font family */
-            font-weight: bold; /* Added bold font weight */
+            font-family: sans-serif; 
+            font-weight: bold; 
         }
         .footer-content {
-            max-width: 800px; /* Max width for content */
-            margin: auto; /* Center the footer content */
+            max-width: 800px; 
+            margin: auto;
         }
         footer h2 {
-            margin: 0; /* Remove default margin */
+            margin: 0; 
         }
         footer p {
-            margin: 5px 0; /* Margin for paragraphs */
+            margin: 5px 0; 
         }
     </style>
 </head>
