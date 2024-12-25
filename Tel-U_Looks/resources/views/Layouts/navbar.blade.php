@@ -12,6 +12,8 @@
     nav {
         background-color: #58A3FC;
         padding: 10px;
+        font-family: sans-serif;
+        font-weight: bold;
     }
 
     nav ul {
