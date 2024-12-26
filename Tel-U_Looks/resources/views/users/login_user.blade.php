@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Tel-U Looks</title>
+    <title>Tel-U Looks - Login</title>
     <style>
         * {
             margin: 0;
@@ -130,6 +130,10 @@
             text-decoration: underline;
         }
 
+        .forgot-password {
+            margin-top: 10px;
+        }
+
         .container-right img {
             width: 200px;
             margin-bottom: 20px;
@@ -158,20 +162,22 @@
     <div class="container">
         <div class="container-left">
             <div class="toggle-buttons">
-                <a href="/login_user" class="toggle-btn">Login</a>
-                <a href="/register" class="toggle-btn active">Register</a>
+                <a href="/login" class="toggle-btn active">Login</a>
+                <a href="/register" class="toggle-btn">Register</a>
             </div>
-            <h1>Welcome</h1>
-            <p>Please register to your account</p>
+            <h1>Welcome Back</h1>
+            <p>Please login to your account</p>
             <div class="input-container">
-                <input type="email" id="email" name="email" placeholder="Email" class="input-field">
-                <input type="tel" id="phone" name="phone" placeholder="No Telp" class="input-field">
                 <input type="text" id="username" name="username" placeholder="Username" class="input-field">
                 <input type="password" id="password" name="password" placeholder="Password" class="input-field">
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" class="input-field">
             </div>
-            <button type="submit">Daftar</button>
-            <p>Already have an account? <a href="#">Login here</a></p>
+            <button type="submit">Login</button>
+            <p class="forgot-password">
+                <a href="/forgot-password">Forgot Password?</a>
+            </p>
+            <p>Don't have an account? <a href="/register">Register here</a></p>
+            <hr style="width: 100%; max-width: 300px; margin: 20px 0;">
+            <button onclick="location.href='/admin-login'" style="background-color: #ff4d4d;">Login as Admin</button>
         </div>
         <div class="container-right">
             <img src="logo.png" alt="Tel-U Looks Logo">
