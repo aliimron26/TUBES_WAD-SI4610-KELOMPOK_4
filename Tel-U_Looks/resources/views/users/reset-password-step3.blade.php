@@ -110,7 +110,7 @@
         <p><a href="/login">Back to Login</a></p>
     </div>
     <div class="container-right">
-        <img src="logo.png" alt="Tel-U Looks Logo">
+        <img src="Tel-U_Looks\resources\views\Asset\Logo.png" alt="Tel-U Looks Logo">
         <h2>Tel-U Looks: Explore, Inspire, Express</h2>
     </div>
 

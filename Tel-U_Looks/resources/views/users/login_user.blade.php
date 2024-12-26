@@ -177,10 +177,10 @@
             </p>
             <p>Don't have an account? <a href="/register">Register here</a></p>
             <hr style="width: 100%; max-width: 300px; margin: 20px 0;">
-            <button onclick="location.href='/admin-login'" style="background-color: #ff4d4d;">Login as Admin</button>
+            <button onclick="location.href='/login_admin'" style="background-color: #ff4d4d;">Login as Admin</button>
         </div>
         <div class="container-right">
-            <img src="logo.png" alt="Tel-U Looks Logo">
+            <img src="Tel-U_Looks\resources\views\Asset\Logo.png" alt="Tel-U Looks Logo">
             <h2>Tel-U Looks: Explore, Inspire, Express</h2>
         </div>
     </div>
