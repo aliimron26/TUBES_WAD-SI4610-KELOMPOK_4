@@ -115,10 +115,10 @@
             <input type="tel" id="phone" name="phone" placeholder="No Telp" class="input-field">
             <input type="text" id="username" name="username" placeholder="Username" class="input-field">
             <input type="password" id="password" name="password" placeholder="Password" class="input-field">
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" class="input-field">
         </div>
         <button type="submit">Daftar</button>
         <p>Already have an account? <a href="#">Login here</a></p>
-        <p><a href="#">Forgot Password?</a></p>
     </div>
     <div class="container-right">
         <img src="logo.png" alt="Tel-U Looks Logo">
