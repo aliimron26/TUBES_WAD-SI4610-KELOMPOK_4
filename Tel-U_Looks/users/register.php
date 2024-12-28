@@ -174,7 +174,7 @@
             <p>Already have an account? <a href="login_user.php">Login here</a></p>
         </div>
         <div class="container-right">
-            <img src="../Asset/Logo.png" alt="Tel-U Looks Logo">>
+            <img src="../assets/Logo.png" alt="Tel-U Looks Logo">>
             <h2>Tel-U Looks: Explore, Inspire, Express</h2>
         </div>
     </div>
