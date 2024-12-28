@@ -84,7 +84,7 @@
         <div class="footer-content">
             <h2>Tel-U Looks</h2>
             <p>Jl. Telekomunikasi No. 1, Bandung Terusan Buahbatu - Bojongsoang, Sukapura, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257</p>
-            <p>Tel-U Looks &copy; 2024</p> <!-- Updated copyright information -->
+            <p>Tel-U Looks &copy; 2024</p>
         </div>
     </footer>
     
