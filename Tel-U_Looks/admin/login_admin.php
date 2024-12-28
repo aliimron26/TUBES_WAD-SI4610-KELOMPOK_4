@@ -169,10 +169,10 @@
             </div>
             <button type="submit">Login</button>
             <hr style="width: 100%; max-width: 300px; margin: 20px 0;">
-            <button onclick="location.href='/login_user'" style="background-color: #ff4d4d;">Login as User</button>
+            <button onclick="location.href='../users/login_user.php'" style="background-color: #ff4d4d;">Login as User</button>
         </div>
         <div class="container-right">
-            <img src="Tel-U_Looks\resources\views\Asset\Logo.png" alt="Tel-U Looks Logo">
+            <img src="../Asset/Logo.png" alt="Tel-U Looks Logo">
             <h2>Tel-U Looks: Explore, Inspire, Express</h2>
         </div>
     </div>

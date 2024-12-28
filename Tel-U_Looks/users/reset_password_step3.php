@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password - Step 2</title>
+    <title>Reset Password - Step 3</title>
     <style>
         * {
             margin: 0;
@@ -100,23 +100,24 @@
 </head>
 <body>
     <div class="container-left">
-        <h1>Verify Code</h1>
-        <p>Enter the code sent to your email to verify.</p>
+        <h1>Set New Password</h1>
+        <p>Enter your new password and confirm it below.</p>
         <div class="input-container">
-            <input type="text" id="code" name="code" placeholder="Enter verification code" class="input-field">
+            <input type="password" id="new-password" name="new-password" placeholder="New Password" class="input-field">
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" class="input-field">
         </div>
-        <button type="submit" onclick="handleVerifyCode()">Verify Code</button>
-        <p><a href="/reset-password">Resend Code</a></p>
+        <button type="submit" onclick="handleResetPassword()">Reset Password</button>
+        <p><a href="/login">Back to Login</a></p>
     </div>
     <div class="container-right">
-        <img src="Tel-U_Looks\resources\views\Asset\Logo.png" alt="Tel-U Looks Logo">
+        <img src="../Asset/Logo.png" alt="Tel-U Looks Logo">
         <h2>Tel-U Looks: Explore, Inspire, Express</h2>
     </div>
 
     <script>
-        function handleVerifyCode() {
-            alert('Code verified successfully!');
-            window.location.href = "/reset-password-step3";
+        function handleResetPassword() {
+            alert('Password reset successfully!');
+            window.location.href = "login_user.php";
         }
     </script>
 </body>

@@ -162,25 +162,25 @@
     <div class="container">
         <div class="container-left">
             <div class="toggle-buttons">
-                <a href="/login" class="toggle-btn active">Login</a>
-                <a href="/register" class="toggle-btn">Register</a>
+                <a href="#" class="toggle-btn active">Login</a>
+                <a href="register.php" class="toggle-btn">Register</a>
             </div>
             <h1>Welcome Back</h1>
             <p>Please login to your account</p>
             <div class="input-container">
-                <input type="text" id="username" name="username" placeholder="Username" class="input-field">
+                <input type="email" id="email" name="email" placeholder="Email" class="input-field">
                 <input type="password" id="password" name="password" placeholder="Password" class="input-field">
             </div>
             <button type="submit">Login</button>
             <p class="forgot-password">
-                <a href="/forgot-password">Forgot Password?</a>
+                <a href="reset_password_step1.php">Forgot Password?</a>
             </p>
-            <p>Don't have an account? <a href="/register">Register here</a></p>
+            <p>Don't have an account? <a href="register.php">Register here</a></p>
             <hr style="width: 100%; max-width: 300px; margin: 20px 0;">
-            <button onclick="location.href='/login_admin'" style="background-color: #ff4d4d;">Login as Admin</button>
+            <button onclick="location.href='../admin/login_admin.php'" style="background-color: #ff4d4d;">Login as Admin</button>
         </div>
         <div class="container-right">
-            <img src="Tel-U_Looks\resources\views\Asset\Logo.png" alt="Tel-U Looks Logo">
+        <img src="../Asset/Logo.png" alt="Tel-U Looks Logo">
             <h2>Tel-U Looks: Explore, Inspire, Express</h2>
         </div>
     </div>

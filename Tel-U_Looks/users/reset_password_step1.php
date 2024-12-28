@@ -109,14 +109,14 @@
         <p><a href="/login">Back to Login</a></p>
     </div>
     <div class="container-right">
-        <img src="{{ asset('Tel-U_Looks/resources/views/Asset/Logo.png') }}" alt="Tel-U Looks Logo">
+        <img src="../Asset/Logo.png" alt="Tel-U Looks Logo">
         <h2>Tel-U Looks: Explore, Inspire, Express</h2>
     </div>
 
     <script>
         function handleSendCode() {
             alert('Verification code sent to your email!');
-            window.location.href = "/reset-password-step2";
+            window.location.href = "reset_password_step2.php";
         }
     </script>
 </body>

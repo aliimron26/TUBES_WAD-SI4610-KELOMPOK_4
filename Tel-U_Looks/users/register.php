@@ -158,8 +158,8 @@
     <div class="container">
         <div class="container-left">
             <div class="toggle-buttons">
-                <a href="/login_user" class="toggle-btn">Login</a>
-                <a href="/register" class="toggle-btn active">Register</a>
+                <a href="login_user.php" class="toggle-btn">Login</a>
+                <a href="#" class="toggle-btn active">Register</a>
             </div>
             <h1>Welcome</h1>
             <p>Please register to your account</p>
@@ -171,10 +171,10 @@
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" class="input-field">
             </div>
             <button type="submit">Daftar</button>
-            <p>Already have an account? <a href="#">Login here</a></p>
+            <p>Already have an account? <a href="login_user.php">Login here</a></p>
         </div>
         <div class="container-right">
-            <img src="Tel-U_Looks\resources\views\Asset\Logo.png" alt="Tel-U Looks Logo">
+            <img src="../Asset/Logo.png" alt="Tel-U Looks Logo">>
             <h2>Tel-U Looks: Explore, Inspire, Express</h2>
         </div>
     </div>
