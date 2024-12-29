@@ -1,6 +1,6 @@
 <?php
 // Memasukkan Header
-include 'header.php';
+include '../users/header.php';
 
 // Data produk (contoh hardcoded, bisa diganti dengan database)
 $produk = [
@@ -60,5 +60,5 @@ $detail = $produk[$id];
 
 <?php
 // Memasukkan Footer
-include 'footer.php';
+include 'users/footer.php';
 ?>
