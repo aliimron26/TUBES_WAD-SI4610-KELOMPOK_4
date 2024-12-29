@@ -132,7 +132,7 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="assets/img/gallery/produk 1.jpg" class="glightbox" data-gallery="images-gallery">
+              <a href="detail.php">
                 <img src="assets/img/gallery/produk 1.jpg" alt="" class="img-fluid">
               </a>
             </div>
@@ -140,7 +140,7 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="assets/img/gallery/produk 2.jpg" class="glightbox" data-gallery="images-gallery">
+              <a href="detail.php">
                 <img src="assets/img/gallery/produk 2.jpg" alt="" class="img-fluid">
               </a>
             </div>
@@ -148,7 +148,7 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="assets/img/gallery/produk 3.jpg" class="glightbox" data-gallery="images-gallery">
+              <a href="detail.php">
                 <img src="assets/img/gallery/produk 3.jpg" alt="" class="img-fluid">
               </a>
             </div>
@@ -156,7 +156,7 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="assets/img/gallery/produk 4.jpeg" class="glightbox" data-gallery="images-gallery">
+              <a href="detail.php">
                 <img src="assets/img/gallery/produk 4.jpeg" alt="" class="img-fluid">
               </a>
             </div>
@@ -164,7 +164,7 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="assets/img/gallery/produk 5.jpg" class="glightbox" data-gallery="images-gallery">
+              <a href="detail.php">
                 <img src="assets/img/gallery/produk 5.jpg" alt="" class="img-fluid">
               </a>
             </div>
@@ -172,7 +172,7 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="assets/img/gallery/produk 6.jpg" class="glightbox" data-gallery="images-gallery">
+              <a href="detail.php">
                 <img src="assets/img/gallery/produk 6.jpg" alt="" class="img-fluid">
               </a>
             </div>
@@ -180,7 +180,7 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="assets/img/gallery/produk 7.jpeg" class="glightbox" data-gallery="images-gallery">
+              <a href="detail.php">
                 <img src="assets/img/gallery/produk 7.jpeg" alt="" class="img-fluid">
               </a>
             </div>
@@ -188,7 +188,7 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="assets/img/gallery/produk 8.jpg" class="glightbox" data-gallery="images-gallery">
+              <a href="detail.php">
                 <img src="assets/img/gallery/produk 8.jpg" alt="" class="img-fluid">
               </a>
             </div>
