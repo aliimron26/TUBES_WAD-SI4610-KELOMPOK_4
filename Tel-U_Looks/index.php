@@ -94,7 +94,7 @@
 
         <div class="row position-relative">
 
-          <div class="col-lg-7 about-img" data-aos="zoom-in" data-aos-delay="200"><img src="assets/Logo.png"></div>
+          <div class="col-lg-7 about-img" data-aos="zoom-in" data-aos-delay="200"><img src="assets/Logo-B.png"></div>
 
           <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
             <h2 class="inner-title">Tel-U Looks</h2>
