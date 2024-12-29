@@ -1,31 +1,25 @@
-<footer>
-    <div class="footer-content">
-        <h2>Tel-U Looks</h2>
-        <p>Jl. Telekomunikasi No. 1, Bandung Terusan Buahbatu - Bojongsoang, Sukapura, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257</p>
-        <p>Tel-U Looks © 2024</p>
+<footer id="footer" class="footer light-background">
+    <div class="container">
+      <h3 class="sitename">Tel-U Looks</h3>
+      <p>Explore, Inspire, Express</p>
+      <div class="social-links d-flex justify-content-center">
+        <a href=""><i class="bi bi-twitter-x"></i></a>
+        <a href=""><i class="bi bi-facebook"></i></a>
+        <a href=""><i class="bi bi-instagram"></i></a>
+        <a href=""><i class="bi bi-skype"></i></a>
+        <a href=""><i class="bi bi-linkedin"></i></a>
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <span>Copyright</span> <strong class="px-1 sitename">Tel-U Looks</strong> <span>All Rights Reserved</span>
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you've purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+          Designed by <a href="https://bootstrapmade.com/">Kelompok 4</a>
+        </div>
+      </div>
     </div>
-
-    <style>
-        footer {
-            background-color: #58A3FC; 
-            color: white; 
-            padding: 20px; 
-            text-align: center; 
-            font-family: sans-serif; 
-            font-weight: bold; 
-        }
-
-        .footer-content {
-            max-width: 800px; 
-            margin: auto; 
-        }
-
-        footer h2 {
-            margin: 0; 
-        }
-
-        footer p {
-            margin: 5px 0; 
-        }
-    </style>
-</footer>
+  </footer>

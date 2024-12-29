@@ -32,26 +32,8 @@
 
 <body class="index-page">
 
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+  <?php include 'Layouts/navbar.php'; ?>
 
-      <a class="logo d-flex align-items-center">
-        <h1 class="sitename">Tel-U Looks</h1>
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#product">Product</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="users/login_user.php">Login</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
-    </div>
-  </header>
 
   <main class="main">
 
@@ -94,7 +76,9 @@
 
         <div class="row position-relative">
 
-          <div class="col-lg-7 about-img" data-aos="zoom-in" data-aos-delay="200"><img src="assets/Logo-B.png"></div>
+          <div class="col-lg-7 about-img" data-aos="zoom-in" data-aos-delay="200">
+            <img src="assets/Logo-B.png">
+          </div>
 
           <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
             <h2 class="inner-title">Tel-U Looks</h2>

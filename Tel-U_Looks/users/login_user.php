@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tel-U Looks - Login</title>
-    <link href="../assets/css/login_dll.css" rel="stylesheet">
+    <link href="../assets/css/login_register.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">

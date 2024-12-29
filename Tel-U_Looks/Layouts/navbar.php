@@ -1,31 +1,20 @@
-<nav>
-    <ul>
-        <li><a href="{{ url('/') }}">Home</a></li>
-        <li><a href="{{ url('/rekomendasi') }}">Rekomendasi</a></li>
-        <li><a href="{{ url('/artikel') }}">Artikel</a></li>
-        <li><a href="{{ url('/wishlist') }}">Wishlist</a></li>
-    </ul>
-</nav>
+<header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-<style>
-    nav {
-        background-color: #58A3FC;
-        padding: 10px;
-        font-family: sans-serif;
-        font-weight: bold;
-    }
+      <a class="logo d-flex align-items-center">
+        <h1 class="sitename">Tel-U Looks</h1>
+      </a>
 
-    nav ul {
-        list-style-type: none;
-    }
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#product">Product</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="users/login_user.php">Login</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
 
-    nav ul li {
-        display: inline;
-        margin-right: 20px;
-    }
-
-    nav ul li a {
-        color: white;
-        text-decoration: none;
-    }
-</style>
+    </div>
+  </header>
