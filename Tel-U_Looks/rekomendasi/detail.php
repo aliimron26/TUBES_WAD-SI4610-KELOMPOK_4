@@ -94,18 +94,28 @@ if (!$detail) {
 ?>
 
 <!-- Konten Utama Detail Produk -->
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-5">
-            <img src="<?php echo htmlspecialchars($detail['gambar']); ?>" alt="<?php echo htmlspecialchars($detail['nama']); ?>" class="img-fluid">
-        </div>
-        <div class="col-md-5">
-            <h2><?php echo htmlspecialchars($detail['nama']); ?></h2>
-            <p><?php echo htmlspecialchars($detail['deskripsi']); ?></p>
-            <p><strong>Harga:</strong> <?php echo htmlspecialchars($detail['harga']); ?></p>
-        </div>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Products</title>
+</head>
+<body>
+  <div class="container mt-5">
+      <div class="row">
+          <div class="col-md-5">
+              <img src="<?php echo htmlspecialchars($detail['gambar']); ?>" alt="<?php echo htmlspecialchars($detail['nama']); ?>" class="img-fluid">
+          </div>
+          <div class="col-md-5">
+              <h2><?php echo htmlspecialchars($detail['nama']); ?></h2>
+              <p><?php echo htmlspecialchars($detail['deskripsi']); ?></p>
+              <p><strong>Harga:</strong> <?php echo htmlspecialchars($detail['harga']); ?></p>
+          </div>
+      </div>
+  </div>
+</body>
+</html>
 
 <?php
 // Memasukkan Footer
