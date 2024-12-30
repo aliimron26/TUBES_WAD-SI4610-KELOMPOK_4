@@ -1,0 +1,74 @@
+
+    body {
+      background-color: #f1f8f9;
+      font-family: var(--default-font);
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+      margin: auto;
+      max-width: 700px;
+    }
+    .btn-primary {
+      background-color: #0ea8ac;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #09898c;
+    }
+    .btn-secondary {
+      background-color: #e0e0e0;
+      border: none;
+    }
+    .btn-secondary:hover {
+      background-color: #c6c6c6;
+    }
+    .btn-cancel {
+      background-color: #e0e0e0;
+      border: none;
+    }
+    .btn-cancel:hover {
+      background-color: #ff4d4d;
+    }
+    h2 {
+      text-align: center;
+      font-weight: 600;
+      color: #0ea8ac;
+      margin-bottom: 20px;
+    }
+    .section-header {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #0ea8ac;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #0ea8ac;
+    }
+    label {
+      font-weight: 500;
+      color: #0ea8ac;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: #0ea8ac;
+      box-shadow: 0 0 5px rgba(14, 168, 172, 0.5);
+      outline: none;
+    }
+    button:focus {
+      box-shadow: 0 0 8px rgba(14, 168, 172, 0.7);
+      outline: none;
+    }
+    .form-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    .form-buttons button {
+      width: 48%;
+    }
+
+    /* Custom modal styles */
+    .modal-content {
+      border-radius: 10px;
+    }
