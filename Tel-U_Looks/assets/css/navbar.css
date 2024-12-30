@@ -1,0 +1,29 @@
+.custom-navbar {
+    background-color: #059ea3 !important;
+    font-family: 'Raleway', sans-serif;
+  }
+  
+  .custom-navbar .nav-link {
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    opacity: 0.6;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .custom-navbar .nav-link:active {
+    opacity: 1;;
+  }
+  
+  .custom-navbar .nav-link:hover {
+    opacity: 1;
+  }
+  
+  .custom-navbar .navbar-brand {
+    font-size: 30px;
+  }
+  
+  .custom-navbar .navbar-toggler {
+    border-color: white;
+  }  

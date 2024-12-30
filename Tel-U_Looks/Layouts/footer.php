@@ -1,4 +1,6 @@
-<footer id="footer" class="footer light-background">
+<link rel="stylesheet" href="../assets/css/main.css">
+
+<footer id="footer" class="footer light-background" style="margin-top: 50px;">
     <div class="container">
       <h3 class="sitename">Tel-U Looks</h3>
       <p>Explore, Inspire, Express</p>

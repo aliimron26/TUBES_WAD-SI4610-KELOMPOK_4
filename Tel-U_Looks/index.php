@@ -32,7 +32,26 @@
 
 <body class="index-page">
 
-  <?php include 'Layouts/navbar.php'; ?>
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a class="logo d-flex align-items-center">
+        <h1 class="sitename">Tel-U Looks</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#product">Product</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="users/login_user.php">Login</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
 
 
   <main class="main">
@@ -102,7 +121,7 @@
     </section><!-- /About Section -->
 
     <!-- Product Section -->
-    <section id="product" class="product section">
+    <section id="product" class="product section dark-background">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -116,68 +135,79 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="rekomendasi/detail.php">
-                <img src="assets/img/gallery/produk 1.jpg" alt="" class="img-fluid">
+              <a href="rekomendasi/detail.php?id=1">
+                <img src="assets/img/gallery/produk 1.jpg" alt="Produk 1" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="rekomendasi/detail.php">
-                <img src="assets/img/gallery/produk 2.jpg" alt="" class="img-fluid">
+              <a href="rekomendasi/detail.php?id=2">
+                <img src="assets/img/gallery/produk 2.jpg" alt="Produk 2" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="rekomendasi/detail.php">
-                <img src="assets/img/gallery/produk 3.jpg" alt="" class="img-fluid">
+              <a href="rekomendasi/detail.php?id=3">
+                <img src="assets/img/gallery/produk 3.jpg" alt="Produk 3" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="rekomendasi/detail.php">
-                <img src="assets/img/gallery/produk 4.jpeg" alt="" class="img-fluid">
+              <a href="rekomendasi/detail.php?id=4">
+                <img src="assets/img/gallery/produk 4.jpeg" alt="Produk 4" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="rekomendasi/detail.php">
-                <img src="assets/img/gallery/produk 5.jpg" alt="" class="img-fluid">
+              <a href="rekomendasi/detail.php?id=5">
+                <img src="assets/img/gallery/produk 5.jpg" alt="Produk 5" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="rekomendasi/detail.php">
-                <img src="assets/img/gallery/produk 6.jpg" alt="" class="img-fluid">
+              <a href="rekomendasi/detail.php?id=6">
+                <img src="assets/img/gallery/produk 6.jpg" alt="Produk 6" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="rekomendasi/detail.php">
-                <img src="assets/img/gallery/produk 7.jpeg" alt="" class="img-fluid">
+              <a href="rekomendasi/detail.php?id=7">
+                <img src="assets/img/gallery/produk 7.jpeg" alt="Produk 7" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="rekomendasi/detail.php">
-                <img src="assets/img/gallery/produk 8.jpg" alt="" class="img-fluid">
+              <a href="rekomendasi/detail.php?id=8">
+                <img src="assets/img/gallery/produk 8.jpg" alt="Produk 8" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
-
+          <section id="call-to-action" class="call-to-action section dark-background" style="margin-bottom: 50px;">
+          <div class="container">
+            <div class="row justify-content-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+              <div class="col-xl-10">
+                <div class="text-center">
+                  <a href="#" class="cta-btn">More Recommendations</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          </section>
+          
         </div>
 
       </div>
@@ -185,7 +215,7 @@
     </section><!-- /Gallery Section -->
 
     <!-- Contact Section -->
-    <section id="contact" class="contact section">
+    <section id="contact" class="contact section" style="margin-top: 50px;">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
