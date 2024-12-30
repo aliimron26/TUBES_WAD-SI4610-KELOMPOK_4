@@ -12,8 +12,8 @@
             <h1>Welcome Back</h1>
             <p>Please login to your account</p>
             <div class="input-container">
-                <input type="text" id="username" name="username" placeholder="Username" class="input-field">
-                <input type="password" id="password" name="password" placeholder="Password" class="input-field">
+                <input type="text" id="username" name="username" placeholder="Username" class="input-field" required>
+                <input type="password" id="password" name="password" placeholder="Password" class="input-field" required>
             </div>
             <button type="submit">Login</button>
             <hr style="width: 100%; max-width: 300px; margin: 20px 0;">

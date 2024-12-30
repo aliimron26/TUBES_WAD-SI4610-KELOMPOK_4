@@ -10,12 +10,14 @@
     <div class="container-left">
         <h1>Set New Password</h1>
         <p>Enter your new password and confirm it below.</p>
-        <div class="input-container">
-            <input type="password" id="new-password" name="new-password" placeholder="New Password" class="input-field">
-            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" class="input-field">
-        </div>
-        <button type="submit" onclick="handleResetPassword()">Reset Password</button>
-        <p><a href="/login">Back to Login</a></p>
+        <form action="update_password.php" method="POST" id="passwordForm">
+            <div class="input-container">
+                <input type="password" id="new-password" name="new-password" placeholder="New Password" class="input-field" required>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" class="input-field" required>
+            </div>
+            <button type="submit" onclick="handleResetPassword()">Reset Password</button>
+        </form>
+        <p><a href="login_user.php">Back to Login</a></p>
     </div>
     <div class="container-right">
         <img src="../Assets/Logo-P.png" alt="Tel-U Looks Logo">

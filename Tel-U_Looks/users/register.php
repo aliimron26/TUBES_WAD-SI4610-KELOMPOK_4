@@ -16,11 +16,11 @@
             <h1>Welcome</h1>
             <p>Please register to your account</p>
             <div class="input-container">
-                <input type="email" id="email" name="email" placeholder="Email" class="input-field">
-                <input type="tel" id="phone" name="phone" placeholder="No Telp" class="input-field">
-                <input type="text" id="username" name="username" placeholder="Username" class="input-field">
-                <input type="password" id="password" name="password" placeholder="Password" class="input-field">
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" class="input-field">
+                <input type="email" id="email" name="email" placeholder="Email" class="input-field" required>
+                <input type="tel" id="phone" name="phone" placeholder="No Telp" class="input-field" required>
+                <input type="text" id="username" name="username" placeholder="Username" class="input-field" required>
+                <input type="password" id="password" name="password" placeholder="Password" class="input-field" required>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" class="input-field" required>
             </div>
             <button type="submit">Daftar</button>
             <p>Already have an account? <a href="login_user.php">Login here</a></p>

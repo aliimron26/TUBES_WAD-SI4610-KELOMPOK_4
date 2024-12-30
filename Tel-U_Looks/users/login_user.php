@@ -27,8 +27,8 @@
             <h1>Welcome Back</h1>
             <p>Please login to your account</p>
             <div class="input-container">
-                <input type="email" id="email" name="email" placeholder="Email" class="input-field">
-                <input type="password" id="password" name="password" placeholder="Password" class="input-field">
+                <input type="email" id="email" name="email" placeholder="Email" class="input-field" required>
+                <input type="password" id="password" name="password" placeholder="Password" class="input-field" required>
             </div>
             <!-- Tombol Login menggunakan fungsi goBack() -->
             <button type="button" onclick="goBack()">Login</button>
