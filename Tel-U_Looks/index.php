@@ -76,7 +76,7 @@
 
         <div class="row position-relative">
 
-          <div class="col-lg-7 about-img" data-aos="zoom-in" data-aos-delay="200">
+          <div class="col-lg-6 about-img" data-aos="zoom-in" data-aos-delay="200">
             <img src="assets/Logo-B.png">
           </div>
 
