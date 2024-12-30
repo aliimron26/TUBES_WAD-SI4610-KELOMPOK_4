@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password - Step 2</title>
-    <link href="../assets/css/reset_password.css" rel="stylesheet">
+    <link href="../assets/css/login_dll.css" rel="stylesheet">
 </head>
 <body>
     <div class="container-left">
@@ -20,7 +20,7 @@
         <img src="../Assets/Logo-P.png" alt="Tel-U Looks Logo">
         <h2>Tel-U Looks: Explore, Inspire, Express</h2>
     </div>
-
+    
     <script>
         function handleVerifyCode() {
             alert('Code verified successfully!');
