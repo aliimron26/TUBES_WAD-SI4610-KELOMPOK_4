@@ -42,9 +42,9 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#product">Product</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about">Tentang</a></li>
+          <li><a href="#product">Rekomendasi</a></li>
+          <li><a href="#contact">Kontak</a></li>
           <li><a href="users/login_user.php">Login</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -120,12 +120,12 @@
 
     </section><!-- /About Section -->
 
-    <!-- Product Section -->
+    <!-- Rekomendasi Section -->
     <section id="product" class="product section dark-background">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Product</h2>
+        <h2>Rekomendasi Fashion</h2>
         <p>Koleksi fashion terkini, lagi trending, dan lainnya ada disini</p>
       </div><!-- End Section Title -->
 
@@ -212,14 +212,14 @@
 
       </div>
 
-    </section><!-- /Gallery Section -->
+    </section><!-- /Rekomendasi Section -->
 
     <!-- Contact Section -->
     <section id="contact" class="contact section" style="margin-top: 50px;">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
+        <h2>Kontak</h2>
         <p>Ingin mengetahui lebih lanjut seputar fashion? Isi data diri dibawah ini</p>
       </div><!-- End Section Title -->
 
@@ -231,7 +231,7 @@
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
               <i class="bi bi-geo-alt flex-shrink-0"></i>
               <div>
-                <h3>Address</h3>
+                <h3>Alamat</h3>
                 <p>Jl. Telekomunikasi No. 1, Bandung Terusan Buahbatu - Bojongsoang, Sukapura, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257</p>
               </div>
             </div><!-- End Info Item -->
@@ -239,7 +239,7 @@
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
               <i class="bi bi-telephone flex-shrink-0"></i>
               <div>
-                <h3>Call Us</h3>
+                <h3>Hubungi Kami</h3>
                 <p>+1 5589 55488 55</p>
               </div>
             </div><!-- End Info Item -->
@@ -247,7 +247,7 @@
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
               <i class="bi bi-envelope flex-shrink-0"></i>
               <div>
-                <h3>Email Us</h3>
+                <h3>Email Kami</h3>
                 <p>Looks@mail.com</p>
               </div>
             </div><!-- End Info Item -->
