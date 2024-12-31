@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password - Step 1</title>
-    <link href="../assets/css/reset_password.css" rel="stylesheet">
+    <link href="../../assets/css/reset_password.css" rel="stylesheet">
 </head>
 <body>
     <div class="container-left">
         <h1>Reset Password</h1>
         <p>Enter your registered email to receive a verification code.</p>
-        <form action="kirim_kode_verifikasi.php" method="post">
+        <form action="send_code.php" method="post">
             <div class="input-container">
                 <input type="email" id="email" name="email" placeholder="Enter your email" class="input-field" required>
             </div>
@@ -19,7 +19,7 @@
         <p><a href="login_user.php">Back to Login</a></p>
     </div>
     <div class="container-right">
-        <img src="../Assets/Logo-P.png" alt="Tel-U Looks Logo">
+        <img src="../../Assets/Logo-P.png" alt="Tel-U Looks Logo">
         <h2>Tel-U Looks: Explore, Inspire, Express</h2>
     </div>
 

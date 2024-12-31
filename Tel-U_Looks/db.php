@@ -2,7 +2,7 @@
 $host = "localhost"; // Nama server "localhost"
 $username = "root"; // Nama pengguna database
 $password = ''; // Kata sandi pengguna database
-$db = "telyulook"; // Nama database
+$db = "telulooks"; // Nama database
 
 // Membuat Koneksi
 $conn = mysqli_connect($host, $username, $password, $db);
