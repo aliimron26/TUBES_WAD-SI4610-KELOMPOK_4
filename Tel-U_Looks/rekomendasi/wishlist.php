@@ -1,4 +1,4 @@
-<?php include '../Layouts/navbar.php';
+<?php include '../Layouts/main-navbar.php';
 
 $items = [ // sementara aja, biar keliatan tampilannya kayak gimana
     [
