@@ -1,4 +1,5 @@
-<?php
+<?php 
+include '../Layouts/navbar.php'; 
 include 'db.php';
 
 if (isset($_GET['id'])) {
@@ -24,103 +25,144 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($article['title']); ?></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
         }
-        img {
-            max-width: 100%;
+
+        h1 {
+            text-align: center;
+            color: #005f73;
+            margin: 20px 0;
+        }
+
+        .article-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .article-container img {
+            width: 100%;
             height: auto;
+            border-radius: 8px;
         }
-        .delete-button {
-            background-color: red; 
-            color: white; 
-            border: none; 
-            padding: 10px 15px; 
-            border-radius: 5px; 
-            cursor: pointer;
-            font-size: 20px; 
-            transition: background-color 0.3s; 
+
+        .article-content {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .article-content p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .article-footer {
+            margin-top: 20px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px; /* Menambahkan margin bawah untuk jarak */
+            justify-content: space-between;
+            width: 100%;
         }
-        .delete-button:hover {
-            background-color: darkred; 
-        }
-        .btn-back {
-            display: inline-block;
-            text-decoration: none; 
-            background-color: #29313e;
+
+        .btn-back, .edit-button, .delete-button {
+            text-decoration: none;
             color: white;
-            padding: 10px; /* Padding disesuaikan untuk tombol kotak */
-            border-radius: 5px; 
-            transition: background-color 0.3s; 
-            margin-bottom: 10px; /* Menambahkan margin bawah untuk jarak */
+            background-color: #005f73;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
-        .btn-back:hover {
-            background-color: blue; 
+
+        .btn-back:hover, .edit-button:hover, .delete-button:hover {
+            background-color: #0a9396;
         }
-        .edit-button {
-            background-color: #007bff; /* Warna tombol edit */
-            color: white; 
-            border: none; 
-            padding: 5px; /* Padding lebih kecil untuk tombol kotak */
-            border-radius: 5px; 
-            cursor: pointer;
-            font-size: 16px; /* Ukuran font lebih kecil */
-            transition: background-color 0.3s; 
+
+        .delete-button {
+            background-color: red;
+        }
+
+        .delete-button:hover {
+            background-color: darkred;
+        }
+
+        .btn-share {
             display: flex;
-            align-items: center;
             justify-content: center;
-            margin-bottom: 5px; /* Menambahkan margin bawah untuk jarak */
-            width: 40px; /* Lebar tombol edit */
-            height: 40px; /* Tinggi tombol edit */
-            text-align: center; /* Menyelaraskan teks di tengah */
+            align-items: center;
+            margin-top: 20px;
         }
-        .edit-button:hover {
-            background-color: #0056b3; /* Warna saat hover */
+
+        .btn-share i {
+            font-size: 28px;
+            margin: 0 10px;
+            color: #1F1E1E;
+            transition: transform 0.3s;
         }
-        .edit-button i {
-            font-size: 16px; /* Ukuran ikon */
-        }
-        .btn-back i {
-            font-size: 20px; /* Ukuran ikon panah */
+
+        .btn-share i:hover {
+            transform: scale(1.2);
         }
     </style>
+    <title><?php echo htmlspecialchars($article['title']); ?></title>
 </head>
 <body>
-    <h1><?php echo htmlspecialchars($article['title']); ?></h1>
-    <img src="uploads/<?php echo htmlspecialchars($article['image']); ?>" alt="<?php echo htmlspecialchars($article['title']); ?>">
-    
-    <!-- Menampilkan konten dengan format HTML -->
-    <div>
-        <?php echo $article['content']; ?>
+
+    <div class="article-container">
+        <h1><?php echo htmlspecialchars($article['title']); ?></h1>
+        <img src="uploads/<?php echo htmlspecialchars($article['image']); ?>" alt="<?php echo htmlspecialchars($article['title']); ?>">
+        
+        <div class="article-content">
+            <p><?php echo $article['content']; ?></p>
+        </div>
+        
+        <p><small><?php echo htmlspecialchars($article['created_at']); ?></small></p>
+
+        <div class="article-footer">
+            <a href="update_article.php?id=<?php echo $article['id']; ?>" class="edit-button">
+                <i class="fas fa-pencil-alt"></i> Edit
+            </a>
+
+            <form action="delete_article.php" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');">
+                <input type="hidden" name="id" value="<?php echo $article['id']; ?>">
+                <button type="submit" class="delete-button">
+                    <i class="fas fa-trash"></i> Hapus
+                </button>
+            </form>
+        </div>
+
+        <div class="btn-share">
+            <a href="javascript:void(0);" onclick="shareArticle('<?php echo htmlspecialchars($article['title']); ?>')">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+
+        <a href="artikel.php" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </a>
     </div>
-    
-    <p><small><?php echo htmlspecialchars($article['created_at']); ?></small></p>
 
-    <!-- Tombol Edit hanya dengan ikon pensil -->
-    <a href="update_article.php?id=<?php echo $article['id']; ?>" class="edit-button">
-        <i class="fas fa-pencil-alt"></i>
-    </a>
-
-    <!-- Tombol Hapus -->
-    <form action="delete_article.php" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');">
-        <input type="hidden" name="id" value="<?php echo $article['id']; ?>">
-        <button type="submit" class="delete-button">
-            <i class="fas fa-trash"></i>
-        </button>
-    </form>
-
-    <!-- Tombol Kembali ke Dashboard dengan ikon panah -->
-    <a href="artikel.php" class="btn-back">
-        <i class="fas fa-arrow-left"></i>
-    </a>
+    <script>
+        function shareArticle(title) {
+            alert("Bagikan artikel: " + title);
+        }
+    </script>
 
 </body>
 </html>
+
+<?php include '../Layouts/footer.php'; ?>
