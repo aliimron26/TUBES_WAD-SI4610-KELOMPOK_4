@@ -49,6 +49,22 @@ $items = [ // sementara aja, biar keliatan tampilannya kayak gimana
             transition: all .3s ease;
         }
 
+        .btn-share i.fa-facebook-f {
+            color: #3b5998; /* Biru khas Facebook */
+        }
+        
+        .btn-share i.fa-twitter {
+            color: #1da1f2; /* Biru khas Twitter */
+        }
+        
+        .btn-share i.fa-instagram {
+            color: #e1306c; /* Gradasi merah Instagram */
+        }
+        
+        .btn-share i.fa-github {
+            color: #333; /* Hitam khas GitHub */
+        }
+
         .btn-share .btn_wrap {
             position: relative;
             display: flex;
@@ -58,7 +74,7 @@ $items = [ // sementara aja, biar keliatan tampilannya kayak gimana
             cursor: pointer;
             width: 240px;
             height: 72px;
-            background-color:rgb(201, 201, 200);
+            background-color:rgb(250, 250, 201);
             border-radius: 80px;
             padding: 0 18px;
             transition: all .2s ease-in-out;
