@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">Birthday</label>
-                                    <input type="text" class="form-control" style="background-color: var(--base-variant); color: var(--text-color);" value="May 3, 1995">
+                                    <input type="date" class="form-control" style="background-color: var(--base-variant); color: var(--text-color);" value="May 3, 1995">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">Interest Fashion</label>
@@ -114,17 +114,6 @@
                                 </div>
                             </div>
                             <hr class="border-light m-0">
-                            <div class="card-body pb-2">
-                                <h6 class="mb-4" style="color: var(--text-color);">Contacts</h6>
-                                <div class="form-group">
-                                    <label class="form-label" style="color: var(--text-color);">Phone</label>
-                                    <input type="text" class="form-control" style="background-color: var(--base-variant); color: var(--text-color);" value="+0 (123) 456 7891">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" style="color: var(--text-color);">Website</label>
-                                    <input type="text" class="form-control" style="background-color: var(--base-variant); color: var(--text-color);" value>
-                                </div>
-                            </div>
                         </div>
                         <div class="tab-pane fade" id="account-social-links">
                             <div class="card-body pb-2">
