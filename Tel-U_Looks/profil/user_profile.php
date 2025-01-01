@@ -33,9 +33,9 @@
                             <li><i class="fa fa-linkedin"></i></li>
                             <li><i class="fa fa-instagram"></i></li>
                         </ul>
-                        <div class="buttons">
-                            <button href="../profil/manajemen_profil_pengguna.php" class="btn btn-outline-primary px-4">Edit Profile</button>
-                            <button href="../Layouts/app.php"class="btn btn-primary px-4 ms-3">Back</button>
+                        <div class="a">
+                            <a href="../profil/manajemen_profil_pengguna.php" class="btn btn-outline-primary px-4">Edit Profile</a>
+                            <a href="../Layouts/app.php"class="btn btn-primary px-4 ms-3">Back</a>
                         </div>
                     </div>
                 </div>

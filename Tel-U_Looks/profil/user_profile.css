@@ -62,22 +62,22 @@ body{
 }
 
 
-.buttons button:nth-child(1){
-       border:1px solid #059ea3 !important;
-       color:#059ea3;
-       height:40px;
+.a a:nth-child(1){
+    border:1px solid #059ea3 !important;
+    color:#059ea3;
+    height:40px;
 }
 
-.buttons button:nth-child(1):hover{
-       border:1px solid #059ea3 !important;
-       color:#fff;
-       height:40px;
-       background-color:#059ea3;
+.a a:nth-child(1):hover{
+    border:1px solid #059ea3 !important;
+    color:#fff;
+    height:40px;
+    background-color:#059ea3;
 }
 
-.buttons button:nth-child(2){
-       border:1px solid #059ea3 !important;
-       background-color:#059ea3;
-       color:#fff;
+.a a:nth-child(2){
+    border:1px solid #059ea3 !important;
+    background-color:#059ea3;
+    color:#fff;
         height:40px;
 }
