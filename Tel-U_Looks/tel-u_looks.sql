@@ -19,17 +19,29 @@ CREATE TABLE rekomendasi (
 
 -- Membuat tabel users
 CREATE TABLE users (
-    id_user INT PRIMARY KEY AUTO_INCREMENT,
+    id_user VARCHAR(10) PRIMARY KEY,
     nama VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     username VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
 
+-- Membuat tabel admin
+CREATE TABLE admin (
+    id_admin VARCHAR(10) PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Menambahkan data ke tabel admin
+INSERT INTO admin (id_admin, nama, username, password) 
+VALUES ('adm1', 'admin1', 'admin1', 'admin1');
+
 -- Membuat tabel komentar
 CREATE TABLE komentar (
     id_komentar INT PRIMARY KEY AUTO_INCREMENT,
-    id_user INT,
+    id_user VARCHAR(10),
     isi_komentar TEXT NOT NULL,
     FOREIGN KEY (id_user) REFERENCES users(id_user)
 );

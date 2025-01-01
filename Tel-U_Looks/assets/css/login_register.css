@@ -150,4 +150,22 @@
                 font-size: 2rem;
             }
         }
+
+        .notification {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .notification-success {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+
+        .notification-error {
+            background-color: #f44336; /* Red */
+            color: white;
+        }
  
