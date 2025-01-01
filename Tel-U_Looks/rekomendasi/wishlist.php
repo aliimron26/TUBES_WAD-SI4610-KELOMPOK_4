@@ -263,7 +263,7 @@ $items = [ // sementara aja, biar keliatan tampilannya kayak gimana
                     <p class="price">Rp<?php echo number_format($item['harga'], 0, ',', '.'); ?></p>
                     <p><?php echo $item['deskripsi']; ?></p>
                     <div class="actions">
-                        <a href="javascript:void(0);" onclick="editItem(<?php echo $item['id']; ?>, '<?php echo $item['name']; ?>', '<?php echo $item['description']; ?>')">Edit</a>
+                        <a href="javascript:void(0);" onclick="editItem(<?php echo $item['id']; ?>, '<?php echo $item['nama']; ?>', '<?php echo $item['deskripsi']; ?>')">Edit</a>
                         <a href="?delete=<?php echo $item['id']; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?');">Hapus</a>
                     </div>
                 </div>
@@ -275,10 +275,10 @@ $items = [ // sementara aja, biar keliatan tampilannya kayak gimana
             <div class="btn_wrap">
                 <span>Bagikan Wishlist</span>
                 <div class="container">
-                    <i class="fab fa-facebook-f"></i>
-                    <i class="fab fa-twitter"></i>
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-github"></i>
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>
