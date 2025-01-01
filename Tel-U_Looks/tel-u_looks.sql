@@ -14,7 +14,8 @@ CREATE TABLE rekomendasi (
     link_affiliate_tokopedia VARCHAR(255),
     link_affiliate_lazada VARCHAR(255),
     image VARCHAR(255),
-    status VARCHAR(10)
+    status VARCHAR(10),
+    kategori VARCHAR(255)
 );
 
 -- Membuat tabel users
