@@ -1,6 +1,6 @@
 <?php
 include '../Layouts/sidebar-admin.php';
-include '../db.php'; // Menghubungkan ke database
+include '../db.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];

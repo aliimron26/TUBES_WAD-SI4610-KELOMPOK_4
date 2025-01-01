@@ -56,3 +56,8 @@
 .custom-navbar .dropdown-toggle::after {
     color: white; /* Ubah warna panah dropdown */
 }
+
+.btn btn-warning btn-sm {
+  color: #059ea3;
+  font-family: 'Raleway', sans-serif;
+}
