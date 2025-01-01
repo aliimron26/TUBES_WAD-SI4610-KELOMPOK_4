@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     !str_contains($_SERVER['HTTP_REFERER'], 'login_user.php')) {
                     header("Location: " . $_SERVER['HTTP_REFERER']);
                 } else {
-                    header("Location: ../index.php");
+                    header("Location: ../Layouts/app.php");
                 }
                 exit;
             } else {
