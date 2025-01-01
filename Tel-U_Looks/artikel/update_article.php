@@ -1,28 +1,38 @@
 <?php
-include 'db.php';
+session_start(); // Memulai session
 
-// Cek apakah ID artikel disediakan
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+// Cek apakah admin sudah login
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: login_admin.php"); // Redirect ke halaman login jika belum login
+    exit();
+}
 
-    // Ambil data artikel dari database
-    $sql = "SELECT * FROM articles WHERE id = $id";
-    $result = $conn->query($sql);
+include '../db.php'; // Pastikan untuk menyertakan koneksi database
 
-    if ($result->num_rows > 0) {
-        $article = $result->fetch_assoc();
-    } else {
-        echo "Artikel tidak ditemukan.";
-        exit();
-    }
-} else {
+// Cek apakah ID artikel diterima
+if (!isset($_GET['id'])) {
     echo "ID artikel tidak ditentukan.";
     exit();
 }
 
+$id = $_GET['id'];
+
+// Mengambil data artikel dari database
+$sql = "SELECT * FROM articles WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows == 0) {
+    echo "Artikel tidak ditemukan.";
+    exit();
+}
+
+$article = $result->fetch_assoc();
+
 // Proses pembaruan artikel
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Ambil data dari form
     $title = $_POST['title'];
     $content = $_POST['content'];
     $image = $_FILES['image'];
@@ -31,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $conn->real_escape_string($title);
     $content = $conn->real_escape_string($content);
 
-    // Proses upload gambar jika ada gambar baru
+    // Proses upload gambar jika ada
     if ($image['name']) {
         $target_dir = "uploads/";
         $target_file = $target_dir . basename($image["name"]);
@@ -40,9 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Cek apakah file gambar adalah gambar sebenarnya
         $check = getimagesize($image["tmp_name"]);
-        if ($check !== false) {
-            $uploadOk = 1;
-        } else {
+        if ($check === false) {
             echo "File bukan gambar.";
             $uploadOk = 0;
         }
@@ -58,27 +66,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Maaf, file Anda tidak terupload.";
         } else {
             if (move_uploaded_file($image["tmp_name"], $target_file)) {
-                // Update data artikel dengan gambar baru
-                $sql = "UPDATE articles SET title='$title', content='$content', image='$image[name]' WHERE id=$id";
-                if ($conn->query($sql) === TRUE) {
-                    header("Location: artikel.php"); // Mengarahkan ke artikel.php
-                    exit();
-                } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
-                }
+                // Update artikel ke database dengan gambar baru
+                $sql = "UPDATE articles SET title = ?, content = ?, image = ? WHERE id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sssi", $title, $content, $image['name'], $id);
             } else {
                 echo "Maaf, terjadi kesalahan saat mengupload file.";
             }
         }
     } else {
-        // Jika tidak ada gambar baru, hanya update judul dan konten
-        $sql = "UPDATE articles SET title='$title', content='$content' WHERE id=$id";
-        if ($conn->query($sql) === TRUE) {
-            header("Location: artikel.php"); // Mengarahkan ke artikel.php
-            exit();
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+        // Update artikel ke database tanpa mengubah gambar
+        $sql = "UPDATE articles SET title = ?, content = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssi", $title, $content, $id);
+    }
+
+    if ($stmt->execute()) {
+        header("Location: view_article.php?id=" . $id); // Redirect ke halaman detail artikel setelah berhasil
+        exit();
+    } else {
+        echo "Error: " . $stmt->error;
     }
 }
 ?>
@@ -88,146 +95,68 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Artikel</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Update Article - Tel-U Looks</title>
+    <link href="../assets/css/login_register.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: sans-serif;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
             margin: 0;
+            padding: 20px;
         }
 
         .container {
-            display: flex;
-            flex: 1;
-            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            background: white;
             padding: 20px;
-        }
-
-        .container-left {
-            width: 35%;
-            background-color: #f9f9f9;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container-right {
-            width: 65%;
-            background-color: #29313e;
-            color: white;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            font-size: 2.5rem;
             margin-bottom: 20px;
-            color: #007bff;
         }
 
         .input-container {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
+            margin-bottom: 20px;
         }
 
         .input-field {
-            border: none;
-            border-bottom: 1px solid #ccc;
-            background: none;
-            padding: 10px 0;
-            font-size: 14px;
-            margin-bottom: 15px;
-            color: white; /* Mengubah warna tulisan menjadi putih */
-            outline: none;
-        }
-
-        .input-field::placeholder {
-            color: #bbb;
-        }
-
-        .editor {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
-            padding: 10px;
-            min-height: 150px; /* Tinggi minimum untuk editor */
-            background-color: #fff;
-            color: #333;
-            margin-bottom: 15px;
-            overflow-y: auto; /* Scroll jika konten lebih dari tinggi */
         }
 
         button {
-            padding: 10px 20px;
-            background-color: #007bff;
+            padding: 10px 15px;
+            background-color: #28a745;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 100%;
-            max-width: 300px;
-            margin-top: 10px;
         }
 
         button:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-kembali {
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .container-left, .container-right {
-                width: 100%;
-            }
+            background-color: #218838;
         }
     </style>
-    <script>
-        function confirmUpdate() {
-            return confirm("Apakah Anda ingin mengubah artikel?");
-        }
-    </script>
 </head>
 <body>
     <div class="container">
-        <div class="container-left">
-            <h1>Edit Artikel</h1>
-            <a href="artikel.php" class="btn-kembali" onclick="return confirm('Apakah Anda yakin ingin keluar dari edit artikel?');">
-                <i class="fas fa-arrow-left"></i> Kembali
-            </a>
-        </div>
-        <div class="container-right">
-            <form action="update_article.php?id=<?php echo $id; ?>" method="POST" enctype="multipart/form-data" onsubmit="return confirmUpdate();">
-                <div class="input-container">
-                    <input type="text" id="title" name="title" class="input-field" placeholder="Judul" value="<?php echo htmlspecialchars($article['title']); ?>" required>
-                    
-                    <div id="editor" class="editor" contenteditable="true" placeholder="Tulis konten di sini..."><?php echo htmlspecialchars($article['content']); ?></div>
-                    <input type="hidden" name="content" id="content">
-                    <input type="file" id="image" name="image" accept="image/*">
-                    <button type="submit" onclick="document.getElementById('content').value = document.getElementById('editor').innerHTML;">Perbarui Artikel</button>
-                </div>
-            </form>
-        </div>
+        <h1>Update Article</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="input-container">
+                <input type="text" id="title" name="title" placeholder="Article Title" class="input-field" value="<?php echo htmlspecialchars($article['title']); ?>" required>
+                <textarea id="content" name="content" placeholder="Article Content" class="input-field" required><?php echo htmlspecialchars($article['content']); ?></textarea>
+                <input type="file" id="image" name="image" class="input-field">
+                <p>Current Image: <img src="uploads/<?php echo htmlspecialchars($article['image']); ?>" alt="<?php echo htmlspecialchars($article['title']); ?>" width="100"></p>
+            </div>
+            <button type="submit">Update Article</button>
+        </form>
+        <button onclick="location.href='view_article.php?id=<?php echo $article['id']; ?>'">Kembali ke Artikel</button>
     </div>
 </body>
 </html>

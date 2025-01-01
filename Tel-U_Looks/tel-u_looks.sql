@@ -54,3 +54,19 @@ CREATE TABLE report (
     fitur_direport VARCHAR(100) NOT NULL,
     isi_report TEXT NOT NULL
 );
+
+-- Tabel untuk menyimpan artikel
+CREATE TABLE IF NOT EXISTS articles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Menambahkan beberapa data contoh untuk artikel
+INSERT INTO articles (title, content, image) VALUES
+('Artikel Pertama', 'Ini adalah konten artikel pertama.', 'image1.jpg'),
+('Artikel Kedua', 'Ini adalah konten artikel kedua.', 'image2.jpg'),
+('Artikel Ketiga', 'Ini adalah konten artikel ketiga.', 'image3.jpg');

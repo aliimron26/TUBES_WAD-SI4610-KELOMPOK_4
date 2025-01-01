@@ -1,31 +1,28 @@
 <?php
-include 'db.php';
+session_start(); // Memulai session
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
-    $id = $_POST['id'];
+// Cek apakah admin sudah login
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: login_admin.php"); // Redirect ke halaman login jika belum login
+    exit();
+}
 
-    // Mengambil nama gambar dari database untuk dihapus
-    $sql = "SELECT image FROM articles WHERE id = $id";
-    $result = $conn->query($sql);
-    
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $image = $row['image'];
+include '../db.php'; // Pastikan untuk menyertakan koneksi database
 
-        // Menghapus artikel dari database
-        $sql = "DELETE FROM articles WHERE id = $id";
-        if ($conn->query($sql) === TRUE) {
-            // Menghapus file gambar jika ada
-            if (file_exists("uploads/" . $image)) {
-                unlink("uploads/" . $image);
-            }
-            header("Location: artikel.php"); // Mengarahkan ke artikel.php
-            exit();
-        } else {
-            echo "Error deleting record: " . $conn->error;
-        }
+// Proses penghapusan artikel
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    // Hapus artikel dari database
+    $sql = "DELETE FROM articles WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        header("Location: artikel.php"); // Redirect ke halaman artikel setelah berhasil
+        exit();
     } else {
-        echo "Artikel tidak ditemukan.";
+        echo "Error: " . $stmt->error;
     }
 } else {
     echo "ID artikel tidak ditentukan.";
