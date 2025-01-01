@@ -1,30 +1,13 @@
 <?php
-session_start();
-include '../db.php'; // Koneksi database
-
-// Cek apakah admin sudah login
-if (!isset($_SESSION['id_admin'])) {
-    header("Location: login_admin.php");
-    exit();
-}
-
-// Cek apakah ID artikel diterima
-if (!isset($_GET['id'])) {
-    echo "ID artikel tidak ditentukan.";
-    exit();
-}
+include '../db.php'; // Menghubungkan ke database
 
 $id = $_GET['id'];
-
-// Hapus artikel dari database
-$sql = "DELETE FROM articles WHERE id = ?";
-$stmt = $conn->prepare($sql);
+$query = "DELETE FROM articles WHERE id = ?";
+$stmt = $conn->prepare($query);
 $stmt->bind_param("i", $id);
-
 if ($stmt->execute()) {
-    header("Location: index.php"); // Redirect ke halaman index setelah berhasil
-    exit();
+    echo "<script>alert('Artikel berhasil dihapus.'); window.location.href='artikel.php';</script>";
 } else {
-    echo "Error: " . $stmt->error;
+    echo "<script>alert('Gagal menghapus artikel.'); window.location.href='artikel.php';</script>";
 }
 ?>

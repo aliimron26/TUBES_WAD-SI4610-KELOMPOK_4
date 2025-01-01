@@ -1,93 +1,58 @@
 <?php
-session_start();
-include '../db.php'; // Koneksi database
-include '../Layouts/navbar.php'; // Memasukkan Header
-
-// Cek apakah admin sudah login
-if (!isset($_SESSION['id_admin'])) {
-    header("Location: login_admin.php");
-    exit();
-}
-
-// Cek apakah ID artikel diterima
-if (!isset($_GET['id'])) {
-    echo "ID artikel tidak ditentukan.";
-    exit();
-}
+include '../Layouts/main-navbar.php';
+include '../db.php'; // Menghubungkan ke database
 
 $id = $_GET['id'];
-
-// Mengambil data artikel dari database
-$sql = "SELECT * FROM articles WHERE id = ?";
-$stmt = $conn->prepare($sql);
+$query = "SELECT * FROM articles WHERE id = ?";
+$stmt = $conn->prepare($query);
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
-
-if ($result->num_rows == 0) {
-    echo "Artikel tidak ditemukan.";
-    exit();
-}
-
 $article = $result->fetch_assoc();
 
-// Proses pembaruan artikel
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
-    $image = $_FILES['image'];
+    $image = $_FILES['image']['name'];
+    $target = "assets/img/articles/" . basename($image);
 
-    // Validasi dan sanitasi data
-    $title = $conn->real_escape_string($title);
-    $content = $conn->real_escape_string($content);
-
-    // Proses upload gambar jika ada
-    if ($image['name']) {
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($image["name"]);
-        move_uploaded_file($image["tmp_name"], $target_file);
-
-        // Update artikel ke database dengan gambar baru
-        $sql = "UPDATE articles SET title = ?, content = ?, image = ? WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssi", $title, $content, $image['name'], $id);
+    if ($image) {
+        // Update dengan gambar baru
+        $query = "UPDATE articles SET title = ?, content = ?, image = ? WHERE id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("sssi", $title, $content, $image, $id);
+        if ($stmt->execute()) {
+            move_uploaded_file($_FILES['image']['tmp_name'], $target);
+            echo "<script>alert('Artikel berhasil diperbarui.'); window.location.href='artikel.php';</script>";
+        } else {
+            echo "<script>alert('Gagal memperbarui artikel.');</script>";
+        }
     } else {
-        // Update artikel ke database tanpa mengubah gambar
-        $sql = "UPDATE articles SET title = ?, content = ? WHERE id = ?";
-        $stmt = $conn->prepare($sql);
+        // Update tanpa mengganti gambar
+        $query = "UPDATE articles SET title = ?, content = ? WHERE id = ?";
+        $stmt = $conn->prepare($query);
         $stmt->bind_param("ssi", $title, $content, $id);
-    }
-
-    if ($stmt->execute()) {
-        header("Location: view_article.php?id=" . $id); // Redirect ke halaman detail artikel setelah berhasil
-        exit();
-    } else {
-        echo "Error: " . $stmt->error;
+        if ($stmt->execute()) {
+            echo "<script>alert('Artikel berhasil diperbarui.'); window.location.href='artikel.php';</script>";
+        } else {
+            echo "<script>alert('Gagal memperbarui artikel.');</script>";
+        }
     }
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Article - Tel-U Looks</title>
-    <link href="../assets/css/login_register.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <h1>Update Article</h1>
-        <form method="POST" enctype="multipart/form-data">
-            <input type="text" name="title" value="<?php echo htmlspecialchars($article['title']); ?>" required>
-            <textarea name="content" required><?php echo htmlspecialchars($article['content']); ?></textarea>
-            <input type="file" name="image">
-            <p>Current Image: <img src="uploads/<?php echo htmlspecialchars($article['image']); ?>" width="100"></p>
-            <button type="submit">Update Article</button>
-        </form>
-        <button onclick="location.href='view_article.php?id=<?php echo $article['id']; ?>'">Kembali</button>
-    </div>
-</body>
-</html>
+<main class="main">
+    <section class="update-article section">
+        <div class="container">
+            <h2>Perbarui Artikel</h2>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <input type="text" name="title" value="<?php echo $article['title']; ?>" required>
+                <textarea name="content" required><?php echo $article['content']; ?></textarea>
+                <input type="file" name="image">
+                <button type="submit">Perbarui Artikel</button>
+            </form>
+        </div>
+    </section>
+</main>
 
-<?php include '../Layouts/footer.php'; // Memasukkan Footer ?>
+<?php include '../Layouts/footer.php'; ?>
