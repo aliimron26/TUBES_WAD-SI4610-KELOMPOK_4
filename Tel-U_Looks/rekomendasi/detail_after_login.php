@@ -3,7 +3,7 @@
 session_start();
 
 // Memasukkan Header
-include '../Layouts/navbar.php';
+include '../Layouts/main-navbar.php';
 
 // Data produk
 $produk = [
