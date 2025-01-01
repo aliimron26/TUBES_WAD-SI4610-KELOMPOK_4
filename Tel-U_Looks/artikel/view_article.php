@@ -1,7 +1,7 @@
 <?php
 session_start();
 include '../db.php'; // Koneksi database
-include '../Layouts/main-navbar.php'; // Memasukkan Header
+include '../Layouts/navbar.php'; // Memasukkan Header
 
 // Cek apakah ID artikel diterima
 if (!isset($_GET['id'])) {
@@ -41,7 +41,7 @@ $article = $result->fetch_assoc();
         <p><?php echo nl2br(htmlspecialchars($article['content'])); ?></p>
         <p>Published on: <?php echo $article['created_at']; ?> by <?php echo htmlspecialchars($article['admin_name']); ?></p>
 
-        <?php if (isset($_SESSION['admin_id'])): // Jika admin ?>
+        <?php if (isset($_SESSION['id_admin'])): // Jika admin ?>
             <div class="admin-actions">
                 <a href="update_article.php?id=<?php echo $article['id']; ?>" class="edit-button">✏️ Edit</a>
                 <a href="delete_article.php?id=<?php echo $article['id']; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');" class="delete-button">🗑️ Hapus</a>

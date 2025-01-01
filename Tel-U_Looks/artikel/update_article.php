@@ -1,10 +1,10 @@
 <?php
 session_start();
 include '../db.php'; // Koneksi database
-include '../Layouts/main-navbar.php'; // Memasukkan Header
+include '../Layouts/navbar.php'; // Memasukkan Header
 
 // Cek apakah admin sudah login
-if (!isset($_SESSION['admin_id'])) {
+if (!isset($_SESSION['id_admin'])) {
     header("Location: login_admin.php");
     exit();
 }
