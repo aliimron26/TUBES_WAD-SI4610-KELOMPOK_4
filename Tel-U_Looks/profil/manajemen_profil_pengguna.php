@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manajemen Profil Pengguna</title>
-    <link rel="stylesheet" href="manajemen_profil_pengguna.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="manajemen_profil_pengguna.css">
     <script type="text/javascript" src="theme.js" defer></script>
 </head>
 
@@ -46,7 +46,7 @@
                                 <img src="cute cat.jpg" alt
                                     class="d-block ui-w-80">
                                 <div class="media-body ml-4">
-                                    <label class="btn btn-outline-primary">
+                                    <label class="btn btn-custom">
                                         Upload new photo
                                         <input type="file" class="account-settings-fileinput">
                                     </label> &nbsp;
@@ -67,10 +67,6 @@
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">E-mail</label>
                                     <input type="text" class="form-control mb-1" value="aryanugraha@mail.com" style="background-color: var(--base-variant); color: var(--text-color);">
-                                    <div class="alert alert-warning mt-3" style="background-color: var(--base-variant); color: var(--text-color);">
-                                        Your email is not confirmed. Please check your inbox.<br>
-                                        <a href="javascript:void(0)" style="color: var(--link-color);">Resend confirmation</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -227,7 +223,7 @@
             </div>
         </div>
         <div class="text-right mt-3">
-            <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+            <button type="button" class="btn btn-custom">Save changes</button>&nbsp;
             <button type="button" class="btn btn-default">Cancel</button>
         </div>
     </div>
