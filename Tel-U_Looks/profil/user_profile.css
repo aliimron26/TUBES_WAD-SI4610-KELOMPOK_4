@@ -55,7 +55,7 @@ body{
     padding:0;
 }
 
-.social-list li{
+.social-list a{
     padding:10px;
     color:#059ea3;
     font-size:19px;

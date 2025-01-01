@@ -14,7 +14,11 @@ $produk = [
         'deskripsi' => 'Salah satu fashion items penolong yang bisa kamu ambil dari lemari saat hari pertama semester baru perkuliahan adalah a-line midi skirt. 
         Padukan rok dengan atasan sesuai keinginan. Pakailah flat shoes atau sepatu kets yang sesuai dengan keinginan, dan tara! Kamu siap pergi ke kampus.',
         'harga' => 'Rp 150.000',
-        'link_affiliate' => 'https://shopee.co.id/example-link-1'
+        'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id',
+            'tokopedia' => 'https://www.tokopedia.com',
+            'lazada' => 'https://www.lazada.co.id'
+        ],
     ],
     [
       'id' => 2,
@@ -23,6 +27,11 @@ $produk = [
       'deskripsi' => 'Outer tampaknya selalu menjadi pakaian yang selalu menarik bagi para hijabers. Sebab, outer memang dirancang secara khusus agar bisa sesuai dengan berbagai macam tampilan outfit yang dipakai oleh banyak orang. 
       Gunakan celana jeans kulot untuk bisa mengantongi kakimu yang jenjang. Kenakan juga inner pakaian warna terang yang dikombinasikan dengan outer dengan gaya casual seperti ini. Dijamin, cantik banget!',
       'harga' => 'Rp 200.000',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id',
+            'tokopedia' => 'https://www.tokopedia.com',
+            'lazada' => 'https://www.lazada.co.id'
+        ],
     ],
     [
       'id' => 3,
@@ -31,6 +40,11 @@ $produk = [
       'deskripsi' => 'Outfit yang satu ini bisa menjadi andalan kamu saat cuaca dingin atau hujan tiba. Selain membuat tubuh lebih hangat, memadukan sweater menggunakan celana jeans atau bahan juga cukup stylish untuk dikenakan saat kuliah, lho. 
       Kamu juga bisa menambahkan kemeja di dalam sweater agar terlihat semi-formal.',
       'harga' => 'Rp 250.000',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id',
+            'tokopedia' => 'https://www.tokopedia.com',
+            'lazada' => 'https://www.lazada.co.id'
+        ],
     ],
     [
       'id' => 4,
@@ -40,6 +54,11 @@ $produk = [
       Karena bahan dasar yang berbeda itu pula, kesan yang ditimbulkan saat memakainya pun berbeda. Orang yang memakai denim vest akan terlihat lebih boyish dan cool.
       Memakai denim vest juga bisa jadi alternatif bagi kamu yang ingin memakai setelan berkerah tapi tidak ingin terlihat terlalu kaku dan formal.',
       'harga' => 'Rp 300.000',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id',
+            'tokopedia' => 'https://www.tokopedia.com',
+            'lazada' => 'https://www.lazada.co.id'
+        ],
     ],
     [
       'id' => 5,
@@ -48,6 +67,11 @@ $produk = [
       'deskripsi' => 'Meskipun terlihat formal dan kaku, sebenarnya baju batik bisa menjadi keren dengan jenis celana dan sepatu yang sesuai, lho. 
       Dengan memilih kemeja yang dari bahan katun premium dan dilapisi oleh furing, kemeja batik yang kamu gunakan akan menjadi kemeja yang sangat nyaman dan tidak akan bikin kepanasan saat mengikuti perkuliahan.',
       'harga' => 'Rp 350.000',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id',
+            'tokopedia' => 'https://www.tokopedia.com',
+            'lazada' => 'https://www.lazada.co.id'
+        ],
     ],
     [
       'id' => 6,
@@ -56,6 +80,11 @@ $produk = [
       'deskripsi' => 'Blazer adalah salah satu penyelamat di kala kamu tidak tahu lagi haru mengenakan outfit apa ke kampus. 
       Padukan blazer dengan kaos atau kemeja polos, juga celana favorit. Jangan lupa kenakan sepatu yang nyaman, ya! Tambahkan totebag untuk membawa peralatan perkuliahanmu.',
       'harga' => 'Rp 400.000',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id',
+            'tokopedia' => 'https://www.tokopedia.com',
+            'lazada' => 'https://www.lazada.co.id'
+        ],
     ],
     [
       'id' => 7,
@@ -68,6 +97,11 @@ $produk = [
       Berikutnya, kamu bisa memaksimalkan penampilan dengan memasukkan kaos ke dalam celana jeans. 
       Trik ini membuat look kamu akan semakin elegan sekaligus kasual.',
       'harga' => 'Rp450.000',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id',
+            'tokopedia' => 'https://www.tokopedia.com',
+            'lazada' => 'https://www.lazada.co.id'
+        ],
     ],
     [
       'id' => 8,
@@ -75,6 +109,11 @@ $produk = [
       'gambar' => '../assets/img/gallery/produk 8.jpg',
       'deskripsi' => 'Tentunya perpaduan kaos/kemeja dengan celana jeans adalah hal yang sangat sering digunakan oleh para mahasiswa.',
       'harga' => 'Rp 500.000',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id',
+            'tokopedia' => 'https://www.tokopedia.com',
+            'lazada' => 'https://www.lazada.co.id'
+        ],
     ],
 ];
 
@@ -103,88 +142,119 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detail Produk</title>
-  <!-- Tambahkan SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- Tambahkan Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk</title>
+    <!-- Tambahkan SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Tambahkan Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-  <div class="container mt-5">
-      <div class="row">
-          <div class="col-md-5">
-              <img src="<?php echo htmlspecialchars($detail['gambar']); ?>" alt="<?php echo htmlspecialchars($detail['nama']); ?>" class="img-fluid">
-          </div>
-          <div class="col-md-7">
-              <h2><?php echo htmlspecialchars($detail['nama']); ?></h2>
-              <p><?php echo htmlspecialchars($detail['deskripsi']); ?></p>
-              <p><strong>Harga:</strong> <?php echo htmlspecialchars($detail['harga']); ?></p>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-5">
+                <img src="<?php echo htmlspecialchars($detail['gambar']); ?>" alt="<?php echo htmlspecialchars($detail['nama']); ?>" class="img-fluid">
+            </div>
+            <div class="col-md-7">
+                <h2><?php echo htmlspecialchars($detail['nama']); ?></h2>
+                <p><?php echo htmlspecialchars($detail['deskripsi']); ?></p>
+                <p><strong>Harga:</strong> <?php echo htmlspecialchars($detail['harga']); ?></p>
 
-              <!-- Tombol Affiliate -->
-              <a href="<?php echo htmlspecialchars($detail['link_affiliate']); ?>" target="_blank" class="btn btn-primary mt-3">Beli Produk</a>
+                <!-- Tombol Affiliate -->
+                <button id="buyProductBtn" class="btn mt-3" style="background-color:#059ea3; color:white">Beli Produk</button>
 
-              <!-- Tombol Wishlist -->
-              <button id="wishlistBtn" class="btn btn-danger mt-3">Tambah ke Wishlist</button>
-          </div>
-      </div>
-  </div>
+                <!-- Tombol Wishlist -->
+                <button id="wishlistBtn" class="btn btn-danger mt-3">Tambah ke Wishlist</button>
+            </div>
+        </div>
+    </div>
 
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-      const wishlistBtn = document.getElementById("wishlistBtn");
+    <!-- Modal Pilihan Platform -->
+    <div class="modal fade" id="platformModal" tabindex="-1" aria-labelledby="platformModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="platformModalLabel">Pilih Platform untuk Membeli Produk</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Silakan pilih platform tempat Anda ingin membeli produk ini:</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="<?php echo htmlspecialchars($detail['link_affiliate']['shopee']); ?>" target="_blank" class="btn btn-warning">Shopee</a>
+                        <a href="<?php echo htmlspecialchars($detail['link_affiliate']['tokopedia']); ?>" target="_blank" class="btn btn-success">Tokopedia</a>
+                        <a href="<?php echo htmlspecialchars($detail['link_affiliate']['lazada']); ?>" target="_blank" class="btn btn-primary">Lazada</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-      wishlistBtn.addEventListener("click", function () {
-          <?php if ($isLoggedIn): ?>
-              // Jika user sudah login
-              Swal.fire({
-                  title: 'Berhasil!',
-                  text: 'Wishlist Anda telah tersimpan!',
-                  icon: 'success',
-                  confirmButtonText: 'OK'
-              });
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Tombol Beli Produk
+        const buyProductBtn = document.getElementById("buyProductBtn");
 
-              // Kirim data wishlist ke server (Opsional)
-              fetch("wishlist.php", {
-                  method: "POST",
-                  headers: {
-                      "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({ productId: <?php echo $detail['id']; ?> }),
-              })
-              .then(response => response.json())
-              .then(data => {
-                  if (!data.success) {
-                      Swal.fire({
-                          title: 'Error!',
-                          text: data.message,
-                          icon: 'error',
-                          confirmButtonText: 'OK'
-                      });
-                  }
-              })
-              .catch(error => {
-                  console.error("Error:", error);
-                  Swal.fire({
-                      title: 'Error!',
-                      text: 'Terjadi kesalahan saat menyimpan wishlist.',
-                      icon: 'error',
-                      confirmButtonText: 'OK'
-                  });
-              });
-          <?php else: ?>
-              // Jika user belum login
-              Swal.fire({
-                  title: 'Gagal!',
-                  text: 'Silakan login terlebih dahulu untuk menambahkan ke wishlist.',
-                  icon: 'warning',
-                  confirmButtonText: 'OK'
-              });
-          <?php endif; ?>
-      });
-  });
-  </script>
+        buyProductBtn.addEventListener("click", function () {
+            const platformModal = new bootstrap.Modal(document.getElementById("platformModal"));
+            platformModal.show();
+        });
+
+        // Tombol Wishlist
+        const wishlistBtn = document.getElementById("wishlistBtn");
+
+        wishlistBtn.addEventListener("click", function () {
+            <?php if ($isLoggedIn): ?>
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: 'Wishlist Anda telah tersimpan!',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+
+                // Kirim data wishlist ke server (Opsional)
+                fetch("wishlist.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ productId: <?php echo $detail['id']; ?> }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: data.message,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan saat menyimpan wishlist.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
+            <?php else: ?>
+                Swal.fire({
+                    title: 'Gagal!',
+                    text: 'Silakan login terlebih dahulu untuk menambahkan ke wishlist.',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+            <?php endif; ?>
+        });
+    });
+    </script>
 </body>
 </html>
 

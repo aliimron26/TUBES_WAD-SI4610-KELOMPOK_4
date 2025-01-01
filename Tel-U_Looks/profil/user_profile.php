@@ -27,11 +27,11 @@
                             <p class="fonts">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                         </div>
                         <ul class="social-list">
-                            <li><i class="fa fa-twitter"></i></li>
-                            <li><i class="fa fa-facebook"></i></li>
-                            <li><i class="fa fa-google"></i></li>
-                            <li><i class="fa fa-linkedin"></i></li>
-                            <li><i class="fa fa-instagram"></i></li>
+                            <li><a href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://facebook.com" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://google.com" target="_blank"><i class="fa fa-google"></i></a></li>
+                            <li><a href="https://linkedin.com" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="https://instagram.com" target="_blank"><i class="fa fa-instagram"></i></a></li>
                         </ul>
                         <div class="a">
                             <a href="../profil/manajemen_profil_pengguna.php" class="btn btn-outline-primary px-4">Edit Profile</a>

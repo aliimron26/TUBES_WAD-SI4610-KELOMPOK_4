@@ -12,7 +12,7 @@
 <body>
   <!-- Header Section -->
   <header>
-    <nav class="navbar navbar-expand-lg custom-navbar" id="navmenu" class="navmenu">
+    <nav class="navbar navbar-expand-lg custom-navbar">
       <div class="container">
         <a class="navbar-brand text-white">TEL-U LOOKS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
