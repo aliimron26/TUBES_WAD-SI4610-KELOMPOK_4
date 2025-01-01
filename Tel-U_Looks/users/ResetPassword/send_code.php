@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
-require 'db.php'; // File konfigurasi untuk koneksi database
+include '../../db.php';
 
 // Fungsi untuk membuat kode verifikasi random
 function generateVerificationCode($length = 6) {
@@ -54,15 +54,16 @@ if ($result->num_rows > 0) {
             <p><b>Tel-U Looks</b></p>
         ";
         $mail->send();
-        header("location:step2.php?alert=berhasil");
+        header("location:step2.php?status=berhasil");
     } catch (Exception $e) {
-        header("location:step1.php?alert=gagal");
+        header("location:step1.php?status=gagal");
     }
 } else {
     // Email tidak ditemukan
-    header("location:step1.php?alert=not_registered");
+    header("location:step1.php?status=not_registered");
 }
 
 $stmt->close();
 $conn->close();
 ?>
+

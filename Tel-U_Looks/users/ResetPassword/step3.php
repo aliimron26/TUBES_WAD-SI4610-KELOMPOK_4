@@ -23,12 +23,5 @@
         <img src="../../Assets/Logo-P.png" alt="Tel-U Looks Logo">
         <h2>Tel-U Looks: Explore, Inspire, Express</h2>
     </div>
-
-    <script>
-        function handleResetPassword() {
-            alert('Password reset successfully!');
-            window.location.href = "login_user.php";
-        }
-    </script>
 </body>
 </html>

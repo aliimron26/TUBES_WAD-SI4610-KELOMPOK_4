@@ -22,7 +22,7 @@
       <a href="../artikel/create_article.php"><i class="bi bi-file-earmark-plus"></i> <span>Tambah Artikel</span></a>
       <a href="../artikel/manage_articles.php"><i class="bi bi-folder"></i> <span>Kelola Artikel</span></a>
     </div>
-    <a href="login_admin.php" class="logout"><i class="bi bi-box-arrow-right"></i> <span>Keluar</span></a>
+    <a href="../admin/login_admin.php" class="logout"><i class="bi bi-box-arrow-right"></i> <span>Keluar</span></a>
   </div>
 
   <script>

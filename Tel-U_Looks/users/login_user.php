@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
 
             <p class="forgot-password">
-                <a href="reset_password_step1.php">Forgot Password?</a>
+                <a href="ResetPassword/step1.php">Forgot Password?</a>
             </p>
             <p>Don't have an account? <a href="register.php">Register here</a></p>
             <hr style="width: 100%; max-width: 300px; margin: 20px 0;">
@@ -91,5 +91,63 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <h2>Tel-U Looks: Explore, Inspire, Express</h2>
         </div>
     </div>
+    <script>
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            
+            // Set kelas untuk tipe notifikasi
+            notification.className = `alert alert-${type}`;
+            
+            // Menambahkan style untuk warna latar belakang dan teks berdasarkan tipe
+            if (type === 'success') {
+            notification.style.backgroundColor = '#28a745';  // Hijau untuk success
+            notification.style.color = '#fff';  // Warna teks putih
+            } else if (type === 'danger') {
+            notification.style.backgroundColor = '#dc3545';  // Merah untuk error
+            notification.style.color = '#fff';  // Warna teks putih
+            } else {
+            notification.style.backgroundColor = '#f9f9f9';  // Warna default
+            notification.style.color = '#333';  // Warna teks default
+            }
+            
+            // Style untuk penempatan dan animasi
+            notification.style.position = 'fixed';
+            notification.style.top = '50%';
+            notification.style.left = '50%';
+            notification.style.transform = 'translate(-50%, -50%)';
+            notification.style.zIndex = '1050';
+            notification.style.padding = '20px 40px';
+            notification.style.textAlign = 'center';
+            notification.style.borderRadius = '8px';
+            notification.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+            notification.style.transition = 'opacity 0.5s ease-in-out';
+            
+            document.body.appendChild(notification);
+
+            // Menghapus notifikasi setelah 3 detik
+            setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        // Menangkap parameter URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+
+        // Menampilkan notifikasi berdasarkan status
+        if (status === 'password_reset_success') {
+            showNotification('Password berhasil diperbaru!', 'success');
+        } else if (status === 'terhapus') {
+            showNotification('Data berhasil dihapus!', 'success');
+        } else if (status === 'error') {
+            showNotification('Terjadi kesalahan, Data gagal diperbaru.', 'danger');
+        }
+        </script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
