@@ -51,8 +51,8 @@
                 <i class="fas fa-user"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                <li><a class="dropdown-item" href="#">Profil</a></li>
-                <li><a class="dropdown-item" href="#">Pengaturan</a></li>
+                <li><a class="dropdown-item" href="../profil/user_profile.php">Profil</a></li>
+                <li><a class="dropdown-item" href="../profil/manajemen_profil_pengguna.php">Pengaturan</a></li>
                 <li><a class="dropdown-item" href="../index.php">Keluar</a></li>
             </ul>
           </li>
