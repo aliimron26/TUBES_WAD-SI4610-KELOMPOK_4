@@ -72,3 +72,17 @@
     .modal-content {
       border-radius: 10px;
     }
+
+    .alert {
+      padding: 15px;
+      border-radius: 5px;
+      font-size: 1rem;
+      color: white;
+    }
+    .alert-success {
+      background-color: #0ea8ac;
+    }
+    .alert-danger {
+      background-color: #ff4d4d;
+    }
+    

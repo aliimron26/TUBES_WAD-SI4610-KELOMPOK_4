@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $link_shopee = $_POST['link_shopee'] ?? '';
     $link_tokopedia = $_POST['link_tokopedia'] ?? '';
     $link_lazada = $_POST['link_lazada'] ?? '';
-    $status = 'Pending';
+    $status = 'Upload';
 
     $target_dir = "../assets/rekomendasi/";
     $image_name = basename($_FILES['gambar']['name']);
@@ -35,12 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param('ssissssss', $nama, $deskripsi, $harga, $link_shopee, $link_tokopedia, $link_lazada, $image_name, $status, $kategori);
 
         if ($stmt->execute()) {
-            header("Location: ../index.php");
+            header("Location: add_recomendation_admin.php?status=success");
         } else {
-            echo "Terjadi kesalahan: " . $stmt->error;
+            header("Location: add_recomendation_admin.php?status=error");
         }
     } else {
-        echo "Gagal mengunggah gambar.";
+        header("Location: add_recomendation_admin.php?status=error");
     }
 } else {
     echo "Form tidak di-submit dengan benar.";

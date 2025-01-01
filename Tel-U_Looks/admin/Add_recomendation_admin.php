@@ -3,7 +3,6 @@
 include '../Layouts/sidebar-admin.php';
 ?>
 
-<!-- Konten Utama untuk Tambah Rekomendasi -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -13,34 +12,28 @@ include '../Layouts/sidebar-admin.php';
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="../assets/css/add_rekomendasi.css" rel="stylesheet">
-  
 </head>
 <body>
   <div class="container mt-5">
     <h2>Tambah Rekomendasi Fashion</h2>
     <div class="card">
-      <form action="proses_tambah_rekomendasi.php" method="POST" enctype="multipart/form-data" id="fashionForm">
-        <!-- Informasi Produk -->
+      <form action="proses_tambah_rekomendasi_admin.php" method="POST" enctype="multipart/form-data" id="fashionForm">
+        <!-- Form Fields -->
         <div class="section-header">Informasi Produk</div>
-
         <div class="mb-3">
           <label for="nama" class="form-label">Nama Fashion</label>
           <input type="text" class="form-control" id="nama" name="nama" placeholder="Contoh: Seragam Mahasiswa Teknik">
         </div>
-
         <div class="mb-3">
           <label for="deskripsi" class="form-label">Deskripsi Fashion</label>
           <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4" placeholder="Tuliskan deskripsi singkat mengenai produk"></textarea>
         </div>
-
         <div class="mb-3">
           <label for="harga" class="form-label">Harga Fashion (Rp)</label>
           <input type="number" class="form-control" id="harga" name="harga" placeholder="Masukkan harga produk">
         </div>
-
-        <!-- Kategori Pengguna -->
+        <!-- Kategori -->
         <div class="section-header">Kategori Pengguna</div>
-
         <div class="mb-3">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="dosen" name="kategori[]" value="Dosen">
@@ -51,99 +44,73 @@ include '../Layouts/sidebar-admin.php';
             <label class="form-check-label" for="mahasiswa">Rekomendasi untuk Mahasiswa</label>
           </div>
         </div>
-
         <!-- Link Afiliasi -->
         <div class="section-header">Link Afiliasi</div>
-
         <div class="mb-3">
           <label for="link_shopee" class="form-label">Link Afiliasi Shopee</label>
           <input type="url" class="form-control" id="link_shopee" name="link_shopee" placeholder="Masukkan URL afiliasi Shopee">
         </div>
-
         <div class="mb-3">
           <label for="link_tokopedia" class="form-label">Link Afiliasi Tokopedia</label>
           <input type="url" class="form-control" id="link_tokopedia" name="link_tokopedia" placeholder="Masukkan URL afiliasi Tokopedia">
         </div>
-
         <div class="mb-3">
           <label for="link_lazada" class="form-label">Link Afiliasi Lazada</label>
           <input type="url" class="form-control" id="link_lazada" name="link_lazada" placeholder="Masukkan URL afiliasi Lazada">
         </div>
-
-        <!-- Unggah Foto Fashion -->
+        <!-- Unggah Foto -->
         <div class="section-header">Unggah Foto</div>
-
         <div class="mb-3">
           <label for="gambar" class="form-label">Unggah Foto Fashion</label>
           <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*">
         </div>
-
-        <!-- Tombol Submit dan Cancel -->
+        <!-- Tombol -->
         <div class="form-buttons">
           <button type="submit" class="btn btn-primary px-4 py-2">Simpan Rekomendasi</button>
-          <button type="button" class="btn btn-cancel px-4 py-2" id="cancelButton" data-bs-toggle="modal" data-bs-target="#cancelModal">Batal</button>
+          <button type="button" class="btn btn-cancel px-4 py-2" id="cancelButton">Batal</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Modal Popup Konfirmasi -->
-  <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="cancelModalLabel">Konfirmasi Pembatalan</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Apakah Anda yakin ingin membatalkan? Semua data yang diisi akan hilang.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-          <button type="button" class="btn btn-danger" id="confirmCancel">Ya, Batalkan</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
+  <!-- Notifikasi -->
   <script>
-    // Get form fields
-    const formFields = document.querySelectorAll('input, textarea');
-    
-    // Get cancel button and modal
-    const cancelButton = document.getElementById('cancelButton');
-    const cancelModal = new bootstrap.Modal(document.getElementById('cancelModal'));
+    function showNotification(message, type) {
+      const notification = document.createElement('div');
+      notification.textContent = message;
+      notification.className = `alert alert-${type}`;
+      notification.style.position = 'fixed';
+      notification.style.top = '50%';
+      notification.style.left = '50%';
+      notification.style.transform = 'translate(-50%, -50%)';
+      notification.style.zIndex = '1050';
+      notification.style.padding = '20px 40px';
+      notification.style.textAlign = 'center';
+      notification.style.borderRadius = '8px';
+      notification.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+      notification.style.transition = 'opacity 0.5s ease-in-out';
 
-    // Get confirm cancel button in the modal
-    const confirmCancelButton = document.getElementById('confirmCancel');
+      document.body.appendChild(notification);
 
-    // Function to check if any form fields are filled
-    function isFormFilled() {
-      let filled = false;
-      formFields.forEach(function(field) {
-        if (field.value.trim() !== "") {
-          filled = true;
-        }
-      });
-      return filled;
+      // Menghapus notifikasi setelah 2 detik
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => notification.remove(), 500);
+      }, 3000);
     }
 
-    // Cancel button behavior - show modal if form is filled
-    cancelButton.addEventListener('click', function() {
-      if (isFormFilled()) {
-        cancelModal.show();  // Show modal popup
-      } else {
-        window.location.href = '../index.php';  // Redirect to ../index.php if no fields are filled
-      }
-    });
+    // Menangkap parameter URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
 
-    // Confirm cancel action
-    confirmCancelButton.addEventListener('click', function() {
-      window.location.href = '../index.php';  // Redirect to ../index.php
-    });
+    // Menampilkan notifikasi berdasarkan status
+    if (status === 'success') {
+      showNotification('Data berhasil disimpan!', 'success');
+    } else if (status === 'error') {
+      showNotification('Terjadi kesalahan, data gagal disimpan.', 'danger');
+    }
   </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

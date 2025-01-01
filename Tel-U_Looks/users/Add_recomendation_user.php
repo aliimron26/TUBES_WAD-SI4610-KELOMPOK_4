@@ -1,6 +1,6 @@
 <?php
 // Memasukkan Header
-include '../Layouts/navbar.php';
+include '../Layouts/main-navbar.php';
 ?>
 
 <!-- Konten Utama untuk Tambah Rekomendasi -->
@@ -36,7 +36,6 @@ include '../Layouts/navbar.php';
           <label for="harga" class="form-label">Harga Fashion (Rp)</label>
           <input type="number" class="form-control" id="harga" name="harga" placeholder="Masukkan harga produk" required>
         </div>
-
 
         <!-- Kategori Pengguna -->
         <div class="section-header">Kategori Pengguna</div>
@@ -109,6 +108,41 @@ include '../Layouts/navbar.php';
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    // Fungsi untuk menampilkan notifikasi
+    function showNotification(message, type) {
+      const notification = document.createElement('div');
+      notification.textContent = message;
+      notification.className = `alert alert-${type}`;
+      notification.style.position = 'fixed';
+      notification.style.top = '50%';
+      notification.style.left = '50%';
+      notification.style.transform = 'translate(-50%, -50%)';
+      notification.style.zIndex = '1050';
+      notification.style.padding = '20px 40px';
+      notification.style.textAlign = 'center';
+      notification.style.borderRadius = '8px';
+      notification.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+      notification.style.transition = 'opacity 0.5s ease-in-out';
+
+      document.body.appendChild(notification);
+
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => notification.remove(), 500);
+      }, 3000);
+    }
+
+    // Menangkap parameter URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+
+    // Menampilkan notifikasi berdasarkan status
+    if (status === 'success') {
+      showNotification('Data berhasil disimpan!', 'success');
+    } else if (status === 'error') {
+      showNotification('Terjadi kesalahan, data gagal disimpan.', 'danger');
+    }
+
     // Get form fields
     const formFields = document.querySelectorAll('input, textarea');
     
@@ -135,13 +169,13 @@ include '../Layouts/navbar.php';
       if (isFormFilled()) {
         cancelModal.show();  // Show modal popup
       } else {
-        window.location.href = '../index.php';  // Redirect to ../index.php if no fields are filled
+        window.location.href = '../Layouts/app..php';  // Redirect to ../index.php if no fields are filled
       }
     });
 
     // Confirm cancel action
     confirmCancelButton.addEventListener('click', function() {
-      window.location.href = '../index.php';  // Redirect to ../index.php
+      window.location.href = '../Layouts/app.php';  // Redirect to ../index.php
     });
   </script>
 </body>
