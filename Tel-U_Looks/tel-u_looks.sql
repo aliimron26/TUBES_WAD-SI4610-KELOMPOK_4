@@ -63,10 +63,7 @@ CREATE TABLE articles (
     content TEXT NOT NULL,
     image VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    id_admin VARCHAR(10), -- Menyimpan ID admin yang membuat artikel
-    FOREIGN KEY (id_admin) REFERENCES admin(id_admin)
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
--- Menambahkan beberapa data contoh untuk artikel
-INSERT INTO articles (title, content, image) VALUES
-('Artikel Pertama', 'Ini adalah konten artikel pertama.', 'Prediksi_Tren_Fashion_Muslim_yang_akan_Booming_tahun_2022_4.png'),
+
+SELECT * FROM articles ORDER BY created_at DESC;

@@ -1,5 +1,5 @@
 <?php
-include '../Layouts/main-navbar.php';
+include '../Layouts/sidebar-admin.php';
 include '../db.php'; // Menghubungkan ke database
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt->execute()) {
         // Mengupload gambar
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-            echo "<script>alert('Artikel berhasil ditambahkan.'); window.location.href='artikel.php';</script>";
+            echo "<script>alert('Artikel berhasil ditambahkan.'); window.location.href='manage_articles.php';</script>";
         } else {
             echo "<script>alert('Gagal mengupload gambar.');</script>";
         }
@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -118,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <button type="submit">Buat Artikel</button>
         </form>
-        <a href="artikel.php" class="btn-secondary">Kembali ke Daftar Artikel</a>
+        <a href="manage_articles.php" class="btn-secondary">Kembali ke Kelola Artikel</a>
     </div>
 </body>
 </html>
