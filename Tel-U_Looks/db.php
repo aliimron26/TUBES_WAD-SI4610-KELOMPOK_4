@@ -1,13 +1,14 @@
-<?php 
-$host = "localhost"; // Nama server "localhost"
-$username = "root"; // Nama pengguna database
-$password = ''; // Kata sandi pengguna database
-$db = "telulooks"; // Nama database
+<?php
+$servername = "localhost";
+$username = "root"; // Ganti dengan username database Anda
+$password = ""; // Ganti dengan password database Anda
+$dbname = "tel_u_looks"; // Ganti dengan nama database Anda
 
-// Membuat Koneksi
-$conn = mysqli_connect($host, $username, $password, $db);
+// Membuat koneksi
+$conn = new mysqli($servername, $username, $password, $dbname);
 
+// Memeriksa koneksi
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Koneksi gagal: " . $conn->connect_error);
 }
 ?>
