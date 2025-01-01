@@ -12,7 +12,7 @@
 <body>
   <!-- Header Section -->
   <header>
-    <nav class="navbar navbar-expand-lg custom-navbar">
+    <nav class="navbar navbar-expand-lg custom-navbar" id="navmenu" class="navmenu">
       <div class="container">
         <a class="navbar-brand text-white">TEL-U LOOKS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -20,7 +20,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link text-white" href="../index.php">Back to Home</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="../index.php">Home</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="../index.php">About</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="../index.php">Rekomendasi</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="../index.php">Kontak</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="../users/login_user.php">Login</a></li>
           </ul>
         </div>
       </div>

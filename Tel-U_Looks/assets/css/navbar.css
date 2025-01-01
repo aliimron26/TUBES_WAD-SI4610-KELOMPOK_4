@@ -29,27 +29,27 @@
   }
 
   .custom-navbar .dropdown-menu {
-    background-color: #059ea3; /* Sama seperti warna navbar */
+    background-color: white; /* Sama seperti warna navbar */
     border-color: rgb(250, 250, 201); /* Hilangkan border */
     border-radius: 1.5; /* Opsional, sesuai gaya navbar */
 }
 
 .custom-navbar .dropdown-menu .dropdown-item {
-    color: white; /* Warna teks dropdown */
+    color: black; /* Warna teks dropdown */
     font-family: 'Poppins', sans-serif;
     opacity: 0.6; /* Sama dengan link di navbar */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .custom-navbar .dropdown-menu .dropdown-item:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Warna latar belakang saat hover */
-    color: white; /* Warna teks tetap putih */
+    background-color: rgba(228, 227, 227, 0.2); /* Warna latar belakang saat hover */
+    color: #059ea3; /* Warna teks tetap putih */
     opacity: 1;
 }
 
 .custom-navbar .dropdown-menu .dropdown-item:active {
-    background-color: rgba(255, 255, 255, 0.3); /* Latar belakang saat aktif */
-    color: white;
+    background-color: rgba(212, 212, 212, 0.3); /* Latar belakang saat aktif */
+    color: #059ea3;
     opacity: 1;
 }
 
