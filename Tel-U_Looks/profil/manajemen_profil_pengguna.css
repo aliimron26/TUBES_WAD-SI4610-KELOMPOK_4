@@ -4,7 +4,7 @@
     --text-color: #111528;
     --secondary-text: #232738;
     --primary-color: #3a435d;
-    --accent-color: #0071ff;
+    --accent-color: #059ea3;
 }
 
 .darkmode{
@@ -13,7 +13,7 @@
     --text-color: #ffffff;
     --secondary-text: #a4a5b8;
     --primary-color: #3a435d;
-    --accent-color: #0071ff;
+    --accent-color: #059ea3;
 }
 body {
     background-color: var(--color-bg);
