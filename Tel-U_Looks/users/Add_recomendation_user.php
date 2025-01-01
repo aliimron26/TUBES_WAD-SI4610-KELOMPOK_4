@@ -13,30 +13,30 @@ include '../Layouts/navbar.php';
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="../assets/css/add_rekomendasi.css" rel="stylesheet">
-  
 </head>
 <body>
   <div class="container mt-5">
     <h2>Tambah Rekomendasi Fashion</h2>
     <div class="card">
-      <form action="proses_tambah_rekomendasi.php" method="POST" enctype="multipart/form-data" id="fashionForm">
+      <form action="proses_tambah_rekomendasi_user.php" method="POST" enctype="multipart/form-data" id="fashionForm">
         <!-- Informasi Produk -->
         <div class="section-header">Informasi Produk</div>
 
         <div class="mb-3">
           <label for="nama" class="form-label">Nama Fashion</label>
-          <input type="text" class="form-control" id="nama" name="nama" placeholder="Contoh: Seragam Mahasiswa Teknik">
+          <input type="text" class="form-control" id="nama" name="nama" placeholder="Contoh: Seragam Mahasiswa Teknik" required>
         </div>
 
         <div class="mb-3">
           <label for="deskripsi" class="form-label">Deskripsi Fashion</label>
-          <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4" placeholder="Tuliskan deskripsi singkat mengenai produk"></textarea>
+          <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4" placeholder="Tuliskan deskripsi singkat mengenai produk" required></textarea>
         </div>
 
         <div class="mb-3">
           <label for="harga" class="form-label">Harga Fashion (Rp)</label>
-          <input type="number" class="form-control" id="harga" name="harga" placeholder="Masukkan harga produk">
+          <input type="number" class="form-control" id="harga" name="harga" placeholder="Masukkan harga produk" required>
         </div>
+
 
         <!-- Kategori Pengguna -->
         <div class="section-header">Kategori Pengguna</div>
@@ -75,7 +75,7 @@ include '../Layouts/navbar.php';
 
         <div class="mb-3">
           <label for="gambar" class="form-label">Unggah Foto Fashion</label>
-          <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*">
+          <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*" required>
         </div>
 
         <!-- Tombol Submit dan Cancel -->

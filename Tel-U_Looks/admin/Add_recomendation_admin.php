@@ -1,6 +1,6 @@
 <?php
 // Memasukkan Header
-include '../Layouts/navbar.php';
+include '../Layouts/sidebar-admin.php';
 ?>
 
 <!-- Konten Utama untuk Tambah Rekomendasi -->
@@ -147,6 +147,3 @@ include '../Layouts/navbar.php';
 </body>
 </html>
 
-<?php
-include '../Layouts/footer.php';
-?>
