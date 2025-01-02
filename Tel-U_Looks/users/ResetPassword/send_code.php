@@ -1,4 +1,5 @@
-<?php 
+<?php
+session_start();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -14,7 +15,6 @@ function generateVerificationCode($length = 6) {
 
 $email = htmlspecialchars($_POST['email']);
 
-
 $sql = "SELECT * FROM users WHERE email = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $email);
@@ -25,9 +25,9 @@ if ($result->num_rows > 0) {
     // Email ditemukan
     $verificationCode = generateVerificationCode(); 
 
-    // Simpan kode ke database (atau session, jika perlu)
-    session_start();
+    // Simpan kode dan email ke session
     $_SESSION['verification_code'] = $verificationCode;
+    $_SESSION['email'] = $email;
 
     $mail = new PHPMailer(true);
     try {
@@ -66,4 +66,3 @@ if ($result->num_rows > 0) {
 $stmt->close();
 $conn->close();
 ?>
-

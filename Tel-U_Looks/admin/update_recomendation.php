@@ -94,7 +94,7 @@ if (isset($_GET['id_rekomendasi'])) {
         <div class="mb-3">
           <label for="gambar" class="form-label">Unggah Foto Fashion</label>
           <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*">
-          <p>Foto saat ini: <?php echo $row['image'] ? '<img src="../uploads/'.$row['image'].'" width="100">' : 'Tidak ada gambar'; ?></p>
+          <p>Foto saat ini: <?php echo $row['image'] ? '<img src="../assets/rekomendasi/'.$row['image'].'" width="400">' : 'Tidak ada gambar'; ?></p>
         </div>
 
         <!-- Tombol -->

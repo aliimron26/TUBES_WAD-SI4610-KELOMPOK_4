@@ -1,40 +1,46 @@
 <?php
-session_start(); // Memulai session
 
-// Cek apakah admin sudah login
-if (isset($_SESSION['admin_id'])) {
-    header("Location: app.php"); // Redirect ke app.php jika sudah login
-    exit();
-}
+$error_message = "";
 
 // Proses login
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include '../db.php'; // Pastikan untuk menyertakan koneksi database
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    // Validasi input
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
-    // Query untuk memeriksa kredensial admin
-    $sql = "SELECT * FROM admin WHERE username = ? LIMIT 1";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    if (!empty($username) && !empty($password)) {
+        // Query untuk memeriksa kredensial admin
+        $sql = "SELECT * FROM admin WHERE username = ? LIMIT 1";
+        $stmt = $conn->prepare($sql);
 
-    if ($result->num_rows > 0) {
-        $admin = $result->fetch_assoc();
-        // Verifikasi password
-        if (password_verify($password, $admin['password'])) {
-            // Set session dan redirect ke app.php
-            $_SESSION['admin_id'] = $admin['id_admin'];
-            $_SESSION['admin_name'] = $admin['nama'];
-            header("Location: app.php"); // Ganti dengan halaman app.php
-            exit();
+        if ($stmt) {
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $admin = $result->fetch_assoc();
+                // Verifikasi password
+                if ($password == $admin['password']) {
+                    // Set session dan redirect ke app.php
+                    $_SESSION['admin_id'] = $admin['id_admin'];
+                    $_SESSION['admin_name'] = $admin['nama'];
+                    header("Location: list_recomendation.php");
+                    exit();
+                } else {
+                    $error_message = "Password salah.";
+                }
+            } else {
+                $error_message = "Username tidak ditemukan.";
+            }
+            $stmt->close();
         } else {
-            $error_message = "Username atau password salah.";
+            $error_message = "Terjadi kesalahan pada sistem. Coba lagi nanti.";
         }
     } else {
-        $error_message = "Username atau password salah.";
+        $error_message = "Harap isi username dan password.";
     }
 }
 ?>
@@ -52,8 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="container-left">
             <h1>Welcome Back</h1>
             <p>Please login to your account</p>
-            <?php if (isset($error_message)): ?>
-                <div class="error-message"><?php echo $error_message; ?></div>
+            <?php if (!empty($error_message)): ?>
+                <div class="error-message"><?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?></div>
             <?php endif; ?>
             <form method="POST" action="">
                 <div class="input-container">

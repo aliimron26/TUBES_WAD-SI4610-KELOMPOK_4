@@ -50,8 +50,7 @@ $result = $conn->query($query);
                                 echo "<td><a href='" . $row['link_affiliate_tokopedia'] . "' target='_blank'>Tokopedia</a></td>";
                                 echo "<td><a href='" . $row['link_affiliate_lazada'] . "' target='_blank'>Lazada</a></td>";
                                 echo "<td>
-                                        <a href='update_recomendation.php?id_rekomendasi=" . $row['id_rekomendasi'] . "' class='btn btn-warning btn-sm'>Update</a>
-                                        <a href='delete.php?id_rekomendasi=" . $row['id_rekomendasi'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Apakah Anda yakin ingin menghapus data ini?\")'>Delete</a>       
+                                        <a href='review_recomendation_pending.php?id_rekomendasi=" . $row['id_rekomendasi'] . "' class='btn btn-warning btn-sm'>Review</a>   
                                       </td>";
                                 echo "</tr>";
                             }

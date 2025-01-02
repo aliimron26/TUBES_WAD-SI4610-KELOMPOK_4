@@ -1,42 +1,42 @@
 <?php
-session_start();
-include '../../db.php';
+session_start(); // Memulai session
+include '../../db.php'; // Tambahkan koneksi database
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Mendapatkan input dari pengguna
-    $newPassword = htmlspecialchars($_POST['new-password']);
-    $confirmPassword = htmlspecialchars($_POST['confirm-password']);
-    $email = $_SESSION['reset_email']; // Pastikan email disimpan pada langkah sebelumnya
+// Ambil password baru dari form
+$newPassword = htmlspecialchars($_POST['new-password']);
+$confirmPassword = htmlspecialchars($_POST['confirm-password']);
 
-    // Validasi input
-    if (empty($newPassword) || empty($confirmPassword)) {
-        header("Location: step3.php?alert=empty_fields");
-        exit();
-    }
-
-    if ($newPassword !== $confirmPassword) {
-        header("Location: step3.php?alert=password_mismatch");
-        exit();
-    }
-
-    // Enkripsi password baru
+if ($newPassword === $confirmPassword) {
+    // Hash password baru
     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
-    // Update password di database
-    $sql = "UPDATE users SET password = ? WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $hashedPassword, $email);
+    // Ambil email dari session
+    $email = isset($_SESSION['user_email']) ? $_SESSION['user_email'] : null;
 
-    if ($stmt->execute()) {
-        // Password berhasil diperbarui
-        session_destroy(); 
-        header("Location: ../login_user.php?status=password_reset_success");
+    if ($email) {
+        // Update password di database
+        $sql = "UPDATE users SET password = ? WHERE email = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $hashedPassword, $email);
+        
+        if ($stmt->execute()) {
+            // Berhasil mengupdate password
+            unset($_SESSION['user_email']); // Hapus email dari session
+            header("Location: ../login_user.php?status=success");
+            exit();
+        } else {
+            // Gagal mengupdate password
+            header("Location: step3.php?alert=update_failed");
+            exit();
+        }
     } else {
-        // Gagal memperbarui password
-        header("Location: step3.php?alert=update_failed");
+        // Email tidak ditemukan di session
+        header("Location: step3.php?alert=session_error");
+        exit();
     }
-
-    $stmt->close();
-    $conn->close();
+} else {
+    // Password tidak cocok
+    header("Location: step3.php?alert=password_mismatch");
+    exit();
 }
 ?>

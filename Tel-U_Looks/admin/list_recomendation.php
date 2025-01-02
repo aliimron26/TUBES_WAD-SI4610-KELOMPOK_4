@@ -9,7 +9,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 include '../db.php';
 
 // Query untuk mendapatkan semua data rekomendasi
-$query = "SELECT id_rekomendasi, nama_fashion, deskripsi_fashion, harga, kategori, link_affiliate_shopee, link_affiliate_tokopedia, link_affiliate_lazada, status FROM rekomendasi";
+$query = "SELECT * FROM rekomendasi WHERE status = 'Upload'";
 $result = $conn->query($query);
 ?>
 
@@ -31,7 +31,6 @@ $result = $conn->query($query);
                             <th>Shopee</th>
                             <th>Tokopedia</th>
                             <th>Lazada</th>
-                            <th>Status</th>
                             <th>Aksi</th> <!-- Kolom Aksi untuk tombol Update dan Delete -->
                         </tr>
                     </thead>
@@ -49,7 +48,6 @@ $result = $conn->query($query);
                                 echo "<td><a href='" . $row['link_affiliate_shopee'] . "' target='_blank'>Shopee</a></td>";
                                 echo "<td><a href='" . $row['link_affiliate_tokopedia'] . "' target='_blank'>Tokopedia</a></td>";
                                 echo "<td><a href='" . $row['link_affiliate_lazada'] . "' target='_blank'>Lazada</a></td>";
-                                echo "<td>" . $row['status'] . "</td>";
                                 echo "<td>
                                         <a href='update_recomendation.php?id_rekomendasi=" . $row['id_rekomendasi'] . "' class='btn btn-warning btn-sm'>Update</a>
                                         <a href='delete_recomendation.php?id_rekomendasi=" . $row['id_rekomendasi'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Apakah Anda yakin ingin menghapus data ini?\")'>Delete</a>       
