@@ -1,4 +1,5 @@
 <?php
+session_start(); // Memulai session
 include '../Layouts/main-navbar.php';
 include '../db.php'; // Menghubungkan ke database
 
@@ -25,12 +26,23 @@ if (!$article) {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo htmlspecialchars($article['title']); ?></title>
+    <link href="../assets/css/style.css" rel="stylesheet"> <!-- Ganti dengan CSS Anda -->
+</head>
+<body>
 <main class="main">
     <section class="article-detail section">
         <div class="container">
             <h2><?php echo htmlspecialchars($article['title']); ?></h2>
-            <img src="<?php echo htmlspecialchars($article['image']); ?>" alt="<?php echo htmlspecialchars($article['title']); ?>" class="img-fluid">
-            <p><?php echo nl2br(htmlspecialchars($article['content'])); ?></p>
+            <?php if (!empty($article['image'])): ?>
+                <img src="<?php echo htmlspecialchars($article['image']); ?>" alt="<?php echo htmlspecialchars($article['title']); ?>" class="img-fluid">
+            <?php endif; ?>
+            <p><?php echo $article['content']; // Menampilkan konten sebagai HTML ?></p>
             <p><strong>Diterbitkan pada:</strong> <?php echo htmlspecialchars($article['created_at']); ?></p>
             <?php if (isset($_SESSION['admin_id'])): ?>
                 <a href="update_articles.php?id=<?php echo $article['id']; ?>" class="btn btn-warning">Edit Artikel</a>
@@ -41,3 +53,11 @@ if (!$article) {
 </main>
 
 <?php include '../Layouts/footer.php'; ?>
+
+</body>
+</html>
+
+<?php
+// Menutup koneksi database
+$conn->close();
+?>
