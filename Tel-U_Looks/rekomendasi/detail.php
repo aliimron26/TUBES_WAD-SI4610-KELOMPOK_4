@@ -12,6 +12,11 @@ $result = $conn->query($sql);
 // Cek status login pengguna
 $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
 //$userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
+
+// Link affiliate (pastikan link ini tersedia)
+$linkShopee = isset($detail['link_affiliate_shopee']) ? htmlspecialchars($detail['link_affiliate_shopee']) : '#';
+$linkTokopedia = isset($detail['link_affiliate_tokopedia']) ? htmlspecialchars($detail['link_affiliate_tokopedia']) : '#';
+$linkLazada = isset($detail['link_affiliate_lazada']) ? htmlspecialchars($detail['link_affiliate_lazada']) : '#';
 ?>
 
 <!DOCTYPE html>
@@ -189,12 +194,15 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <p>Silakan pilih platform tempat Anda ingin membeli produk ini:</p>
-                    <div class="d-flex justify-content-center gap-3">
-                        <a href="<?php echo htmlspecialchars($detail['link_affiliate_shopee']); ?>" target="_blank" class="btn btn-warning">Shopee</a>
-                        <a href="<?php echo htmlspecialchars($detail['link_affiliate_tokopedia']); ?>" target="_blank" class="btn btn-success">Tokopedia</a>
-                        <a href="<?php echo htmlspecialchars($detail['link_affiliate_lazada']); ?>" target="_blank" class="btn btn-primary">Lazada</a>
-                    </div>
+                    <?php if ($linkShopee === '#' && $linkTokopedia === '#' && $linkLazada === '#'): ?>
+                        <p class="text-danger">Link pembelian tidak tersedia.</p>
+                    <?php else: ?>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="<?= $linkShopee ?>" target="_blank" class="btn btn-warning">Shopee</a>
+                            <a href="<?= $linkTokopedia ?>" target="_blank" class="btn btn-success">Tokopedia</a>
+                            <a href="<?= $linkLazada ?>" target="_blank" class="btn btn-primary">Lazada</a>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

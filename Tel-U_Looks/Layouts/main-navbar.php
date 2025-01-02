@@ -22,6 +22,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link text-white" href="../Layouts/app.php">Home</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" id="filterDropdown" role="button" data-bs-toggle="dropdown">Filter</a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="filterDropdown">
+                    <li><a class="dropdown-item" href="#">Mahasiswa</a></li>
+                    <li><a class="dropdown-item" href="#">Dosen</a></li>
+                </ul>
+            </li>
             <li class="nav-item"><a class="nav-link text-white" href="../artikel/artikel.php">Artikel</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="#">Rekomendasi</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="../rekomendasi/wishlist.php">Wishlist</a></li>

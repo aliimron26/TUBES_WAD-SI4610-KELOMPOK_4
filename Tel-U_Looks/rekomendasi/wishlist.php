@@ -1,22 +1,17 @@
-<?php include '../Layouts/main-navbar.php';
+<?php 
+session_start();
+include '../Layouts/main-navbar.php';
+include '../db.php';
 
-$items = [ // sementara aja, biar keliatan tampilannya kayak gimana
-    [
-        'id' => 1,
-        'nama' => 'A Line Skirt',
-        'harga' =>  150000,
-        'gambar' => '../assets/img/gallery/produk 1.jpg',
-        'deskripsi' => 'Salah satu fashion items penolong yang bisa kamu ambil dari lemari...',
-    ],
-    [
-        'id' => 4,
-        'nama' => 'Denim Vest',
-        'gambar' => '../assets/img/gallery/produk 4.jpeg',
-        'deskripsi' => 'Denim vest memiliki model yang sama dengan sweater vest...',
-        'harga' => 300000,
-    ],
-];
+if (!isset($_SESSION['wishlist']) || empty($_SESSION['wishlist'])) {
+    echo "<p>Wishlist kosong.</p>";
+    exit;
+}
 
+// Ambil produk dari database berdasarkan ID di wishlist
+$ids = implode(',', $_SESSION['wishlist']);
+$sql = "SELECT * FROM rekomendasi WHERE id_rekomendasi IN ($ids)";
+$result = $conn->query($sql);;
 ?>
 
 <!DOCTYPE html>
@@ -232,61 +227,56 @@ $items = [ // sementara aja, biar keliatan tampilannya kayak gimana
     <title>Wishlist Rekomendasi</title>
 </head>
 <body>
-    
-    <h1>Wishlist Rekomendasi</h1>
-
-    <div class="filter-sorting-container">
-        <div class="filters">
-            <label>Kategori:</label>
-            <select>
-                <option value="Mahasiswa">Untuk Mahasiswa</option>
-                <option value="Dosen">Untuk Dosen</option>
-            </select>
-        </div>
-
-        <div class="sorting">
-            <label>Urutkan:</label>
-            <select>
-                <option value="terbaru">Terbaru Disimpan</option>
-                <option value="terlaris">Terlaris</option>
-            </select>
-        </div>
-    </div>
-    
-    <!-- Tabel untuk menampilkan wishlist -->
-    <div class="wishlist-container">
-        <?php foreach ($items as $item): ?>
-            <div class="wishlist-item">
-                <img src="<?php echo $item['gambar']; ?>" alt="Gambar Produk">
-                <div class="content">
-                    <h3><?php echo $item['nama']; ?></h3>
-                    <p class="price">Rp<?php echo number_format($item['harga'], 0, ',', '.'); ?></p>
-                    <p><?php echo $item['deskripsi']; ?></p>
-                    <div class="actions">
-                        <a href="javascript:void(0);" onclick="editItem(<?php echo $item['id']; ?>, '<?php echo $item['nama']; ?>', '<?php echo $item['deskripsi']; ?>')">Edit</a>
-                        <a href="?delete=<?php echo $item['id']; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?');">Hapus</a>
+    <div class="container mt-5">
+        <h2 class="mb-4">Wishlist</h2>
+        <div class="row">
+            <?php if ($result->num_rows > 0): ?>
+                <?php while ($row = $result->fetch_assoc()): ?>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top" alt="Produk">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo htmlspecialchars($row['nama_fashion']); ?></h5>
+                                <p class="card-text"><?php echo htmlspecialchars($row['deskripsi_fashion']); ?></p>
+                                <p class="card-text"><strong>Harga:</strong> Rp <?php echo htmlspecialchars($row['harga']); ?></p>
+                                <button class="btn btn-danger" onclick="removeFromWishlist(<?php echo $row['id_rekomendasi']; ?>)">Hapus</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        <?php endforeach; ?>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p class="text-center">Tidak ada produk dalam wishlist.</p>
+            <?php endif; ?>
+        </div>
     </div>
 
-        <div class="btn-share">
-            <div class="btn_wrap">
-                <span>Bagikan Wishlist</span>
-                <div class="container">
-                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
-                </div>
+    <div class="btn-share">
+        <div class="btn_wrap">
+            <span>Bagikan Wishlist</span>
+            <div class="container">
+                <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
             </div>
         </div>
+    </div>
     <script>
-        function editItem(id, name, description) {
-            document.querySelector('input[name="id"]').value = id;
-            document.querySelector('input[name="name"]').value = name;
-            document.querySelector('textarea[name="description"]').value = description;
+        function removeFromWishlist(productId) {
+            fetch('../rekomendasi/remove_from_wishlist.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ productId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                Swal.fire(data.success ? 'Berhasil' : 'Gagal', data.message, data.success ? 'success' : 'error')
+                    .then(() => location.reload());
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire('Error', 'Terjadi kesalahan.', 'error');
+            });
         }
     </script>
 </body>
