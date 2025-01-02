@@ -34,8 +34,6 @@
                         <a class="list-group-item list-group-item-action" data-toggle="list"
                             href="#account-social-links">Social links</a>
                         <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#add-account">Add Account</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list"
                             href="#account-notifications">Notifications</a>
                     </div>
                 </div>
@@ -46,11 +44,13 @@
                                 <img src="https://i.imgur.com/bDLhJiP.jpg" alt
                                     class="d-block ui-w-80">
                                 <div class="media-body ml-4">
-                                    <label class="btn btn-custom">
-                                        Upload new photo
-                                        <input type="file" class="account-settings-fileinput">
-                                    </label> &nbsp;
-                                    <button type="button" class="btn btn-default md-btn-flat">Reset</button>
+                                    <form action="upload.php" method="post" enctype="multipart/form-data">
+                                        <label class="btn btn-custom">
+                                            Upload new photo
+                                            <input type="file" class="account-settings-fileinput" name="fileToUpload" id="fileToUpload">
+                                        </label> &nbsp;
+                                        <button type="submit" class="btn btn-default md-btn-flat">Upload</button>
+                                    </form>
                                     <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">E-mail</label>
-                                    <input type="text" class="form-control mb-1" value="aryanugraha@mail.com" style="background-color: var(--base-variant); color: var(--text-color);">
+                                    <input type="text" class="form-control mb-1" value="aryanugraha@gmail.com" style="background-color: var(--base-variant); color: var(--text-color);">
                                 </div>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">Bio</label>
                                     <textarea class="form-control" style="background-color: var(--base-variant); color: var(--text-color);"
-                                        rows="5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc arcu, dignissim sit amet sollicitudin iaculis, vehicula id urna. Sed luctus urna nunc. Donec fermentum, magna sit amet rutrum pretium, turpis dolor molestie diam, ut lacinia diam risus eleifend sapien. Curabitur ac nibh nulla. Maecenas nec augue placerat, viverra tellus non, pulvinar risus.</textarea>
+                                        rows="5">Saya seorang mahasiswa yang sangat tertarik dengan perkembangan fashion dan ingin terus mengikuti trend fashion terkini. Saya juga sangat menyukai musik dan film.</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">Birthday</label>
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">Interest Fashion</label>
-                                    <select class="custom-select" style="background-color: var(--base-variant); color: var(--text-color);">
+                                    <select class="custom-select" id="interest-fashion" style="background-color: var(--base-variant); color: var(--text-color);">
                                         <option>Casual</option>
                                         <option selected>Formal</option>
                                         <option>Sports</option>
@@ -108,6 +108,47 @@
                                         <option>Preppy</option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn" style="background-color: #059ea3; color: white;" onclick="addInterest()">Add Interest</button>
+                                    <div id="interest-list" style="margin-top: 1rem;">
+                                        <?php
+                                            if(isset($_COOKIE['interest-fashion'])) {
+                                                $interests = explode(",", $_COOKIE['interest-fashion']);
+                                                foreach($interests as $interest) {
+                                                    echo '<div class="badge badge-primary mr-2 mb-2" style="background-color: #059ea3;">' . htmlspecialchars($interest) . ' <span style="cursor: pointer;" onclick="removeInterest(this)">&times;</span></div>';
+                                                }
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function addInterest() {
+                                        var select = document.getElementById("interest-fashion");
+                                        var option = select.options[select.selectedIndex];
+                                        var interestList = document.getElementById("interest-list");
+                                        var newDiv = document.createElement("div");
+                                        newDiv.className = "badge badge-primary mr-2 mb-2";
+                                        newDiv.style.backgroundColor = "#059ea3";
+                                        newDiv.innerHTML = `${option.value} <span style="cursor: pointer;" onclick="removeInterest(this)">&times;</span>`;
+                                        interestList.appendChild(newDiv);
+                                        updateInterestCookie();
+                                    }
+
+                                    function removeInterest(element) {
+                                        element.parentNode.remove();
+                                        updateInterestCookie();
+                                    }
+
+                                    function updateInterestCookie() {
+                                        var interests = [];
+                                        var badges = document.querySelectorAll("#interest-list .badge");
+                                        badges.forEach(function(badge) {
+                                            interests.push(badge.textContent.trim().slice(0, -1)); // Remove the '×' symbol
+                                        });
+                                        document.cookie = "interest-fashion=" + encodeURIComponent(interests.join(",")) + "; path=/";
+                                    }
+                                </script>
                             </div>
                             <hr class="border-light m-0">
                         </div>
@@ -122,7 +163,7 @@
                                     <input type="text" class="form-control" value="https://www.facebook.com/user">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Google+</label>
+                                    <label class="form-label">WhatsApp</label>
                                     <input type="text" class="form-control" value>
                                 </div>
                                 <div class="form-group">
@@ -133,39 +174,6 @@
                                     <label class="form-label">Instagram</label>
                                     <input type="text" class="form-control" value="https://www.instagram.com/user">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="add-account">
-                            <div class="card-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" style="color: var(--text-color);">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" style="background-color: var(--base-variant); color: var(--text-color);">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1" style="color: var(--text-color);">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" style="background-color: var(--base-variant); color: var(--text-color);">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Add Account</button>
-                                </form>
-                            </div>
-                            <hr class="border-light m-0">
-                            <div class="card-body">
-                                <h5 class="mb-2">
-                                    List of Accounts
-                                </h5>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <i class="ion ion-logo-google text-google"></i>
-                                        <span class="ml-2">dummyaccount@gmail.com</span>
-                                        <button type="button" class="btn btn-danger btn-sm ml-auto">Delete</button>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <i class="ion ion-logo-facebook text-facebook"></i>
-                                        <span class="ml-2">dummyaccount2@gmail.com</span>
-                                        <button type="button" class="btn btn-danger btn-sm ml-auto">Delete</button>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="account-notifications">
@@ -223,7 +231,13 @@
             </div>
         </div>
         <div class="text-right mt-3">
-            <button type="button" class="btn btn-custom">Save changes</button>&nbsp;
+            <button type="button" class="btn btn-custom" onclick="saveChanges()">Save changes</button>&nbsp;
+            <script>
+                function saveChanges() {
+                    // Implement the save functionality here
+                    alert('Changes have been saved successfully.');
+                }
+            </script>
             <button type="button" class="btn btn-default">Cancel</button>
         </div>
     </div>

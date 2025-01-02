@@ -20,16 +20,34 @@
                         <img src="https://i.imgur.com/bDLhJiP.jpg" width="100" class="rounded-circle">
                     </div>
                     <div class="text-center mt-3">
-                        <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span>
-                        <h5 class="mt-2 mb-0">Alexender Schidmt</h5>
-                        <span>UI/UX Designer</span>
+                        <h5 class="mt-2 mb-0">Arya Nugraha</h5>
+                        <p class="mt-2 mb-1">Interest Fashion:</p>
+                        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+                            <?php
+                            $interest = array();
+                            if(isset($_COOKIE['interest-fashion'])) {
+                                $interest = explode(",", $_COOKIE['interest-fashion']);
+                            }
+                            ?>
+                            <?php foreach($interest as $i) { ?>
+                                <span style="background-color: #059ea3; border-radius: 10px; padding: 5px 10px; color: white; margin-right: 5px; margin-bottom: 5px;"><?php echo $i; ?></span>
+                            <?php } ?>
+                        </div>
                         <div class="px-4 mt-1">
-                            <p class="fonts">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            <p class="fonts">
+                            <?php
+                            if(isset($_COOKIE['bio'])) {
+                                echo $_COOKIE['bio'];
+                            } else {
+                                echo "Saya seorang mahasiswa yang sangat tertarik dengan perkembangan fashion dan ingin terus mengikuti trend fashion terkini. Saya juga sangat menyukai musik dan film.";
+                            }
+                            ?>
+                            </p>
                         </div>
                         <ul class="social-list">
                             <li><a href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i></a></li>
                             <li><a href="https://facebook.com" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="https://google.com" target="_blank"><i class="fa fa-google"></i></a></li>
+                            <li><a href="https://whatsapp.com" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
                             <li><a href="https://linkedin.com" target="_blank"><i class="fa fa-linkedin"></i></a></li>
                             <li><a href="https://instagram.com" target="_blank"><i class="fa fa-instagram"></i></a></li>
                         </ul>
