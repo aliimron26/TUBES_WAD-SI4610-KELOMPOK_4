@@ -56,7 +56,6 @@ CREATE TABLE report (
     isi_report TEXT NOT NULL
 );
 
--- Tabel untuk menyimpan artikel
 CREATE TABLE articles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,

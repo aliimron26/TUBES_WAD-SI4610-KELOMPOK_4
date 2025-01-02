@@ -20,7 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
             echo "<script>alert('Artikel berhasil ditambahkan.'); window.location.href='manage_articles.php';</script>";
         } else {
-            echo "<script>alert('Gagal mengupload gambar.');</script>";
+            // Menampilkan error upload
+            echo "<script>alert('Gagal mengupload gambar. Error: " . $_FILES['image']['error'] . "');</script>";
         }
     } else {
         echo "<script>alert('Gagal menambahkan artikel.');</script>";
@@ -124,3 +125,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </body>
 </html>
+
+<?php
+// Menutup koneksi database
+$conn->close();
+?>
