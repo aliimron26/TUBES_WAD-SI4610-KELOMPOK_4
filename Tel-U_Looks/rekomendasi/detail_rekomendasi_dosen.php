@@ -115,6 +115,90 @@ $produk = [
             'lazada' => 'https://www.lazada.co.id'
         ],
     ],
+    [
+      'id' => 9,
+      'nama' => 'BAJU TENUN COUPLE TUNIK MARWA X KEMEJA (WHITE-GREY)',
+      'gambar' => '../assets/img/gallery/produk 16.jpg',
+      'deskripsi' => 'Tampilkan kekompakan dengan pasanganmu dalam set couple tenun Marwa. Desain eksklusif, bahan berkualitas, dan jahitan rapi membuat set ini tahan lama. Cocok untuk acara formal maupun santai.',
+      'harga' => 'Rp95.000 - Rp205.000',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id/product/17288248/2982834747?channel_code=MyCollection&uls_trackid=51l3hcqk047e&utm_campaign=-&utm_content=----&utm_medium=affiliates&utm_source=an_11367620044&utm_term=cc23frrr45bm',
+            'tokopedia' => '',
+            'lazada' => ''
+        ],
+    ],
+    [
+      'id' => 10,
+      'nama' => 'S E I A | SEJIWA SET COUPLE HITAM BATIK',
+      'gambar' => '../assets/img/gallery/produk 17.jpg',
+      'deskripsi' => '✨Sejiwa set couple✨ dengan motif batik cap handmade
+
+      💡 Kelebihan Sejiwa Rok Lilit:
+      ✅ Bahan rayon premium dijamin adem, jatuh & flowy, ga nerawang
+      ✅ Size Pinggang Adjustable
+      ✅ Cocok untuk acara formal/casual😍
+      
+      💡Kelebihan Sejiwa Kemeja:
+      ✅ Bahan katun premium dijamin adem, elegant, ga nerawang
+      ✅ Cocok untuk acara formal/casual😍',
+      'harga' => 'Rp134.100 - Rp170.100 ',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id/product/961146820/18975900958?uls_trackid=51l3hgoq0083&utm_campaign=-&utm_content=----&utm_medium=affiliates&utm_source=an_11367620044&utm_term=cc23izf4bmts',
+            'tokopedia' => '',
+            'lazada' => ''
+        ],
+    ],
+    [
+      'id' => 11,
+      'nama' => 'CUTOFF Clark Kemeja Pria Oxford Panjang',
+      'gambar' => '../assets/img/gallery/produk 11.jpg',
+      'deskripsi' => 'Dibuat dari bahan plain oxford fabric yang memberikan kesan nyaman dan lembut ketika digunakan
+      -Dengan button down collar membuat kerah tetap stay dan tegak saat beraktivitas
+      -Bagian belakang kemeja terdapat back pleat yang dapat menyamarkan postur punggung agar terkesan lebih rapi.
+      -Cuttingan Modern Fit yang mengikuti bentuk tubuh bikin look lebih stylish dan rapi',
+      'harga' => 'Rp179.000',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id/product/224582338/12798155098?channel_code=MyCollection&uls_trackid=51l3fdni017e&utm_campaign=-&utm_content=----&utm_medium=affiliates&utm_source=an_11367620044&utm_term=cc21x6n4siv3',
+            'tokopedia' => '',
+            'lazada' => ''
+        ],
+    ],
+    [
+      'id' => 12,
+      'nama' => 'Assojar - Couple Batik Sekar set / Baju setelan couple batik',
+      'gambar' => '../assets/img/gallery/produk 18.jpg',
+      'deskripsi' => 'Nikmati pesona batik Indonesia dengan set couple Batik Sekar. Motif sekar yang unik dan detail, dipadukan dengan bahan berkualitas tinggi. Tunjukkan sisi klasik dan modernmu bersama pasangan.',
+      'harga' => 'Rp585.000',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id/product/268063807/11799719185?uls_trackid=51l3hj1e005l&utm_campaign=-&utm_content=----&utm_medium=affiliates&utm_source=an_11367620044&utm_term=cc23kukenydh',
+            'tokopedia' => '',
+            'lazada' => ''
+        ],
+    ],
+    [
+      'id' => 13,
+      'nama' => 'Jayashree Batik Slimfit Nava Black - Kemeja Batik Pria Lengan Panjang',
+      'gambar' => '../assets/img/gallery/produk 23.jpg',
+      'deskripsi' => 'Kemeja Batik Jayashree Official hadir sesuai dengan kebutuhan kamu. Produk Batik Jayashree memiliki fokus menjaga kelestarian Batik di Indonesia dengan sentuhan Modern dari segi warna dan ukuran yang lebih trendy sehingga membuat kamu tampil lebih elegan dengan motif yang ciamik. Semua produk yang kami tampilkan adalah "realpict" dari Jayashree, jadi kamu tidak perlu khawatir untuk keaslian produk-nya.',
+      'harga' => 'Rp180.000',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id/product/53450585/6464600476?uls_trackid=51l3sp6l0196&utm_campaign=-&utm_content=----&utm_medium=affiliates&utm_source=an_11367620044&utm_term=cc2c7qgjqnbq',
+            'tokopedia' => '',
+            'lazada' => ''
+        ],
+    ],
+    [
+      'id' => 14,
+      'nama' => 'Coop Design - Zion Celana Bahan Kerja Panjang Formal Trousers Pants Slimfit Pria',
+      'gambar' => '../assets/img/gallery/produk 24.jpg',
+      'deskripsi' => 'Coop Design - Zion Celana Panjang Formal Pria adalah pilihan sempurna untuk menambah koleksi pakaian formal Anda, menawarkan kombinasi antara gaya yang sophisticated dan kenyamanan yang tak tertandingi. Dengan desain yang terperinci dan bahan berkualitas, celana ini siap menjadi andalan untuk setiap acara formal atau profesional. Anda bisa langsung membelinya satu set dengan Blazer formal dan paket bundling aksesoris dasi serta ikat pinggang (dikirim warna random)',
+      'harga' => 'Rp118.900',
+      'link_affiliate' => [
+            'shopee' => 'https://shopee.co.id/product/225351054/10573356540?utm_campaign=-&utm_content=----&utm_medium=affiliates&utm_source=an_11367620044&utm_term=cc2comt5scvb',
+            'tokopedia' => '',
+            'lazada' => ''
+        ],
+    ],
 ];
 
 // Ambil ID produk dari URL dan validasi
