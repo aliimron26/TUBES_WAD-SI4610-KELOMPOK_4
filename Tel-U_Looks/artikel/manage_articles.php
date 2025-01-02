@@ -1,184 +1,107 @@
 <?php
-session_start(); // Memulai session
-
+// Memasukkan Header
 include '../Layouts/sidebar-admin.php';
-include '../db.php'; // Menghubungkan ke database
 
-// Proses penghapusan artikel
-if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-    $id = $_GET['id'];
-    $query = "DELETE FROM articles WHERE id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $id);
-    if ($stmt->execute()) {
-        echo "<script>alert('Artikel berhasil dihapus.'); window.location.href='manage_articles.php';</script>";
-    } else {
-        echo "<script>alert('Gagal menghapus artikel.');</script>";
-    }
-}
+// Menangani notifikasi status
+$status = isset($_GET['status']) ? $_GET['status'] : '';
 
-// Proses pembaruan artikel
-if (isset($_POST['update'])) {
-    $id = $_POST['id'];
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-    $image = $_FILES['image']['name'];
-    $target = "assets/img/articles/" . basename($image);
+// Koneksi ke database
+include '../db.php';
 
-    if ($image) {
-        // Update dengan gambar baru
-        $query = "UPDATE articles SET title = ?, content = ?, image = ? WHERE id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("sssi", $title, $content, $image, $id);
-        if ($stmt->execute()) {
-            move_uploaded_file($_FILES['image']['tmp_name'], $target);
-            echo "<script>alert('Artikel berhasil diperbarui.'); window.location.href='manage_articles.php';</script>";
-        } else {
-            echo "<script>alert('Gagal memperbarui artikel.');</script>";
-        }
-    } else {
-        // Update tanpa mengganti gambar
-        $query = "UPDATE articles SET title = ?, content = ? WHERE id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("ssi", $title, $content, $id);
-        if ($stmt->execute()) {
-            echo "<script>alert('Artikel berhasil diperbarui.'); window.location.href='manage_articles.php';</script>";
-        } else {
-            echo "<script>alert('Gagal memperbarui artikel.');</script>";
-        }
-    }
-}
-
-// Mengambil artikel dari database
-$query = "SELECT * FROM articles ORDER BY created_at DESC";
+// Query untuk mendapatkan semua data artikel
+$query = "SELECT * FROM articles";
 $result = $conn->query($query);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelola Artikel</title>
-    <link href="../assets/css/style.css" rel="stylesheet"> <!-- Ganti dengan CSS Anda -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .btn {
-            padding: 5px 10px;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .btn-edit {
-            background-color: #007bff;
-        }
-        .btn-delete {
-            background-color: #dc3545;
-        }
-        .btn-edit:hover {
-            background-color: #0056b3;
-        }
-        .btn-delete:hover {
-            background-color: #c82333;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Kelola Artikel</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Judul</th>
-                    <th>Konten</th>
-                    <th>Gambar</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($article = $result->fetch_assoc()): ?>
-                    <tr>
-                        <td><?php echo $article['title']; ?></td>
-                        <td><?php echo substr($article['content'], 0, 50) . '...'; ?></td>
-                        <td><img src="<?php echo $article['image']; ?>" alt="<?php echo $article['title']; ?>" style="width: 100px;"></td>
-                        <td>
-                            <button class="btn btn-edit" onclick="openEditModal(<?php echo $article['id']; ?>, '<?php echo $article['title']; ?>', '<?php echo $article['content']; ?>', '<?php echo $article['image']; ?>')">Edit</button>
-                            <a href="?action=delete&id=<?php echo $article['id']; ?>" class="btn btn-delete" onclick="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');">Hapus</a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    </div>
+<!-- Konten Utama untuk Menampilkan Daftar Artikel -->
+<div class="content-wrapper">
+    <div class="container-fluid mt-5">
+        <h2>Manage Articles</h2>
 
-    <!-- Modal untuk Edit Artikel -->
-    <div id="editModal" style="display:none;">
-        <div class="modal-content">
-            <span class="close" onclick="closeEditModal()">&times;</span>
-            <h2>Edit Artikel</h2>
-            <form action="" method="POST" enctype="multipart/form-data">
-                <input type="hidden" id="edit-id" name="id">
-                <div class="input-container">
-                    <label for="edit-title">Judul Artikel:</label>
-                    <input type="text" id="edit-title" name="title" required>
-                </div>
-                <div class="input-container">
-                    <label for="edit-content">Isi Konten:</label>
-                    <textarea id="edit-content" name="content" required></textarea>
-                </div>
-                <div class="input-container">
-                    <label for="edit-image">Gambar:</label>
-                    <input type="file" id="edit-image" name="image" accept="image/*">
-                </div>
-                <button type="submit" name="update">Perbarui Artikel</button>
-            </form>
+        <!-- Tabel Menampilkan Data Artikel -->
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Judul Artikel</th>
+                            <th>Isi Konten</th>
+                            <th>Gambar</th>
+                            <th>Aksi</th> <!-- Kolom Aksi untuk tombol Update dan Delete -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Cek apakah ada hasil query
+                        if ($result->num_rows > 0) {
+                            // Menampilkan data setiap baris
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . htmlspecialchars($row['title']) . "</td>";
+                                echo "<td>" . htmlspecialchars(substr($row['content'], 0, 50)) . "...</td>";
+                                echo "<td><img src='" . htmlspecialchars($row['image']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width: 100px;'></td>";
+                                echo "<td>
+                                        <a href='update_articles.php?id=" . $row['id'] . "' class='btn btn-warning btn-sm'>Update</a>
+                                        <a href='delete_articles.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Apakah Anda yakin ingin menghapus data ini?\")'>Delete</a>       
+                                      </td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='4'>Tidak ada artikel yang ditemukan.</td></tr>";
+                        }
+
+                        // Menutup koneksi database
+                        $result->free();
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+</div>
 
-    <script>
-        function openEditModal(id, title, content, image) {
-            document.getElementById('edit-id').value = id;
-            document.getElementById('edit-title').value = title;
-            document.getElementById('edit-content').value = content;
-            document.getElementById('editModal').style.display = 'block';
-        }
+<script>
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.textContent = message;
+        notification.className = `alert alert-${type}`;
+        notification.style.position = 'fixed';
+        notification.style.top = '50%';
+        notification.style.left = '50%';
+        notification.style.transform = 'translate(-50%, -50%)';
+        notification.style.zIndex = '1050';
+        notification.style.padding = '20px 40px';
+        notification.style.textAlign = 'center';
+        notification.style.borderRadius = '8px';
+        notification.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+        notification.style.transition = 'opacity 0.5s ease-in-out';
 
-        function closeEditModal() {
-            document.getElementById('editModal').style.display = 'none';
-        }
-    </script>
-</body>
-</html>
+        document.body.appendChild(notification);
+
+        // Menghapus notifikasi setelah 2 detik
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => notification.remove(), 500);
+        }, 3000);
+    }
+
+    // Menangkap parameter URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+
+    // Menampilkan notifikasi berdasarkan status
+    if (status === 'success') {
+        showNotification('Data berhasil diperbarui!', 'success');
+    } else if (status === 'terhapus') {
+        showNotification('Data berhasil dihapus!', 'success');
+    } else if (status === 'error') {
+        showNotification('Terjadi kesalahan, Data gagal diperbarui.', 'danger');
+    }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<?php
+// Menutup koneksi database
+$conn->close();
+?>

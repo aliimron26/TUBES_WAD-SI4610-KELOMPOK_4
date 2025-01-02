@@ -4,26 +4,56 @@ session_start(); // Memulai session
 include '../Layouts/sidebar-admin.php';
 include '../db.php'; // Menghubungkan ke database
 
+// Cek apakah ID artikel ada di URL
+if (!isset($_GET['id'])) {
+    echo "<script>alert('ID artikel tidak ditemukan.'); window.location.href='manage_articles.php';</script>";
+    exit();
+}
+
+$id = $_GET['id'];
+
+// Mengambil data artikel dari database
+$query = "SELECT * FROM articles WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    echo "<script>alert('Artikel tidak ditemukan.'); window.location.href='manage_articles.php';</script>";
+    exit();
+}
+
+$article = $result->fetch_assoc();
+
+// Proses pembaruan artikel
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
     $image = $_FILES['image']['name'];
     $target = "assets/img/articles/" . basename($image);
 
-    // Menyimpan artikel ke database
-    $query = "INSERT INTO articles (title, content, image) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("sss", $title, $content, $image);
-    
-    if ($stmt->execute()) {
-        // Mengupload gambar
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-            echo "<script>alert('Artikel berhasil ditambahkan.'); window.location.href='manage_articles.php';</script>";
+    if ($image) {
+        // Update dengan gambar baru
+        $query = "UPDATE articles SET title = ?, content = ?, image = ? WHERE id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("sssi", $title, $content, $image, $id);
+        if ($stmt->execute()) {
+            move_uploaded_file($_FILES['image']['tmp_name'], $target);
+            echo "<script>alert('Artikel berhasil diperbarui.'); window.location.href='manage_articles.php?status=success';</script>";
         } else {
-            echo "<script>alert('Gagal mengupload gambar.');</script>";
+            echo "<script>alert('Gagal memperbarui artikel.');</script>";
         }
     } else {
-        echo "<script>alert('Gagal menambahkan artikel.');</script>";
+        // Update tanpa mengganti gambar
+        $query = "UPDATE articles SET title = ?, content = ? WHERE id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ssi", $title, $content, $id);
+        if ($stmt->execute()) {
+            echo "<script>alert('Artikel berhasil diperbarui.'); window.location.href='manage_articles.php?status=success';</script>";
+        } else {
+            echo "<script>alert('Gagal memperbarui artikel.');</script>";
+        }
     }
 }
 ?>
@@ -33,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buat Artikel Baru</title>
+    <title>Update Artikel</title>
     <link href="../assets/css/style.css" rel="stylesheet"> <!-- Ganti dengan CSS Anda -->
     <style>
         body {
@@ -104,23 +134,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="container">
-        <h2>Buat Artikel Baru</h2>
+        <h2>Update Artikel</h2>
         <form action="" method="POST" enctype="multipart/form-data">
             <div class="input-container">
                 <label for="title">Judul Artikel:</label>
-                <input type="text" id="title" name="title" placeholder="Masukkan judul artikel" required>
+                <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($article['title']); ?>" required>
             </div>
             <div class="input-container">
                 <label for="content">Isi Konten:</label>
-                <textarea id="content" name="content" placeholder="Masukkan isi artikel" required></textarea>
+                <textarea id="content" name="content" required><?php echo htmlspecialchars($article['content']); ?></textarea>
             </div>
             <div class="input-container">
-                <label for="image">Gambar:</label>
-                <input type="file" id="image" name="image" accept="image/*" required>
+                <label for="image">Gambar (Kosongkan jika tidak ingin mengganti):</label>
+                <input type="file" id="image" name="image" accept="image/*">
             </div>
-            <button type="submit">Buat Artikel</button>
+            <button type="submit">Perbarui Artikel</button>
         </form>
         <a href="manage_articles.php" class="btn-secondary">Kembali ke Daftar Artikel</a>
     </div>
 </body>
 </html>
+
+<?php
+// Menutup koneksi database
+$conn->close();
+?>
