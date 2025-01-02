@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->execute()) {
         // Password berhasil diperbarui
-        session_destroy(); // Hapus sesi setelah reset password selesai
+        session_destroy(); 
         header("Location: ../login_user.php?status=password_reset_success");
     } else {
         // Gagal memperbarui password
