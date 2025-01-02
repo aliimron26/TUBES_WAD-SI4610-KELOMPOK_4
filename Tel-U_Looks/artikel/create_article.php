@@ -102,6 +102,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background-color: #0056b3;
         }
     </style>
+    <script>
+        function insertTag(tag) {
+            const textarea = document.getElementById('content');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end);
+            const newText = `<${tag}>${selectedText}</${tag}>`;
+            textarea.value = textarea.value.substring(0, start) + newText + textarea.value.substring(end);
+            textarea.focus();
+            textarea.selectionStart = start + newText.length;
+            textarea.selectionEnd = start + newText.length;
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === 'b') {
+                event.preventDefault();
+                insertTag('b');
+            }
+            if (event.ctrlKey && event.key === 'i') {
+                event.preventDefault();
+                insertTag('i');
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -113,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="input-container">
                 <label for="content">Isi Konten:</label>
-                <textarea id="content" name="content" placeholder="Masukkan isi artikel" required></textarea>
+                <textarea id="content" name="content" placeholder="Masukkan isi artikel (gunakan Ctrl+B untuk bold dan Ctrl+I untuk italic)" required></textarea>
             </div>
             <div class="input-container">
                 <label for="image">Gambar:</label>

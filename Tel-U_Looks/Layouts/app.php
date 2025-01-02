@@ -43,6 +43,13 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="#hero" class="active">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" id="filterDropdown" role="button" data-bs-toggle="dropdown">Filter</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="filterDropdown">
+                <li><a class="dropdown-item" href="#">Mahasiswa</a></li>
+                <li><a class="dropdown-item" href="#">Dosen</a></li>
+            </ul>
+          </li>
           <li><a href="../artikel/artikel.php">Artikel</a></li>
           <li><a href="#product">Rekomendasi</a></li>
           <li><a href="../rekomendasi/wishlist.php">Wishlist</a></li>
@@ -111,142 +118,142 @@
         <div class="row g-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=1">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=1">
               <img src="../assets/img/gallery/produk 1.jpg" alt="Produk 1" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 1</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 1</p>
+              <h5 class="card-title">Rekomendasi 1</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 1</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=2">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=2">
               <img src="../assets/img/gallery/produk 2.jpg" alt="Produk 2" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 2</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 2</p>
+              <h5 class="card-title">Rekomendasi 2</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 2</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=3">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=3">
               <img src="../assets/img/gallery/produk 3.jpg" alt="Produk 3" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 3</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 3</p>
+              <h5 class="card-title">Rekomendasi 3</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 3</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=4">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=4">
               <img src="../assets/img/gallery/produk 4.jpeg" alt="Produk 4" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 4</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 4</p>
+              <h5 class="card-title">Rekomendasi 4</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 4</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=5">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=5">
               <img src="../assets/img/gallery/produk 5.jpg" alt="Produk 5" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 5</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 5</p>
+              <h5 class="card-title">Rekomendasi 5</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 5</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=6">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=6">
               <img src="../assets/img/gallery/produk 6.jpg" alt="Produk 6" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 6</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 6</p>
+              <h5 class="card-title">Rekomendasi 6</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 6</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=7">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=7">
               <img src="../assets/img/gallery/produk 7.jpeg" alt="Produk 7" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 7</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 7</p>
+              <h5 class="card-title">Rekomendasi 7</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 7</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=8">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=8">
               <img src="../assets/img/gallery/produk 8.jpg" alt="Produk 8" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 8</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 8</p>
+              <h5 class="card-title">Rekomendasi 8</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 8</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=9">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=9">
               <img src="../assets/img/gallery/produk 9.jpg" alt="Produk 9" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 9</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 9</p>
+              <h5 class="card-title">Rekomendasi 9</h5>
+              <p class="card-text text-muted">Deskripsi singkat rekomendasi 9</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=10">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=10">
               <img src="../assets/img/gallery/produk 10.jpg" alt="Produk 10" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 10</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 10</p>
+              <h5 class="card-title">Rekomendasi 10</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 10</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=11">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=11">
               <img src="../assets/img/gallery/produk 11.jpg" alt="Produk 11" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 11</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 11</p>
+              <h5 class="card-title">Rekomendasi 11</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 11</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=12">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=12">
               <img src="../assets/img/gallery/produk 12.jpg" alt="Produk 12" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 12</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 12</p>
+              <h5 class="card-title">Rekomendasi 12</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 12</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=13">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=13">
               <img src="../assets/img/gallery/produk 13.jpg" alt="Produk 13" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 13</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 13</p>
+              <h5 class="card-title">Rekomendasi 13</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 13</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=14">
+            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=14">
               <img src="../assets/img/gallery/produk 14.jpg" alt="Produk 14" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 14</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 14</p>
+              <h5 class="card-title">Rekomendasi 14</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 14</p>
             </div>
           </div><!-- End Gallery Item -->
 
@@ -255,7 +262,7 @@
         <div class="row justify-content-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
           <div class="col-xl-10">
             <div class="text-center">
-              <a href="rekomendasi_halaman_dua.php" class="cta-btn">More Recommendations</a>
+              <a href="rekomendasi_halaman_dua.php" class="cta-btn">Lihat Lainnya</a>
             </div>
           </div>
         </div>
@@ -294,149 +301,149 @@
         <div class="row g-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=1">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=1">
               <img src="../assets/img/gallery/produk 1.jpg" alt="Produk 1" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 1</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 1</p>
+              <h5 class="card-title">Rekomendasi 1</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 1</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=2">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=2">
               <img src="../assets/img/gallery/produk 2.jpg" alt="Produk 2" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 2</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 2</p>
+              <h5 class="card-title">Rekomendasi 2</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 2</p>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=3">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=3">
               <img src="../assets/img/gallery/produk 3.jpg" alt="Produk 3" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 3</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 3</p>
+              <h5 class="card-title">Rekomendasi 3</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 3</p>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=4">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=4">
               <img src="../assets/img/gallery/produk 4.jpeg" alt="Produk 4" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 4</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 4</p>
+              <h5 class="card-title">Rekomendasi 4</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 4</p>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=5">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=5">
               <img src="../assets/img/gallery/produk 5.jpg" alt="Produk 5" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 5</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 5</p>
+              <h5 class="card-title">Rekomendasi 5</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 5</p>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=6">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=6">
               <img src="../assets/img/gallery/produk 6.jpg" alt="Produk 6" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 6</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 6</p>
+              <h5 class="card-title">Rekomendasi 6</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 6</p>
             </div>
           </div><!-- End Gallery Item -->
           
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=7">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=7">
               <img src="../assets/img/gallery/produk 7.jpeg" alt="Produk 7" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 7</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 7</p>
+              <h5 class="card-title">Rekomendasi 7</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 7</p>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=8">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=8">
               <img src="../assets/img/gallery/produk 8.jpg" alt="Produk 8" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 8</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 8</p>
+              <h5 class="card-title">Rekomendasi 8</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 8</p>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=9">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=9">
               <img src="../assets/img/gallery/produk 16.jpg" alt="Produk 9" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 9</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 9</p>
+              <h5 class="card-title">Rekomendasi 9</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 9</p>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=10">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=10">
               <img src="../assets/img/gallery/produk 17.jpg" alt="Produk 10" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 10</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 10</p>
+              <h5 class="card-title">Rekomendasi 10</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 10</p>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=11">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=11">
               <img src="../assets/img/gallery/produk 11.jpg" alt="Produk 11" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 11</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 11</p>
+              <h5 class="card-title">Rekomendasi 11</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 11</p>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=12">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=12">
               <img src="../assets/img/gallery/produk 18.jpg" alt="Produk 12" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 12</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 12</p>
+              <h5 class="card-title">Rekomendasi 12</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 12</p>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=13">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=13">
               <img src="../assets/img/gallery/produk 23.jpg" alt="Produk 13" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 13</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 13</p>
+              <h5 class="card-title">Rekomendasi 13</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 13</p>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_after_login.php?id=14">
+            <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=14">
               <img src="../assets/img/gallery/produk 24.jpg" alt="Produk 14" class="card-img-top img-fluid" style="border-radius: 8px;">
             </a>
             <div class="card-body text-center">
-              <h5 class="card-title">Produk 14</h5>
-              <p class="card-text text-muted">Deskripsi singkat produk 14</p>
+              <h5 class="card-title">Rekomendasi 14</h5>
+              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 14</p>
             </div>
           </div><!-- End Gallery Item -->
         </div>
         <div class="row justify-content-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
           <div class="col-xl-10">
             <div class="text-center">
-              <a href="rekomendasi_halaman_dua.php" class="cta-btn">More Recommendations</a>
+              <a href="rekomendasi_halaman_dua.php" class="cta-btn">Lihat Lainnya</a>
             </div>
           </div>
         </div>

@@ -1,5 +1,3 @@
-
-<!--Website: wwww.codingdung.com-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +12,7 @@
 
 <body>
     <div class="container light-style flex-grow-1 container-p-y">
+        <a href="../Layouts/app.php" class="btn btn-custom mb-3"><i class="fa fa-arrow-left"></i> Back</a>
         <h4 class="font-weight-bold py-3 mb-4">
             Account settings
         </h4>
@@ -155,24 +154,24 @@
                         <div class="tab-pane fade" id="account-social-links">
                             <div class="card-body pb-2">
                                 <div class="form-group">
-                                    <label class="form-label">Twitter</label>
-                                    <input type="text" class="form-control" value="https://twitter.com/user">
+                                    <label class="form-label" style="color: var(--text-color);">Twitter</label>
+                                    <input type="text" class="form-control" value="https://twitter.com/user" style="background-color: var(--base-variant); color: var(--text-color);">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Facebook</label>
-                                    <input type="text" class="form-control" value="https://www.facebook.com/user">
+                                    <label class="form-label" style="color: var(--text-color);">Facebook</label>
+                                    <input type="text" class="form-control" value="https://www.facebook.com/user" style="background-color: var(--base-variant); color: var(--text-color);">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">WhatsApp</label>
-                                    <input type="text" class="form-control" value>
+                                    <label class="form-label" style="color: var(--text-color);">WhatsApp</label>
+                                    <input type="text" class="form-control" value style="background-color: var(--base-variant); color: var(--text-color);">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">LinkedIn</label>
-                                    <input type="text" class="form-control" value>
+                                    <label class="form-label" style="color: var(--text-color);">LinkedIn</label>
+                                    <input type="text" class="form-control" value style="background-color: var(--base-variant); color: var(--text-color);">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Instagram</label>
-                                    <input type="text" class="form-control" value="https://www.instagram.com/user">
+                                    <label class="form-label" style="color: var(--text-color);">Instagram</label>
+                                    <input type="text" class="form-control" value="https://www.instagram.com/user" style="background-color: var(--base-variant); color: var(--text-color);">
                                 </div>
                             </div>
                         </div>
@@ -238,7 +237,33 @@
                     alert('Changes have been saved successfully.');
                 }
             </script>
-            <button type="button" class="btn btn-default">Cancel</button>
+            <button id="resetButton" type="button" class="btn btn-default" onclick="resetToDefault()">Reset to default</button>
+            <script>
+                // Nilai default
+                const defaultSettings = {
+                    username: "aryanugraha",
+                    name: "Arya Nugraha",
+                    email: "aryanugraha@gmail.com", 
+                    bio: "Saya seorang mahasiswa yang sangat tertarik dengan perkembangan fashion dan ingin terus mengikuti trend fashion terkini. Saya juga sangat menyukai musik dan film.",
+                    birthday: "May 3, 1995",
+                    facebook: "https://www.facebook.com/aryanugraha",
+                    instagram: "https://www.instagram.com/aryanugraha/",
+                    twitter: "https://twitter.com/aryanugraha",
+                };
+                // Fungsi untuk mereset pengaturan
+                function resetToDefault() {
+                    document.getElementById('username').value = defaultSettings.username;
+                    document.getElementById('name').value = defaultSettings.name;
+                    document.getElementById('email').value = defaultSettings.email;
+                    document.getElementById('bio').value = defaultSettings.bio;
+                    document.getElementById('birthday').value = defaultSettings.birthday;
+                    document.getElementById('facebook').value = defaultSettings.facebook;
+                    document.getElementById('instagram').value = defaultSettings.instagram;
+                    document.getElementById('twitter').value = defaultSettings.twitter;
+                }
+                // Event listener untuk tombol reset
+                document.getElementById('resetButton').addEventListener('click', resetToDefault);
+            </script>
         </div>
     </div>
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
