@@ -26,8 +26,8 @@
                     <div class="list-group list-group-flush account-settings-links">
                         <a class="list-group-item list-group-item-action active" data-toggle="list"
                             href="#account-general">General</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-change-password">Change password</a>
+                        <!-- <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-change-password">Change password</a> -->
                         <a class="list-group-item list-group-item-action" data-toggle="list"
                             href="#account-info">Info</a>
                         <a class="list-group-item list-group-item-action" data-toggle="list"
@@ -40,35 +40,49 @@
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="account-general">
                             <div class="card-body media align-items-center">
-                                <img src="https://i.imgur.com/bDLhJiP.jpg" alt
-                                    class="d-block ui-w-80">
+                                <img id="profileImage" src="https://i.imgur.com/bDLhJiP.jpg" alt class="d-block ui-w-80">
                                 <div class="media-body ml-4">
                                     <form action="upload.php" method="post" enctype="multipart/form-data">
                                         <label class="btn btn-custom">
                                             Upload new photo
-                                            <input type="file" class="account-settings-fileinput" name="fileToUpload" id="fileToUpload">
+                                            <input type="file" class="account-settings-fileinput" name="fileToUpload" id="fileToUpload" onchange="previewImage(event)">
                                         </label> &nbsp;
-                                        <button type="submit" class="btn btn-default md-btn-flat">Upload</button>
                                     </form>
+                                    <button class="btn btn-danger md-btn-flat mt-2" onclick="removeProfileImage()">Remove Photo</button>
                                     <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
                                 </div>
                             </div>
+                            <script>
+                                function previewImage(event) {
+                                    var reader = new FileReader();
+                                    reader.onload = function() {
+                                        var output = document.getElementById('profileImage');
+                                        output.src = reader.result;
+                                    }
+                                    reader.readAsDataURL(event.target.files[0]);
+                                }
+
+                                function removeProfileImage() {
+                                    document.getElementById('profileImage').src = 'https://i.imgur.com/hUQpigu.png';
+                                }
+                            </script>
                             <hr class="border-light m-0">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">Username</label>
-                                    <input type="text" class="form-control mb-1" value="aryanugraha" style="background-color: var(--base-variant); color: var(--text-color);">
+                                    <input type="text" class="form-control mb-1" style="background-color: var(--base-variant); color: var(--text-color);">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">Name</label>
-                                    <input type="text" class="form-control" value="Arya Nugraha" style="background-color: var(--base-variant); color: var(--text-color);">
+                                    <input type="text" class="form-control" style="background-color: var(--base-variant); color: var(--text-color);">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">E-mail</label>
-                                    <input type="text" class="form-control mb-1" value="aryanugraha@gmail.com" style="background-color: var(--base-variant); color: var(--text-color);">
+                                    <input type="text" class="form-control mb-1" style="background-color: var(--base-variant); color: var(--text-color);">
                                 </div>
                             </div>
                         </div>
+                        <!--
                         <div class="tab-pane fade" id="account-change-password">
                             <div class="card-body pb-2">
                                 <div class="form-group">
@@ -85,16 +99,13 @@
                                 </div>
                             </div>
                         </div>
+                        -->
                         <div class="tab-pane fade" id="account-info">
                             <div class="card-body pb-2">
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">Bio</label>
                                     <textarea class="form-control" style="background-color: var(--base-variant); color: var(--text-color);"
                                         rows="5">Saya seorang mahasiswa yang sangat tertarik dengan perkembangan fashion dan ingin terus mengikuti trend fashion terkini. Saya juga sangat menyukai musik dan film.</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" style="color: var(--text-color);">Birthday</label>
-                                    <input type="date" class="form-control" style="background-color: var(--base-variant); color: var(--text-color);" value="May 3, 1995">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">Interest Fashion</label>

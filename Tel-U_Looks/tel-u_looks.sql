@@ -65,4 +65,14 @@ CREATE TABLE articles (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE profil (
+    id_profil INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    bio TEXT,
+    interest VARCHAR(100),
+    FOREIGN KEY (username) REFERENCES users(username)
+);
+
 SELECT * FROM articles ORDER BY created_at DESC;
