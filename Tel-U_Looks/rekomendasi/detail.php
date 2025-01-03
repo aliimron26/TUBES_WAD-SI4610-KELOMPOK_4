@@ -172,15 +172,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </script>
 
 <div class="container mt-5">
-    <h4 id="commentCount">Komentar</h4>
-    
+    <h4>Komentar</h4>
+
     <div id="commentForm" class="form-floating mb-4">
         <textarea class="form-control" placeholder="Tulis Komentar..." id="floatingTextarea" style="height: 100px;"></textarea>
         <label for="floatingTextarea">Tuliskan komentar anda disini...</label>
         <button class="btn btn-primary mt-2" id="submitComment">Kirim</button>
     </div>
-    
+
     <div id="commentSection">
+        <div class="comment mb-4">
+            <div class="d-flex align-items-center mb-2">
+            <img src="https://i.imgur.com/bDLhJiP.jpg" class="rounded-circle me-3 img-fluid" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
+                <div>
+                    <strong>Arya Nugraha</strong> <small class="text-muted">01/01/2025, 12:00 PM</small>
+                </div>
+            </div>
+            <p>Kombinasi warna dan gaya yang sangat menarik! Terlihat sangat stylish!</p>
+            <hr>
+        </div>
     </div>
 </div>
 
@@ -194,8 +204,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="modal-body">
                 <p id="modalMessage">Anda harus login untuk mengirim komentar!</p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetWarning()">Kembali</button>
+                <button type="button" class="btn btn-primary" onclick="redirectToLogin()">Login</button>
             </div>
         </div>
     </div>
@@ -209,92 +220,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <script>
     let isLoggedIn = false;
-    const userId = "user123";
 
-    document.getElementById("submitComment").addEventListener("click", function() {
+    document.getElementById("floatingTextarea").addEventListener("focus", handleWarning);
+    document.getElementById("submitComment").addEventListener("click", handleWarning);
+
+    function handleWarning() {
         if (!isLoggedIn) {
             Swal.fire({
-                title: 'Gagal!',
-                text: 'Silakan login terlebih dahulu untuk mengirimkan komentar.',
+                title: 'Peringatan',
+                text: 'Silakan login terlebih dahulu untuk menambahkan komentar.',
                 icon: 'warning',
-                confirmButtonText: 'OK'
+                showCancelButton: true,
+                confirmButtonText: 'Login',
+                cancelButtonText: 'Kembali',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    redirectToLogin();
+                }
             });
-        } else {
-            const commentText = document.getElementById("floatingTextarea").value.trim();
-            if (commentText) {
-                addComment(commentText, userId);
-                Swal.fire({
-                    title: 'Berhasil!',
-                    text: 'Komentar Anda berhasil dikirim.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            } else {
-                showAlert("Komentar tidak boleh kosong!");
-            }
-        }
-    });
-
-    function addComment(text, userId) {
-        const commentSection = document.getElementById("commentSection");
-        const newComment = document.createElement("div");
-        newComment.classList.add("comment", "mb-4");
-        newComment.innerHTML = `
-            <div class="d-flex align-items-center mb-2">
-                <img src="https://via.placeholder.com/40" class="rounded-circle me-3" alt="Avatar">
-                <div>
-                    <strong>User ${userId}</strong> <small class="text-muted">${new Date().toLocaleString()}</small>
-                </div>
-            </div>
-            <p>${text}</p>
-            <div class="d-flex gap-2">
-                <button class="btn btn-sm btn-warning" onclick="editComment(this, '${userId}')">Edit</button>
-                <button class="btn btn-sm btn-danger" onclick="deleteComment(this, '${userId}')">Hapus</button>
-                <button class="btn btn-sm btn-light d-flex align-items-center">
-                    <i class="bi bi-heart-fill text-danger me-1"></i> (0)
-                </button>
-            </div>
-            <hr>
-        `;
-        commentSection.appendChild(newComment);
-        document.getElementById("floatingTextarea").value = "";
-        updateCommentCount();
-    }
-
-    function editComment(button, commentOwner) {
-        if (userId !== commentOwner) {
-            showAlert("Anda hanya bisa mengedit komentar Anda sendiri!");
-        } else {
-            const commentText = prompt("Edit komentar Anda:", button.parentElement.previousElementSibling.textContent);
-            if (commentText) {
-                button.parentElement.previousElementSibling.textContent = commentText;
-            }
         }
     }
 
-    function deleteComment(button, commentOwner) {
-        if (userId !== commentOwner) {
-            showAlert("Anda hanya bisa menghapus komentar Anda sendiri!");
-        } else {
-            if (confirm("Apakah Anda yakin ingin menghapus komentar ini?")) {
-                button.closest(".comment").remove();
-                updateCommentCount();
-            }
-        }
-    }
-
-    function showAlert(message) {
-        document.getElementById("modalMessage").textContent = message;
-        const alertModal = new bootstrap.Modal(document.getElementById("alertModal"));
-        alertModal.show();
-    }
-
-    function updateCommentCount() {
-        const count = document.querySelectorAll(".comment").length;
-        document.getElementById("commentCount").textContent = `(${count}) Comments`;
+    function redirectToLogin() {
+        window.location.href = "users\login_user.php";
     }
 </script>
-</body>
+
 
 </html>
 
