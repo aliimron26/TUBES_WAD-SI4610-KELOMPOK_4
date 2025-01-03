@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['success' => false, 'message' => 'Anda harus login untuk menambahkan ke wishlist.']);
+    exit;
+}
+
 $data = json_decode(file_get_contents("php://input"), true);
 $productId = $data['productId'] ?? null;
 

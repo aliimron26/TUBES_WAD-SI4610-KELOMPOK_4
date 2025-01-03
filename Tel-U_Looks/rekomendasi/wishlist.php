@@ -12,6 +12,11 @@ if (!isset($_SESSION['wishlist']) || empty($_SESSION['wishlist'])) {
 $ids = implode(',', $_SESSION['wishlist']);
 $sql = "SELECT * FROM rekomendasi WHERE id_rekomendasi IN ($ids)";
 $result = $conn->query($sql);;
+
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['success' => false, 'message' => 'Anda harus login untuk menambahkan ke wishlist.']);
+    exit;
+}
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,6 @@
 <?php
 // Include file koneksi database
+include '../Layouts/navbar.php';
 include '../db.php';
 
 // Cek apakah ada ID yang diberikan di URL
@@ -9,7 +10,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
     // Persiapkan query untuk mengambil data berdasarkan ID
     $query = "SELECT id_rekomendasi, nama_fashion, deskripsi_fashion, harga, link_affiliate_shopee, 
-              link_affiliate_tokopedia, link_affiliate_lazada, image, status, kategori 
+              link_affiliate_tokopedia, link_affiliate_lazada, image, kategori 
               FROM rekomendasi WHERE id_rekomendasi = ?";
     $stmt = mysqli_prepare($conn, $query);
 
@@ -29,7 +30,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $link_tokopedia = htmlspecialchars($row['link_affiliate_tokopedia']);
         $link_lazada = htmlspecialchars($row['link_affiliate_lazada']);
         $image = htmlspecialchars($row['image']);
-        $status = htmlspecialchars($row['status']);
         $kategori = htmlspecialchars($row['kategori']);
     } else {
         echo "Data tidak ditemukan!";
@@ -42,44 +42,26 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     echo "ID tidak valid!";
     exit();
 }
+
+// Cek status login pengguna
+$isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
+//$userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Detail - <?= $nama_fashion; ?> | Tel-U Looks</title>
 
-  <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="../assets/css/main.css" rel="stylesheet">
-
+  <!-- Tambahkan SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Tambahkan Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-
 <body>
-
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-      <a class="logo d-flex align-items-center">
-        <h1 class="sitename">Tel-U Looks</h1>
-      </a>
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="../index.php">Home</a></li>
-          <li><a href="../index.php#about">Tentang</a></li>
-          <li><a href="../index.php#product">Rekomendasi</a></li>
-          <li><a href="../index.php#contact">Kontak</a></li>
-          <li><a href="../users/login_user.php">Login</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
   <main class="main">
 
@@ -95,50 +77,229 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <p><strong>Deskripsi:</strong> <?= $deskripsi_fashion; ?></p>
             <p><strong>Harga:</strong> Rp <?= $harga; ?></p>
             <p><strong>Kategori:</strong> <?= $kategori; ?></p>
-            <p><strong>Status:</strong> <?= $status; ?></p>
-            
-            <!-- Links ke Affiliate -->
-            <p><strong>Beli Sekarang:</strong></p>
-            <?php if ($link_shopee) : ?>
-              <a href="<?= $link_shopee; ?>" target="_blank" class="btn btn-success">Shopee</a>
-            <?php endif; ?>
-            <?php if ($link_tokopedia) : ?>
-              <a href="<?= $link_tokopedia; ?>" target="_blank" class="btn btn-warning">Tokopedia</a>
-            <?php endif; ?>
-            <?php if ($link_lazada) : ?>
-              <a href="<?= $link_lazada; ?>" target="_blank" class="btn btn-danger">Lazada</a>
-            <?php endif; ?>
-            
-            <a href="../index.php#product" class="btn btn-primary">Kembali ke Rekomendasi</a>
+                <button class="btn mt-3" style="background-color:white; color:#059ea3; border-color:#059ea3" onclick="addToWishlist(<?php echo $id_rekomendasi; ?>)">Tambah ke Wishlist</button>
+                <button class="btn mt-3" style="background-color:#059ea3; color:white" data-bs-toggle="modal" data-bs-target="#platformModal">Beli Sekarang</button>
           </div>
         </div>
       </div>
     </section><!-- /Detail Section -->
 
-  </main>
-
-  <footer id="footer" class="footer light-background">
-    <div class="container">
-      <h3 class="sitename">Tel-U Looks</h3>
-      <p>Explore, Inspire, Express</p>
-      <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-twitter-x"></i></a>
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-        <a href=""><i class="bi bi-skype"></i></a>
-        <a href=""><i class="bi bi-linkedin"></i></a>
-      </div>
+    <!-- Modal Pilihan Platform -->
+    <div class="modal fade" id="platformModal" tabindex="-1" aria-labelledby="platformModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="platformModalLabel">Pilih Platform untuk Membeli Produk</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <?php if ($link_shopee === '#' && $link_tokopedia === '#' && $link_lazada === '#'): ?>
+                        <p class="text-danger">Link pembelian tidak tersedia.</p>
+                    <?php else: ?>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="<?= $link_shopee ?>" target="_blank" class="btn btn-warning">Shopee</a>
+                            <a href="<?= $link_tokopedia ?>" target="_blank" class="btn btn-success">Tokopedia</a>
+                            <a href="<?= $link_lazada ?>" target="_blank" class="btn btn-primary">Lazada</a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </footer>
 
-  <!-- Vendor JS Files -->
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/aos/aos.js"></script>
-  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  </main>
+  <script>
+        function addToWishlist() {
+        const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
 
-  <!-- Main JS File -->
-  <script src="../assets/js/main.js"></script>
+        if (!isLoggedIn) {
+            Swal.fire({
+                title: 'Gagal',
+                text: 'Silakan login terlebih dahulu untuk menambahkan produk ke wishlist.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Login',
+                cancelButtonText: 'Nanti Saja'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '../users/login_user.php';
+                }
+            });
+        } else {
+            fetch('../rekomendasi/wishlist.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ productId: productId }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: 'Berhasil',
+                        text: data.message,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Gagal',
+                        text: data.message,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Terjadi kesalahan saat menambahkan ke wishlist.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            });
+        }
+    }
+    </script>
+    <!-- Contoh kode HTML -->
+<div class="container mt-5">
+    <h4 id="commentCount">Komentar</h4>
+    
+    <!-- Form komentar -->
+    <div id="commentForm" class="form-floating mb-4">
+        <textarea class="form-control" placeholder="Tulis Komentar..." id="floatingTextarea" style="height: 100px;"></textarea>
+        <label for="floatingTextarea">Tuliskan komentar anda disini...</label>
+        <button class="btn btn-primary mt-2" id="submitComment">Submit</button>
+    </div>
+    
+    <!-- Area komentar -->
+    <div id="commentSection">
+        <!-- Komentar akan dirender secara dinamis di sini -->
+    </div>
+</div>
 
+<!-- Modal Notifikasi -->
+<div class="modal" tabindex="-1" id="alertModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Peringatan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">Anda harus login untuk mengirim komentar!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap & Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    let isLoggedIn = false; // Ubah ini menjadi 'true' jika pengguna sudah login
+    const userId = "user123"; // Ganti dengan ID pengguna yang sedang login
+
+    document.getElementById("submitComment").addEventListener("click", function() {
+        if (!isLoggedIn) {
+            Swal.fire({
+                title: 'Gagal!',
+                text: 'Silakan login terlebih dahulu untuk mengirimkan komentar.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+        } else {
+            const commentText = document.getElementById("floatingTextarea").value.trim();
+            if (commentText) {
+                addComment(commentText, userId);
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: 'Komentar Anda berhasil dikirim.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                showAlert("Komentar tidak boleh kosong!");
+            }
+        }
+    });
+
+    function addComment(text, userId) {
+        const commentSection = document.getElementById("commentSection");
+        const newComment = document.createElement("div");
+        newComment.classList.add("comment", "mb-4");
+        newComment.innerHTML = `
+            <div class="d-flex align-items-center mb-2">
+                <img src="https://via.placeholder.com/40" class="rounded-circle me-3" alt="Avatar">
+                <div>
+                    <strong>User ${userId}</strong> <small class="text-muted">${new Date().toLocaleString()}</small>
+                </div>
+            </div>
+            <p>${text}</p>
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-warning" onclick="editComment(this, '${userId}')">Edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteComment(this, '${userId}')">Hapus</button>
+                <button class="btn btn-sm btn-light d-flex align-items-center">
+                    <i class="bi bi-heart-fill text-danger me-1"></i> (0)
+                </button>
+            </div>
+            <hr>
+        `;
+        commentSection.appendChild(newComment);
+        document.getElementById("floatingTextarea").value = "";
+        updateCommentCount();
+    }
+
+    function editComment(button, commentOwner) {
+        if (userId !== commentOwner) {
+            showAlert("Anda hanya bisa mengedit komentar Anda sendiri!");
+        } else {
+            const commentText = prompt("Edit komentar Anda:", button.parentElement.previousElementSibling.textContent);
+            if (commentText) {
+                button.parentElement.previousElementSibling.textContent = commentText;
+            }
+        }
+    }
+
+    function deleteComment(button, commentOwner) {
+        if (userId !== commentOwner) {
+            showAlert("Anda hanya bisa menghapus komentar Anda sendiri!");
+        } else {
+            if (confirm("Apakah Anda yakin ingin menghapus komentar ini?")) {
+                button.closest(".comment").remove();
+                updateCommentCount();
+            }
+        }
+    }
+
+    function showAlert(message) {
+        document.getElementById("modalMessage").textContent = message;
+        const alertModal = new bootstrap.Modal(document.getElementById("alertModal"));
+        alertModal.show();
+    }
+
+    function updateCommentCount() {
+        const count = document.querySelectorAll(".comment").length;
+        document.getElementById("commentCount").textContent = `(${count}) Comments`;
+    }
+</script>
 </body>
 
 </html>
+
+<?php
+// Memasukkan Footer
+include '../Layouts/footer.php';
+?>

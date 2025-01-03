@@ -142,7 +142,6 @@ $result = mysqli_query($conn, $query);
               <div class="gallery-item">
                 <a href="rekomendasi/detail.php?id=<?= $row['id_rekomendasi']; ?>">
                   <img src="assets/rekomendasi/<?= $row['image']; ?>" alt="<?= $row['nama_fashion']; ?>" class="img-fluid">
-                  <p><?= $row['nama_fashion']; ?></p>
                 </a>
               </div>
             </div>

@@ -1,3 +1,12 @@
+<?php
+// Include file koneksi database
+include '../db.php';
+
+// Query untuk mendapatkan data rekomendasi
+$query = "SELECT id_rekomendasi, nama_fashion, image FROM rekomendasi";
+$result = mysqli_query($conn, $query);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -104,161 +113,30 @@
 
     </section><!-- /Hero Section -->
 
-    <!-- Rekomendasi Section -->
-    <section id="product" class="product section ">
-
-      <!-- Section Title -->
+    <section id="product" class="product section">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Rekomendasi Fashion Mahasiswa</h2>
+        <h2>Rekomendasi Fashion</h2>
         <p>Koleksi fashion terkini, lagi trending, dan lainnya ada disini</p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
-
+        
         <div class="row g-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
 
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=1">
-              <img src="../assets/img/gallery/produk 1.jpg" alt="Produk 1" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 1</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 1</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=2">
-              <img src="../assets/img/gallery/produk 2.jpg" alt="Produk 2" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 2</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 2</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=3">
-              <img src="../assets/img/gallery/produk 3.jpg" alt="Produk 3" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 3</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 3</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=4">
-              <img src="../assets/img/gallery/produk 4.jpeg" alt="Produk 4" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 4</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 4</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=5">
-              <img src="../assets/img/gallery/produk 5.jpg" alt="Produk 5" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 5</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 5</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=6">
-              <img src="../assets/img/gallery/produk 6.jpg" alt="Produk 6" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 6</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 6</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=7">
-              <img src="../assets/img/gallery/produk 7.jpeg" alt="Produk 7" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 7</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 7</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=8">
-              <img src="../assets/img/gallery/produk 8.jpg" alt="Produk 8" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 8</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 8</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=9">
-              <img src="../assets/img/gallery/produk 9.jpg" alt="Produk 9" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 9</h5>
-              <p class="card-text text-muted">Deskripsi singkat rekomendasi 9</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=10">
-              <img src="../assets/img/gallery/produk 10.jpg" alt="Produk 10" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 10</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 10</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=11">
-              <img src="../assets/img/gallery/produk 11.jpg" alt="Produk 11" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 11</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 11</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=12">
-              <img src="../assets/img/gallery/produk 12.jpg" alt="Produk 12" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 12</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 12</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=13">
-              <img src="../assets/img/gallery/produk 13.jpg" alt="Produk 13" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 13</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 13</p>
-            </div>
-          </div><!-- End Gallery Item -->
-          
-          <div class="card" style="border: none;">
-            <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=14">
-              <img src="../assets/img/gallery/produk 14.jpg" alt="Produk 14" class="card-img-top img-fluid" style="border-radius: 8px;">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">Rekomendasi 14</h5>
-              <p class="card-text text-muted">Deskripsi singkat Rekomendasi 14</p>
-            </div>
-          </div><!-- End Gallery Item -->
-
+          <div class="d-flex flex-nowrap overflow-auto">
+            <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+              <div class="card me-3" style="width: 18rem; min-height: 350px; border:none;">
+                <a href="../rekomendasi/detail_rekomendasi_mahasiswa.php?id=<?= $row['id_rekomendasi']; ?>">
+                  <img src="../assets/rekomendasi/<?= $row['image']; ?>" class="card-img-top img-fluid" style="border-radius: 8px;" alt="<?= $row['nama_fashion']; ?>">
+                </a>
+                <div class="card-body text-center">
+                  <h5 class="card-title"><?= $row['nama_fashion']; ?></h5>
+                </div>
+              </div>
+            <?php endwhile; ?>
+          </div>
         </div>
-
+      </div>
         <div class="row justify-content-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
           <div class="col-xl-10">
             <div class="text-center">
@@ -266,9 +144,6 @@
             </div>
           </div>
         </div>
-          </div><!-- End Gallery Item -->
-          </div><!-- End Gallery Item -->
-          </div><!-- End Gallery Item -->
           <!--section id="call-to-action" class="call-to-action section dark-background" style="margin-bottom: 50px;">
           <div class="container">
             <div class="row justify-content-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
@@ -288,13 +163,12 @@
     </section><!-- /Rekomendasi Section -->
     
     <!-- Rekomendasi Section -->
-    <section id="product" class="product section">
+    <!--section id="product" class="product section">
 
-      <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Rekomendasi Fashion Dosen</h2>
         <p>Koleksi fashion terkini, lagi trending, dan lainnya ada disini</p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
         
@@ -308,7 +182,7 @@
               <h5 class="card-title">Rekomendasi 1</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 1</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
           
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=2">
@@ -318,7 +192,7 @@
               <h5 class="card-title">Rekomendasi 2</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 2</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
 
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=3">
@@ -328,7 +202,7 @@
               <h5 class="card-title">Rekomendasi 3</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 3</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
 
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=4">
@@ -338,7 +212,7 @@
               <h5 class="card-title">Rekomendasi 4</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 4</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
 
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=5">
@@ -348,7 +222,7 @@
               <h5 class="card-title">Rekomendasi 5</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 5</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
 
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=6">
@@ -358,7 +232,7 @@
               <h5 class="card-title">Rekomendasi 6</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 6</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
           
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=7">
@@ -368,7 +242,7 @@
               <h5 class="card-title">Rekomendasi 7</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 7</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
 
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=8">
@@ -378,7 +252,7 @@
               <h5 class="card-title">Rekomendasi 8</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 8</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
 
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=9">
@@ -388,7 +262,7 @@
               <h5 class="card-title">Rekomendasi 9</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 9</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
 
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=10">
@@ -398,7 +272,7 @@
               <h5 class="card-title">Rekomendasi 10</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 10</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
 
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=11">
@@ -408,7 +282,7 @@
               <h5 class="card-title">Rekomendasi 11</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 11</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
 
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=12">
@@ -418,7 +292,7 @@
               <h5 class="card-title">Rekomendasi 12</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 12</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
 
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=13">
@@ -428,7 +302,7 @@
               <h5 class="card-title">Rekomendasi 13</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 13</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
 
           <div class="card" style="border: none;">
             <a href="../rekomendasi/detail_rekomendasi_dosen.php?id=14">
@@ -438,7 +312,7 @@
               <h5 class="card-title">Rekomendasi 14</h5>
               <p class="card-text text-muted">Deskripsi singkat Rekomendasi 14</p>
             </div>
-          </div><!-- End Gallery Item -->
+          </div>
         </div>
         <div class="row justify-content-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
           <div class="col-xl-10">
@@ -448,7 +322,7 @@
           </div>
         </div>
 
-    </section><!-- /Rekomendasi Section -->
+    </section>< /Rekomendasi Section -->
   </main>
 
   <footer id="footer" class="footer light-background">
