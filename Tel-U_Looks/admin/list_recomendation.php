@@ -31,7 +31,7 @@ $result = $conn->query($query);
                             <th>Shopee</th>
                             <th>Tokopedia</th>
                             <th>Lazada</th>
-                            <th>Aksi</th> <!-- Kolom Aksi untuk tombol Update dan Delete -->
+                            <th>Aksi</th> 
                         </tr>
                     </thead>
                     <tbody>
@@ -85,7 +85,6 @@ $result = $conn->query($query);
 
       document.body.appendChild(notification);
 
-      // Menghapus notifikasi setelah 2 detik
       setTimeout(() => {
         notification.style.opacity = '0';
         setTimeout(() => notification.remove(), 500);

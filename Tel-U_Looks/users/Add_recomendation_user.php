@@ -1,9 +1,7 @@
 <?php
-// Memasukkan Header
 include '../Layouts/main-navbar.php';
 ?>
 
-<!-- Konten Utama untuk Tambah Rekomendasi -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -19,7 +17,7 @@ include '../Layouts/main-navbar.php';
     <h2>Tambah Rekomendasi Fashion</h2>
     <div class="card">
       <form action="proses_tambah_rekomendasi_user.php" method="POST" enctype="multipart/form-data" id="fashionForm">
-        <!-- Informasi Produk -->
+        
         <div class="section-header">Informasi Produk</div>
 
         <div class="mb-3">
@@ -37,7 +35,6 @@ include '../Layouts/main-navbar.php';
           <input type="number" class="form-control" id="harga" name="harga" placeholder="Masukkan harga produk" required>
         </div>
 
-        <!-- Kategori Pengguna -->
         <div class="section-header">Kategori Pengguna</div>
 
         <div class="mb-3">
@@ -51,7 +48,6 @@ include '../Layouts/main-navbar.php';
           </div>
         </div>
 
-        <!-- Link Afiliasi -->
         <div class="section-header">Link Afiliasi</div>
 
         <div class="mb-3">
@@ -69,7 +65,6 @@ include '../Layouts/main-navbar.php';
           <input type="url" class="form-control" id="link_lazada" name="link_lazada" placeholder="Masukkan URL afiliasi Lazada">
         </div>
 
-        <!-- Unggah Foto Fashion -->
         <div class="section-header">Unggah Foto</div>
 
         <div class="mb-3">
@@ -77,7 +72,6 @@ include '../Layouts/main-navbar.php';
           <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*" required>
         </div>
 
-        <!-- Tombol Submit dan Cancel -->
         <div class="form-buttons">
           <button type="submit" class="btn btn-primary px-4 py-2">Simpan Rekomendasi</button>
           <button type="button" class="btn btn-cancel px-4 py-2" id="cancelButton" data-bs-toggle="modal" data-bs-target="#cancelModal">Batal</button>
@@ -86,7 +80,6 @@ include '../Layouts/main-navbar.php';
     </div>
   </div>
 
-  <!-- Modal Popup Konfirmasi -->
   <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -108,7 +101,6 @@ include '../Layouts/main-navbar.php';
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // Fungsi untuk menampilkan notifikasi
     function showNotification(message, type) {
       const notification = document.createElement('div');
       notification.textContent = message;
@@ -132,28 +124,22 @@ include '../Layouts/main-navbar.php';
       }, 3000);
     }
 
-    // Menangkap parameter URL
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get('status');
 
-    // Menampilkan notifikasi berdasarkan status
     if (status === 'success') {
       showNotification('Data berhasil disimpan!', 'success');
     } else if (status === 'error') {
       showNotification('Terjadi kesalahan, data gagal disimpan.', 'danger');
     }
 
-    // Get form fields
     const formFields = document.querySelectorAll('input, textarea');
     
-    // Get cancel button and modal
     const cancelButton = document.getElementById('cancelButton');
     const cancelModal = new bootstrap.Modal(document.getElementById('cancelModal'));
 
-    // Get confirm cancel button in the modal
     const confirmCancelButton = document.getElementById('confirmCancel');
 
-    // Function to check if any form fields are filled
     function isFormFilled() {
       let filled = false;
       formFields.forEach(function(field) {
@@ -164,18 +150,16 @@ include '../Layouts/main-navbar.php';
       return filled;
     }
 
-    // Cancel button behavior - show modal if form is filled
     cancelButton.addEventListener('click', function() {
       if (isFormFilled()) {
-        cancelModal.show();  // Show modal popup
+        cancelModal.show();  
       } else {
-        window.location.href = '../Layouts/app..php';  // Redirect to ../index.php if no fields are filled
+        window.location.href = '../Layouts/app..php';  
       }
     });
 
-    // Confirm cancel action
     confirmCancelButton.addEventListener('click', function() {
-      window.location.href = '../Layouts/app.php';  // Redirect to ../index.php
+      window.location.href = '../Layouts/app.php'; 
     });
   </script>
 </body>

@@ -1,6 +1,5 @@
 <?php
-// Koneksi ke database
-include '../db.php'; // Pastikan file ini berisi script koneksi ke database
+include '../db.php'; 
 
 // Pastikan form telah di-submit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

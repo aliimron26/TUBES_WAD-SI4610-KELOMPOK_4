@@ -1,8 +1,7 @@
 <?php
 session_start();
-include '../db.php'; // Koneksi ke database
+include '../db.php'; 
 
-// Logika backend untuk menangani login
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
@@ -10,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($email) || empty($password)) {
         $error = "Email dan password harus diisi.";
     } else {
-        // Query untuk mendapatkan data pengguna berdasarkan email
         $stmt = $conn->prepare("SELECT id_user, email, password FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -19,13 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
 
-            // Verifikasi password
             if (password_verify($password, $user['password'])) {
-                // Login berhasil, set session
                 $_SESSION['user_id'] = $user['id_user'];
                 $_SESSION['email'] = $user['email'];
 
-                // Query untuk mendapatkan data pengguna lengkap
                 $stmt_details = $conn->prepare("SELECT * FROM users WHERE id_user = ?");
                 $stmt_details->bind_param("i", $user['id_user']);
                 $stmt_details->execute();
@@ -74,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <h1>Welcome Back</h1>
             <p>Please login to your account</p>
             
-            <!-- Menampilkan pesan error jika ada -->
             <?php if (!empty($error)): ?>
                 <div style="color: red; margin-bottom: 10px;">
                     <?= htmlspecialchars($error) ?>
@@ -106,19 +100,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             const notification = document.createElement('div');
             notification.textContent = message;
             
-            // Set kelas untuk tipe notifikasi
             notification.className = `alert alert-${type}`;
             
-            // Menambahkan style untuk warna latar belakang dan teks berdasarkan tipe
             if (type === 'success') {
-            notification.style.backgroundColor = '#28a745';  // Hijau untuk success
-            notification.style.color = '#fff';  // Warna teks putih
+            notification.style.backgroundColor = '#28a745';  
+            notification.style.color = '#fff'; 
             } else if (type === 'danger') {
-            notification.style.backgroundColor = '#dc3545';  // Merah untuk error
-            notification.style.color = '#fff';  // Warna teks putih
+            notification.style.backgroundColor = '#dc3545';  
+            notification.style.color = '#fff';  
             } else {
-            notification.style.backgroundColor = '#f9f9f9';  // Warna default
-            notification.style.color = '#333';  // Warna teks default
+            notification.style.backgroundColor = '#f9f9f9'; 
+            notification.style.color = '#333';  
             }
             
             // Style untuk penempatan dan animasi

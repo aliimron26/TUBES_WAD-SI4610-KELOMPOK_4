@@ -1,22 +1,17 @@
 <?php
-// Memasukkan Header
 include '../Layouts/sidebar-admin.php';
 
-// Koneksi ke database
 include '../db.php';
 
-// Cek jika ada id_rekomendasi yang dikirim melalui URL
 if (isset($_GET['id_rekomendasi'])) {
     $id_rekomendasi = $_GET['id_rekomendasi'];
 
-    // Query untuk mengambil data berdasarkan id_rekomendasi
     $query = "SELECT * FROM rekomendasi WHERE id_rekomendasi = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $id_rekomendasi);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Jika data ditemukan
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
     } else {

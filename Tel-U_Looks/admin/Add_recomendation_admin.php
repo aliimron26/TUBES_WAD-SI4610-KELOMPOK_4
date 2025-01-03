@@ -1,5 +1,4 @@
 <?php
-// Memasukkan Sidebar Admin
 include '../Layouts/sidebar-admin.php';
 ?>
 
@@ -9,11 +8,8 @@ include '../Layouts/sidebar-admin.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tambah Rekomendasi Fashion</title>
-  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <!-- Custom CSS -->
   <link href="../assets/css/add_rekomendasi.css" rel="stylesheet">
   <link href="../assets/css/sidebar.css" rel="stylesheet">
   

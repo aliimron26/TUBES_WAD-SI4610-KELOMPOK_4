@@ -1,15 +1,11 @@
 <?php
-// Memasukkan Header
 include '../Layouts/sidebar-admin.php';
 
-// Koneksi ke database
 include '../db.php';
 
-// Cek jika ada id_rekomendasi yang dikirim melalui URL
 if (isset($_GET['id_rekomendasi'])) {
     $id_rekomendasi = $_GET['id_rekomendasi'];
 
-    // Query untuk mengambil data berdasarkan id_rekomendasi
     $query = "SELECT * FROM rekomendasi WHERE id_rekomendasi = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $id_rekomendasi);
@@ -28,10 +24,8 @@ if (isset($_GET['id_rekomendasi'])) {
     exit;
 }
 
-// Proses saat form disubmit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['accept'])) {
-        // Update data
         $query_update = "UPDATE rekomendasi SET status = 'Upload' WHERE id_rekomendasi = ?";
         $stmt_update = $conn->prepare($query_update);
         $stmt_update->bind_param("i", $id_rekomendasi);
@@ -45,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $stmt_update->close();
     } elseif (isset($_POST['reject'])) {
-        // Hapus data
         $query_delete = "DELETE FROM rekomendasi WHERE id_rekomendasi = ?";
         $stmt_delete = $conn->prepare($query_delete);
         $stmt_delete->bind_param("i", $id_rekomendasi);

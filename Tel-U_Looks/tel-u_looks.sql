@@ -1,10 +1,8 @@
--- Membuat database
+
 CREATE DATABASE telulooks;
 
--- Menggunakan database yang baru dibuat
 USE telulooks;
 
--- Membuat tabel rekomendasi
 CREATE TABLE rekomendasi (
     id_rekomendasi INT PRIMARY KEY AUTO_INCREMENT,
     nama_fashion VARCHAR(100) NOT NULL,
@@ -18,7 +16,6 @@ CREATE TABLE rekomendasi (
     kategori VARCHAR(255)
 );
 
--- Membuat tabel users
 CREATE TABLE users (
     id_user VARCHAR(10) PRIMARY KEY,
     nama VARCHAR(100) NOT NULL,
@@ -27,7 +24,6 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL
 );
 
--- Membuat tabel admin
 CREATE TABLE admin (
     id_admin VARCHAR(10) PRIMARY KEY,
     nama VARCHAR(100) NOT NULL,
@@ -35,11 +31,9 @@ CREATE TABLE admin (
     password VARCHAR(255) NOT NULL
 );
 
--- Menambahkan data ke tabel admin
 INSERT INTO admin (id_admin, nama, username, password) 
 VALUES ('adm1', 'admin1', 'admin1', 'admin1');
 
--- Membuat tabel komentar
 CREATE TABLE komentar (
     id_komentar INT PRIMARY KEY AUTO_INCREMENT,
     id_user VARCHAR(10),
@@ -47,13 +41,12 @@ CREATE TABLE komentar (
     FOREIGN KEY (id_user) REFERENCES users(id_user)
 );
 
--- Membuat tabel report
-CREATE TABLE report (
-    id_report INT PRIMARY KEY AUTO_INCREMENT,
-    nama_pelapor VARCHAR(100),
-    permasalahan TEXT NOT NULL,
-    fitur_direport VARCHAR(100) NOT NULL,
-    isi_report TEXT NOT NULL
+CREATE TABLE contact (
+    id_pesan INT PRIMARY KEY AUTO_INCREMENT,
+    nama_pengirim VARCHAR(100), 
+    subjek TEXT NOT NULL,
+    isi_pesan TEXT NOT NULL,
+    status VARCHAR(10)
 );
 
 CREATE TABLE articles (

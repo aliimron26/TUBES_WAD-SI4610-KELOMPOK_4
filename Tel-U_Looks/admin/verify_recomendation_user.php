@@ -1,24 +1,19 @@
 <?php
-// Memasukkan Header
 include '../Layouts/sidebar-admin.php';
 
 $status = isset($_GET['status']) ? $_GET['status'] : '';
 
-// Koneksi ke database
 include '../db.php';
 
-// Query untuk mendapatkan semua data rekomendasi
 $query = "SELECT id_rekomendasi, nama_fashion, deskripsi_fashion, harga, kategori, link_affiliate_shopee, link_affiliate_tokopedia, link_affiliate_lazada FROM rekomendasi WHERE status = 'Pending'";
 
 $result = $conn->query($query);
 ?>
 
-<!-- Konten Utama untuk Menampilkan Daftar Rekomendasi -->
 <div class="content-wrapper">
     <div class="container-fluid mt-5">
         <h2>>Daftar Rekomendasi Pending</h2>
 
-        <!-- Tabel Menampilkan Data Rekomendasi -->
         <div class="card">
             <div class="card-body">
                 <table class="table table-striped">
@@ -37,7 +32,6 @@ $result = $conn->query($query);
                     <tbody>
                         <?php
                         if ($result->num_rows > 0) {
-                            // Menampilkan data setiap baris
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>";
                                 echo "<td>" . $row['nama_fashion'] . "</td>";
@@ -56,7 +50,6 @@ $result = $conn->query($query);
                             echo "<tr><td colspan='8'>Tidak ada rekomendasi penting yang ditemukan.</td></tr>";
                         }
 
-                        // Menutup koneksi database
                         $result->free();
                         ?>
                     </tbody>
@@ -83,18 +76,15 @@ $result = $conn->query($query);
 
       document.body.appendChild(notification);
 
-      // Menghapus notifikasi setelah 2 detik
       setTimeout(() => {
         notification.style.opacity = '0';
         setTimeout(() => notification.remove(), 500);
       }, 3000);
     }
 
-    // Menangkap parameter URL
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get('status');
 
-    // Menampilkan notifikasi berdasarkan status
     if (status === 'success') {
       showNotification('Data berhasil diperbaru!', 'success');
     } else if (status === 'error') {
@@ -105,6 +95,5 @@ $result = $conn->query($query);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 <?php
-// Menutup koneksi database
 $conn->close();
 ?>

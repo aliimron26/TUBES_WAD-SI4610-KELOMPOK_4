@@ -4,14 +4,13 @@ $error_message = "";
 
 // Proses login
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include '../db.php'; // Pastikan untuk menyertakan koneksi database
+    include '../db.php'; 
 
     // Validasi input
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
     if (!empty($username) && !empty($password)) {
-        // Query untuk memeriksa kredensial admin
         $sql = "SELECT * FROM admin WHERE username = ? LIMIT 1";
         $stmt = $conn->prepare($sql);
 
@@ -22,9 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if ($result->num_rows > 0) {
                 $admin = $result->fetch_assoc();
-                // Verifikasi password
                 if ($password == $admin['password']) {
-                    // Set session dan redirect ke app.php
                     $_SESSION['admin_id'] = $admin['id_admin'];
                     $_SESSION['admin_name'] = $admin['nama'];
                     header("Location: list_recomendation.php");
