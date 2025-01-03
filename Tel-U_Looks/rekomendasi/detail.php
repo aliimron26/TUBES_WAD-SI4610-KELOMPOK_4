@@ -15,7 +15,7 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id_rekomendasi);
 $stmt->execute();
 $result = $stmt->get_result();
-$detail = $result->fetch_all(MYSQLI_ASSOC);
+$detail = $result->fetch_assoc(); // Mengambil satu baris data
 $stmt->close();
 
 // Periksa apakah produk ditemukan
@@ -25,9 +25,9 @@ if (!$detail) {
 }
 
 // Link affiliate (pastikan link ini tersedia)
-$linkShopee = isset($detail['link_affiliate_shopee']) ? htmlspecialchars($detail['link_affiliate_shopee']) : '#';
-$linkTokopedia = isset($detail['link_affiliate_tokopedia']) ? htmlspecialchars($detail['link_affiliate_tokopedia']) : '#';
-$linkLazada = isset($detail['link_affiliate_lazada']) ? htmlspecialchars($detail['link_affiliate_lazada']) : '#';
+$linkShopee = filter_var($detail['link_affiliate_shopee'], FILTER_VALIDATE_URL) ? $detail['link_affiliate_shopee'] : '#';
+$linkTokopedia = filter_var($detail['link_affiliate_tokopedia'], FILTER_VALIDATE_URL) ? $detail['link_affiliate_tokopedia'] : '#';
+$linkLazada = filter_var($detail['link_affiliate_lazada'], FILTER_VALIDATE_URL) ? $detail['link_affiliate_lazada'] : '#';
 
 // Cek status login pengguna
 $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
@@ -47,15 +47,19 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <div class="container mt-5">
+<   div class="container mt-5">
         <div class="row">
             <div class="col-md-5">
-                <img src="<?php echo htmlspecialchars($detail['image']); ?>" alt="<?php echo htmlspecialchars($detail['nama_fashion']); ?>" class="img-fluid">
+                <img src="<?php echo htmlspecialchars($detail['image']); ?>" 
+                     alt="<?php echo htmlspecialchars($detail['nama_fashion']); ?>" 
+                     class="img-fluid img-thumbnail">
             </div>
             <div class="col-md-7">
                 <h2><?php echo htmlspecialchars($detail['nama_fashion']); ?></h2>
                 <p><?php echo htmlspecialchars($detail['deskripsi_fashion']); ?></p>
                 <p><strong>Harga:</strong> <?php echo htmlspecialchars($detail['harga']); ?></p>
+                <button class="btn btn-outline-success mt-3" onclick="addToWishlist(<?php echo $id_rekomendasi; ?>)">Tambah ke Wishlist</button>
+                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#platformModal">Beli Sekarang</button>
             </div>
         </div>
     </div>

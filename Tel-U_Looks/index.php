@@ -1,3 +1,12 @@
+<?php
+// Include file koneksi database
+include 'db.php';
+
+// Query untuk mendapatkan data rekomendasi
+$query = "SELECT id_rekomendasi, nama_fashion, image FROM rekomendasi";
+$result = mysqli_query($conn, $query);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -120,99 +129,27 @@
 
     </section><!-- /About Section -->
 
-    <!-- Rekomendasi Section -->
-    <section id="product" class="product section dark-background">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
+    <section id="product" class="product section">
+      <div class="container section-title">
         <h2>Rekomendasi Fashion</h2>
         <p>Koleksi fashion terkini, lagi trending, dan lainnya ada disini</p>
-      </div><!-- End Section Title -->
-
-      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row g-0">
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="rekomendasi/detail.php?id=1">
-                <img src="assets/img/gallery/produk 1.jpg" alt="Produk 1" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="rekomendasi/detail.php?id=2">
-                <img src="assets/img/gallery/produk 2.jpg" alt="Produk 2" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="rekomendasi/detail.php?id=3">
-                <img src="assets/img/gallery/produk 3.jpg" alt="Produk 3" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="rekomendasi/detail.php?id=4">
-                <img src="assets/img/gallery/produk 4.jpeg" alt="Produk 4" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="rekomendasi/detail.php?id=5">
-                <img src="assets/img/gallery/produk 5.jpg" alt="Produk 5" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="rekomendasi/detail.php?id=6">
-                <img src="assets/img/gallery/produk 6.jpg" alt="Produk 6" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="rekomendasi/detail.php?id=7">
-                <img src="assets/img/gallery/produk 7.jpeg" alt="Produk 7" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="rekomendasi/detail.php?id=8">
-                <img src="assets/img/gallery/produk 8.jpg" alt="Produk 8" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-          <section id="call-to-action" class="call-to-action section dark-background" style="margin-bottom: 50px;">
-          <div class="container">
-            <div class="row justify-content-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-              <div class="col-xl-10">
-                <div class="text-center">
-                  <a href="#" class="cta-btn">More Recommendations</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          </section>
-          
-        </div>
-
       </div>
 
-    </section><!-- /Rekomendasi Section -->
+      <div class="container-fluid">
+        <div class="row g-0">
+          <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+            <div class="col-lg-3 col-md-4">
+              <div class="gallery-item">
+                <a href="rekomendasi/detail.php?id=<?= $row['id_rekomendasi']; ?>">
+                  <img src="assets/rekomendasi/<?= $row['image']; ?>" alt="<?= $row['nama_fashion']; ?>" class="img-fluid">
+                  <p><?= $row['nama_fashion']; ?></p>
+                </a>
+              </div>
+            </div>
+          <?php endwhile; ?>
+        </div>
+      </div>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact section" style="margin-top: 50px;">
