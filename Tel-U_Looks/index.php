@@ -191,15 +191,11 @@ $result = mysqli_query($conn, $query);
           </div>
 
           <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form action="contact/send_message.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
 
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+              <div class="col-md-12">
+                  <input type="text" class="form-control" name="Nama" placeholder="Nama" required="">
                 </div>
 
                 <div class="col-md-12">

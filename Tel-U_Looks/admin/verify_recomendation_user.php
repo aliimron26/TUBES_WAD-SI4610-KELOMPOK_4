@@ -2,7 +2,6 @@
 // Memasukkan Header
 include '../Layouts/sidebar-admin.php';
 
-// Menangani notifikasi status
 $status = isset($_GET['status']) ? $_GET['status'] : '';
 
 // Koneksi ke database
@@ -32,12 +31,11 @@ $result = $conn->query($query);
                             <th>Shopee</th>
                             <th>Tokopedia</th>
                             <th>Lazada</th>
-                            <th>Aksi</th> <!-- Kolom Aksi untuk tombol Update dan Delete -->
+                            <th>Aksi</th> 
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        // Cek apakah ada hasil query
                         if ($result->num_rows > 0) {
                             // Menampilkan data setiap baris
                             while ($row = $result->fetch_assoc()) {
