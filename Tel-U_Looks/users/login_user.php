@@ -25,6 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['user_id'] = $user['id_user'];
                 $_SESSION['email'] = $user['email'];
 
+                // Query untuk mendapatkan data pengguna lengkap
+                $stmt_details = $conn->prepare("SELECT * FROM users WHERE id_user = ?");
+                $stmt_details->bind_param("i", $user['id_user']);
+                $stmt_details->execute();
+                $user_details = $stmt_details->get_result()->fetch_assoc();
+
+                $_SESSION['name'] = $user_details['name'];
+                $_SESSION['bio'] = $user_details['bio'];
+                $_SESSION['interest'] = $user_details['interest'];
+
                 // Redirect ke halaman sebelumnya atau ke index.php
                 if (isset($_SERVER['HTTP_REFERER']) && 
                     !str_contains($_SERVER['HTTP_REFERER'], 'register.php') && 

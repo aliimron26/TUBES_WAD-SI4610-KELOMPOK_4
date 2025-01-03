@@ -1,3 +1,24 @@
+<?php
+session_start();
+
+include '../db.php'; // Koneksi ke database
+
+// Periksa apakah pengguna sudah login
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login_user.php");
+    exit;
+}
+
+// Ambil data dari sesi dengan nilai default jika tidak ada
+$user_id = $_SESSION['user_id'];
+$username = $_SESSION['username'] ?? ""; // Default ke string kosong
+$email = $_SESSION['email'] ?? "";       // Default ke string kosong
+$name = $_SESSION['name'] ?? "";         // Default ke string kosong
+$bio = $_SESSION['bio'] ?? "";           // Default ke string kosong
+$interest = isset($_SESSION['interest']) ? explode(",", $_SESSION['interest']) : []; // Default ke array kosong
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,18 +89,20 @@
                             </script>
                             <hr class="border-light m-0">
                             <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="form-label" style="color: var(--text-color);">Username</label>
-                                        <input type="text" class="form-control mb-1" style="background-color: var(--base-variant); color: var(--text-color);" value="aryanugraha">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" style="color: var(--text-color);">Name</label>
-                                        <input type="text" class="form-control" style="background-color: var(--base-variant); color: var(--text-color);" value="Arya Nugraha">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" style="color: var(--text-color);">E-mail</label>
-                                        <input type="text" class="form-control mb-1" style="background-color: var(--base-variant); color: var(--text-color);" value="aryanugraha@gmail.com" readonly>
-                                    </div>
+                                    <form action="update_profile.php" method="post">
+                                        <div class="form-group">
+                                            <label class="form-label" style="color: var(--text-color);">Username</label>
+                                            <input type="text" class="form-control mb-1" style="background-color: var(--base-variant); color: var(--text-color);" name="username" id="username" value="<?= htmlspecialchars($username ?? '') ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" style="color: var(--text-color);">Name</label>
+                                            <input type="text" class="form-control" style="background-color: var(--base-variant); color: var(--text-color);" name="name" id="name" value="<?= htmlspecialchars($name ?? '') ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" style="color: var(--text-color);">E-mail</label>
+                                            <input type="text" class="form-control mb-1" style="background-color: var(--base-variant); color: var(--text-color);" name="email" id="email" value="<?= htmlspecialchars($email ?? '') ?>" readonly>
+                                        </div>
+                                    </form>
                                 </form>
                             </div>
                         </div>
@@ -105,18 +128,18 @@
                             <div class="card-body pb-2">
                                     <div class="form-group">
                                         <label class="form-label" style="color: var(--text-color);">Bio</label>
-                                        <textarea class="form-control" style="background-color: var(--base-variant); color: var(--text-color);"
-                                            rows="5">Saya seorang mahasiswa yang sangat tertarik dengan perkembangan fashion dan ingin terus mengikuti trend fashion terkini. Saya juga sangat menyukai musik dan film.</textarea>
+                                        <textarea class="form-control" style="background-color: var(--base-variant); color: var(--text-color);" rows="5" name="bio" id="bio"><?= htmlspecialchars($bio ?? '') ?></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" style="color: var(--text-color);">Interest Fashion</label>
-                                        <select class="custom-select" id="interest-fashion" style="background-color: var(--base-variant); color: var(--text-color);">
-                                            <option>Casual</option>
-                                            <option selected>Formal</option>
-                                            <option>Sports</option>
-                                            <option>Vintage</option>
-                                            <option>Edgy</option>
-                                            <option>Preppy</option>
+                                        <select class="custom-select" id="interest-fashion" name="interest[]" multiple style="background-color: var(--base-variant); color: var(--text-color);">
+                                            <?php
+                                            $options = ["Casual", "Formal", "Sports", "Vintage", "Edgy", "Preppy"];
+                                            foreach ($options as $option) {
+                                                $selected = in_array($option, $interest) ? "selected" : "";
+                                                echo "<option value='$option' $selected>$option</option>";
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -126,7 +149,7 @@
                                                 if(isset($_COOKIE['interest-fashion'])) {
                                                     $interests = explode(",", $_COOKIE['interest-fashion']);
                                                     foreach($interests as $interest) {
-                                                        echo '<div class="badge badge-primary mr-2 mb-2" style="background-color: #059ea3;">' . htmlspecialchars($interest) . ' <span style="cursor: pointer;" onclick="removeInterest(this)">&times;</span></div>';
+                                                        echo '<div class="badge badge-primary mr-2 mb-2" style="background-color: #059ea3;">' . htmlspecialchars($interest ?? '') . ' <span style="cursor: pointer;" onclick="removeInterest(this)">&times;</span></div>';
                                                     }
                                                 }
                                             ?>
