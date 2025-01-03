@@ -42,7 +42,9 @@ if (!$article) {
             <?php if (!empty($article['image'])): ?>
                 <img src="<?php echo htmlspecialchars($article['image']); ?>" alt="<?php echo htmlspecialchars($article['title']); ?>" class="img-fluid">
             <?php endif; ?>
-            <p><?php echo $article['content']; // Menampilkan konten sebagai HTML ?></p>
+            <div class="article-content">
+                <?php echo $article['content']; // Menampilkan konten sebagai HTML ?>
+            </div>
             <p><strong>Diterbitkan pada:</strong> <?php echo htmlspecialchars($article['created_at']); ?></p>
             <?php if (isset($_SESSION['admin_id'])): ?>
                 <a href="update_articles.php?id=<?php echo $article['id']; ?>" class="btn btn-warning">Edit Artikel</a>
