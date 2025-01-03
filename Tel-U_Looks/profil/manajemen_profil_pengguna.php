@@ -61,25 +61,26 @@
                                     }
                                     reader.readAsDataURL(event.target.files[0]);
                                 }
-
+                                
                                 function removeProfileImage() {
                                     document.getElementById('profileImage').src = 'https://i.imgur.com/hUQpigu.png';
                                 }
                             </script>
                             <hr class="border-light m-0">
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label class="form-label" style="color: var(--text-color);">Username</label>
-                                    <input type="text" class="form-control mb-1" style="background-color: var(--base-variant); color: var(--text-color);">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" style="color: var(--text-color);">Name</label>
-                                    <input type="text" class="form-control" style="background-color: var(--base-variant); color: var(--text-color);">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" style="color: var(--text-color);">E-mail</label>
-                                    <input type="text" class="form-control mb-1" style="background-color: var(--base-variant); color: var(--text-color);">
-                                </div>
+                                    <div class="form-group">
+                                        <label class="form-label" style="color: var(--text-color);">Username</label>
+                                        <input type="text" class="form-control mb-1" style="background-color: var(--base-variant); color: var(--text-color);" value="aryanugraha">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" style="color: var(--text-color);">Name</label>
+                                        <input type="text" class="form-control" style="background-color: var(--base-variant); color: var(--text-color);" value="Arya Nugraha">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" style="color: var(--text-color);">E-mail</label>
+                                        <input type="text" class="form-control mb-1" style="background-color: var(--base-variant); color: var(--text-color);" value="aryanugraha@gmail.com" readonly>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <!--
@@ -102,36 +103,35 @@
                         -->
                         <div class="tab-pane fade" id="account-info">
                             <div class="card-body pb-2">
-                                <div class="form-group">
-                                    <label class="form-label" style="color: var(--text-color);">Bio</label>
-                                    <textarea class="form-control" style="background-color: var(--base-variant); color: var(--text-color);"
-                                        rows="5">Saya seorang mahasiswa yang sangat tertarik dengan perkembangan fashion dan ingin terus mengikuti trend fashion terkini. Saya juga sangat menyukai musik dan film.</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" style="color: var(--text-color);">Interest Fashion</label>
-                                    <select class="custom-select" id="interest-fashion" style="background-color: var(--base-variant); color: var(--text-color);">
-                                        <option>Casual</option>
-                                        <option selected>Formal</option>
-                                        <option>Sports</option>
-                                        <option>Vintage</option>
-                                        <option>Edgy</option>
-                                        <option>Preppy</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <button type="button" class="btn" style="background-color: #059ea3; color: white;" onclick="addInterest()">Add Interest</button>
-                                    <div id="interest-list" style="margin-top: 1rem;">
-                                        <?php
-                                            if(isset($_COOKIE['interest-fashion'])) {
-                                                $interests = explode(",", $_COOKIE['interest-fashion']);
-                                                foreach($interests as $interest) {
-                                                    echo '<div class="badge badge-primary mr-2 mb-2" style="background-color: #059ea3;">' . htmlspecialchars($interest) . ' <span style="cursor: pointer;" onclick="removeInterest(this)">&times;</span></div>';
-                                                }
-                                            }
-                                        ?>
+                                    <div class="form-group">
+                                        <label class="form-label" style="color: var(--text-color);">Bio</label>
+                                        <textarea class="form-control" style="background-color: var(--base-variant); color: var(--text-color);"
+                                            rows="5">Saya seorang mahasiswa yang sangat tertarik dengan perkembangan fashion dan ingin terus mengikuti trend fashion terkini. Saya juga sangat menyukai musik dan film.</textarea>
                                     </div>
-                                </div>
-
+                                    <div class="form-group">
+                                        <label class="form-label" style="color: var(--text-color);">Interest Fashion</label>
+                                        <select class="custom-select" id="interest-fashion" style="background-color: var(--base-variant); color: var(--text-color);">
+                                            <option>Casual</option>
+                                            <option selected>Formal</option>
+                                            <option>Sports</option>
+                                            <option>Vintage</option>
+                                            <option>Edgy</option>
+                                            <option>Preppy</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" class="btn" style="background-color: #059ea3; color: white;" onclick="addInterest()">Add Interest</button>
+                                        <div id="interest-list" style="margin-top: 1rem;">
+                                            <?php
+                                                if(isset($_COOKIE['interest-fashion'])) {
+                                                    $interests = explode(",", $_COOKIE['interest-fashion']);
+                                                    foreach($interests as $interest) {
+                                                        echo '<div class="badge badge-primary mr-2 mb-2" style="background-color: #059ea3;">' . htmlspecialchars($interest) . ' <span style="cursor: pointer;" onclick="removeInterest(this)">&times;</span></div>';
+                                                    }
+                                                }
+                                            ?>
+                                        </div>
+                                    </div>
                                 <script>
                                     function addInterest() {
                                         var select = document.getElementById("interest-fashion");
@@ -174,11 +174,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">WhatsApp</label>
-                                    <input type="text" class="form-control" value style="background-color: var(--base-variant); color: var(--text-color);">
+                                    <input type="text" class="form-control" value="https://wa.me/user" style="background-color: var(--base-variant); color: var(--text-color);">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">LinkedIn</label>
-                                    <input type="text" class="form-control" value style="background-color: var(--base-variant); color: var(--text-color);">
+                                    <input type="text" class="form-control" value="https://www.linkedin.com/in/user" style="background-color: var(--base-variant); color: var(--text-color);">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" style="color: var(--text-color);">Instagram</label>
@@ -248,7 +248,7 @@
                     alert('Changes have been saved successfully.');
                 }
             </script>
-            <button id="resetButton" type="button" class="btn btn-default" onclick="resetToDefault()">Reset to default</button>
+            <button id="resetButton" type="button" class="btn btn-default" onclick="resetToDefault()">Reset</button>
             <script>
                 // Nilai default
                 const defaultSettings = {
@@ -304,3 +304,4 @@
 </body>
 
 </html>
+
