@@ -45,6 +45,10 @@
         <i class="bi bi-folder"></i> 
         <span>Kelola Artikel</span>
       </a>
+      <a href="../admin/list_contact.php" class="<?= basename($_SERVER['PHP_SELF']) == 'list_contact.php' ? 'active' : '' ?>">
+        <i class="bi bi-folder"></i> 
+        <span>Daftar Pesan</span>
+      </a>
     </div>
     <a href="../index.php" class="logout">
       <i class="bi bi-box-arrow-right"></i> 
