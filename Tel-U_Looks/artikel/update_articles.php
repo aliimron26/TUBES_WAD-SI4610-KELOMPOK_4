@@ -1,10 +1,9 @@
 <?php
-session_start(); // Memulai session
+session_start(); 
 
 include '../Layouts/sidebar-admin.php';
-include '../db.php'; // Menghubungkan ke database
+include '../db.php';
 
-// Cek apakah ID artikel ada di URL
 if (!isset($_GET['id'])) {
     echo "<script>alert('ID artikel tidak ditemukan.'); window.location.href='manage_articles.php';</script>";
     exit();
@@ -12,7 +11,6 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
-// Mengambil data artikel dari database
 $query = "SELECT * FROM articles WHERE id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $id);
@@ -26,7 +24,6 @@ if ($result->num_rows === 0) {
 
 $article = $result->fetch_assoc();
 
-// Proses pembaruan artikel
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
@@ -34,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $target = "assets/img/articles/" . basename($image);
 
     if ($image) {
-        // Update dengan gambar baru
+        // mengupdate kalau ada gambar baru
         $query = "UPDATE articles SET title = ?, content = ?, image = ? WHERE id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("sssi", $title, $content, $image, $id);
@@ -45,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "<script>alert('Gagal memperbarui artikel.');</script>";
         }
     } else {
-        // Update tanpa mengganti gambar
+        // mengupdate kalo ga ada gambar
         $query = "UPDATE articles SET title = ?, content = ? WHERE id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("ssi", $title, $content, $id);
@@ -156,6 +153,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </html>
 
 <?php
-// Menutup koneksi database
 $conn->close();
 ?>

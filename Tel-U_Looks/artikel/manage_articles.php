@@ -1,24 +1,18 @@
 <?php
-// Memasukkan Header
 include '../Layouts/sidebar-admin.php';
 
-// Menangani notifikasi status
 $status = isset($_GET['status']) ? $_GET['status'] : '';
 
-// Koneksi ke database
 include '../db.php';
 
-// Query untuk mendapatkan semua data artikel
 $query = "SELECT * FROM articles";
 $result = $conn->query($query);
 ?>
 
-<!-- Konten Utama untuk Menampilkan Daftar Artikel -->
 <div class="content-wrapper">
     <div class="container-fluid mt-5">
         <h2>Manage Articles</h2>
 
-        <!-- Tabel Menampilkan Data Artikel -->
         <div class="card">
             <div class="card-body">
                 <table class="table table-striped">
@@ -27,14 +21,14 @@ $result = $conn->query($query);
                             <th>Judul Artikel</th>
                             <th>Isi Konten</th>
                             <th>Gambar</th>
-                            <th>Aksi</th> <!-- Kolom Aksi untuk tombol Update dan Delete -->
+                            <th>Aksi</th> 
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        // Cek apakah ada hasil query
+                        // cek apakah ada hasil query
                         if ($result->num_rows > 0) {
-                            // Menampilkan data setiap baris
+                            // menampilkan baris artikel
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>";
                                 echo "<td>" . htmlspecialchars($row['title']) . "</td>";
@@ -50,7 +44,6 @@ $result = $conn->query($query);
                             echo "<tr><td colspan='4'>Tidak ada artikel yang ditemukan.</td></tr>";
                         }
 
-                        // Menutup koneksi database
                         $result->free();
                         ?>
                     </tbody>
@@ -78,18 +71,15 @@ $result = $conn->query($query);
 
         document.body.appendChild(notification);
 
-        // Menghapus notifikasi setelah 2 detik
         setTimeout(() => {
             notification.style.opacity = '0';
             setTimeout(() => notification.remove(), 500);
         }, 3000);
     }
 
-    // Menangkap parameter URL
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get('status');
 
-    // Menampilkan notifikasi berdasarkan status
     if (status === 'success') {
         showNotification('Data berhasil diperbarui!', 'success');
     } else if (status === 'terhapus') {
@@ -102,6 +92,5 @@ $result = $conn->query($query);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 <?php
-// Menutup koneksi database
 $conn->close();
 ?>

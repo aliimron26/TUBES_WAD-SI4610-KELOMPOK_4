@@ -1,8 +1,7 @@
 <?php
 include '../Layouts/main-navbar.php';
-include '../db.php'; // Menghubungkan ke database
+include '../db.php'; 
 
-// Mengambil artikel dari database
 $query = "SELECT * FROM articles ORDER BY created_at DESC";
 $result = $conn->query($query);
 ?>
@@ -18,23 +17,21 @@ $result = $conn->query($query);
                             <?php if (!empty($article['image'])): ?>
                                 <img src="<?php echo 'assets/img/articles/' . htmlspecialchars($article['image']); ?>" alt="<?php echo htmlspecialchars($article['title']); ?>" class="img-fluid">
                             <?php else: ?>
-                                <img src="assets/img/default-image.png" alt="Default Image" class="img-fluid"> <!-- Gambar default jika tidak ada -->
+                                <img src="assets/img/default-image.png" alt="Default Image" class="img-fluid"> 
                             <?php endif; ?>
                             <h3><?php echo htmlspecialchars($article['title']); ?></h3>
                             <p><?php echo substr($article['content'], 0, 100) . '...'; ?></p>
                             <div class="d-flex justify-content-between">
                                 <a href="view_article.php?id=<?php echo $article['id']; ?>" class="btn btn-primary">Baca Selengkapnya</a>
-                                <!-- Tombol Edit dan Hapus dihilangkan -->
                             </div>
                         </div>
                     </div>
                 <?php endwhile; ?>
             </div>
-            <!-- Tombol Buat Artikel Baru dihilangkan -->
         </div>
     </section>
 </main>
 
 <?php
-include '../Layouts/footer.php'; // Pastikan footer diinclude
+include '../Layouts/footer.php';
 ?>

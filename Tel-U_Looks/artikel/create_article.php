@@ -1,8 +1,8 @@
 <?php
-session_start(); // Memulai session
+session_start(); 
 
 include '../Layouts/sidebar-admin.php';
-include '../db.php'; // Menghubungkan ke database
+include '../db.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];
@@ -10,17 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $image = $_FILES['image']['name'];
     $target = "assets/img/articles/" . basename($image);
 
-    // Menyimpan artikel ke database
     $query = "INSERT INTO articles (title, content, image) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("sss", $title, $content, $image);
     
     if ($stmt->execute()) {
-        // Mengupload gambar
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
             echo "<script>alert('Artikel berhasil ditambahkan.'); window.location.href='manage_articles.php';</script>";
         } else {
-            // Menampilkan error upload
             echo "<script>alert('Gagal mengupload gambar. Error: " . $_FILES['image']['error'] . "');</script>";
         }
     } else {
@@ -35,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buat Artikel Baru</title>
-    <link href="../assets/css/style.css" rel="stylesheet"> <!-- Ganti dengan CSS Anda -->
+    <link href="../assets/css/style.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -151,6 +148,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </html>
 
 <?php
-// Menutup koneksi database
 $conn->close();
 ?>
