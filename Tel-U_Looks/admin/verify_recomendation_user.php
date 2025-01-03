@@ -55,7 +55,7 @@ $result = $conn->query($query);
                                 echo "</tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='8'>Tidak ada rekomendasi yang ditemukan.</td></tr>";
+                            echo "<tr><td colspan='8'>Tidak ada rekomendasi penting yang ditemukan.</td></tr>";
                         }
 
                         // Menutup koneksi database
