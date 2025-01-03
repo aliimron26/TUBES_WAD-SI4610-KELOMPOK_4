@@ -136,7 +136,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
   </script>
 
 <div class="container mt-5">
-    <h4 id="commentCount">Komentar</h4>
+    <h4>Komentar</h4>
     
     <div id="commentForm" class="form-floating mb-4">
         <textarea class="form-control" placeholder="Tulis Komentar..." id="floatingTextarea" style="height: 100px;"></textarea>
@@ -148,54 +148,41 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     </div>
 </div>
 
-<div class="modal" tabindex="-1" id="alertModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Peringatan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="modalMessage">Anda harus login untuk mengirim komentar!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    let isLoggedIn = true;
-    const userId = "Arya Nugraha"; 
+    const userId = "Arya Nugraha";
+    let editingComment = null; 
 
-    document.getElementById("submitComment").addEventListener("click", function() {
-        if (!isLoggedIn) {
+    document.getElementById("floatingTextarea").addEventListener("keydown", function(event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            document.getElementById("submitComment").click();
+        }
+    });
+
+    document.getElementById("submitComment").addEventListener("click", function () {
+        const commentText = document.getElementById("floatingTextarea").value.trim();
+
+        if (!commentText) {
             Swal.fire({
                 title: 'Gagal!',
-                text: 'Silakan login terlebih dahulu untuk mengirimkan komentar.',
+                text: 'Komentar tidak boleh kosong!',
                 icon: 'warning',
-                confirmButtonText: 'OK'
+                timer: 1000,
+                showConfirmButton: false,
+                position: 'center'
             });
+            return;
+        }
+
+        if (editingComment) {
+            updateComment(commentText);
         } else {
-            const commentText = document.getElementById("floatingTextarea").value.trim();
-            if (commentText) {
-                addComment(commentText, userId);
-                Swal.fire({
-                    title: 'Berhasil!',
-                    text: 'Komentar Anda berhasil dikirim.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            } else {
-                showAlert("Komentar tidak boleh kosong!");
-            }
+            addComment(commentText, userId);
         }
     });
 
@@ -205,57 +192,137 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         newComment.classList.add("comment", "mb-4");
         newComment.innerHTML = `
             <div class="d-flex align-items-center mb-2">
-                <img src="https://via.placeholder.com/40" class="rounded-circle me-3" alt="Avatar">
+                <img src="https://i.imgur.com/bDLhJiP.jpg" class="rounded-circle me-3 img-fluid" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
                 <div>
-                    <strong>User ${userId}</strong> <small class="text-muted">${new Date().toLocaleString()}</small>
+                    <strong class="user-name">${userId}</strong> <small class="text-muted">${new Date().toLocaleString()}</small>
                 </div>
             </div>
             <p>${text}</p>
             <div class="d-flex gap-2">
                 <button class="btn btn-sm btn-warning" onclick="editComment(this, '${userId}')">Edit</button>
-                <button class="btn btn-sm btn-danger" onclick="deleteComment(this, '${userId}')">Hapus</button>
-                <button class="btn btn-sm btn-light d-flex align-items-center">
-                    <i class="bi bi-heart-fill text-danger me-1"></i> (0)
-                </button>
+                <button class="btn btn-sm btn-danger" onclick="deleteComment(this)">Hapus</button>
             </div>
             <hr>
         `;
         commentSection.appendChild(newComment);
         document.getElementById("floatingTextarea").value = "";
-        updateCommentCount();
+
+        Swal.fire({
+            title: 'Berhasil!',
+            text: 'Komentar Anda berhasil ditambahkan.',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false,
+            position: 'center'
+        });
     }
 
     function editComment(button, commentOwner) {
         if (userId !== commentOwner) {
-            showAlert("Anda hanya bisa mengedit komentar Anda sendiri!");
-        } else {
-            const commentText = prompt("Edit komentar Anda:", button.parentElement.previousElementSibling.textContent);
-            if (commentText) {
-                button.parentElement.previousElementSibling.textContent = commentText;
-            }
+            Swal.fire({
+                title: 'Peringatan!',
+                text: 'Anda hanya bisa mengedit komentar Anda sendiri!',
+                icon: 'warning',
+                timer: 1500,
+                showConfirmButton: false,
+                position: 'center'
+            });
+            return;
         }
+
+        editingComment = button.closest(".comment");
+        const commentText = editingComment.querySelector("p").textContent;
+        const userName = editingComment.querySelector(".user-name").textContent;
+        const avatar = editingComment.querySelector("img").src;
+
+        editingComment.innerHTML = `
+            <div class="d-flex align-items-center mb-2">
+                <img src="${avatar}" class="rounded-circle me-3 img-fluid" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
+                <div>
+                    <strong class="user-name">${userName}</strong>
+                </div>
+            </div>
+            <textarea class="form-control mb-2" style="height: 100px;">${commentText}</textarea>
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-primary" onclick="saveEdit(this, '${userName}', '${avatar}')">Simpan</button>
+                <button class="btn btn-sm btn-secondary" onclick="cancelEdit(this, '${userName}', '${avatar}')">Batal</button>
+            </div>
+        `;
     }
 
-    function deleteComment(button, commentOwner) {
-        if (userId !== commentOwner) {
-            showAlert("Anda hanya bisa menghapus komentar Anda sendiri!");
-        } else {
-            if (confirm("Apakah Anda yakin ingin menghapus komentar ini?")) {
+    function saveEdit(button, userName, avatar) {
+        const editedText = button.closest(".comment").querySelector("textarea").value.trim();
+
+        if (!editedText) {
+            Swal.fire({
+                title: 'Gagal!',
+                text: 'Komentar tidak boleh kosong!',
+                icon: 'warning',
+                timer: 1000,
+                showConfirmButton: false,
+                position: 'center'
+            });
+            return;
+        }
+
+        editingComment.innerHTML = `
+            <div class="d-flex align-items-center mb-2">
+                <img src="${avatar}" class="rounded-circle me-3 img-fluid" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
+                <div>
+                    <strong class="user-name">${userName}</strong> <small class="text-muted">edited ${new Date().toLocaleString()}</small>
+                </div>
+            </div>
+            <p>${editedText}</p>
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-warning" onclick="editComment(this, '${userId}')">Edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteComment(this)">Hapus</button>
+            </div>
+            <hr>
+        `;
+        editingComment = null;
+    }
+
+    function cancelEdit(button, userName, avatar) {
+        const originalText = button.closest(".comment").querySelector("textarea").value;
+
+        editingComment.innerHTML = `
+            <div class="d-flex align-items-center mb-2">
+                <img src="${avatar}" class="rounded-circle me-3 img-fluid" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
+                <div>
+                    <strong class="user-name">${userName}</strong> <small class="text-muted">${new Date().toLocaleString()}</small>
+                </div>
+            </div>
+            <p>${originalText}</p>
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-warning" onclick="editComment(this, '${userId}')">Edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteComment(this)">Hapus</button>
+            </div>
+            <hr>
+        `;
+        editingComment = null;
+    }
+
+    function deleteComment(button) {
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: 'Apakah Anda yakin ingin menghapus komentar ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
                 button.closest(".comment").remove();
-                updateCommentCount();
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: 'Komentar Anda berhasil dihapus.',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false,
+                    position: 'center'
+                });
             }
-        }
-    }
-
-    function showAlert(message) {
-        document.getElementById("modalMessage").textContent = message;
-        const alertModal = new bootstrap.Modal(document.getElementById("alertModal"));
-        alertModal.show();
-    }
-
-    function updateCommentCount() {
-        const count = document.querySelectorAll(".comment").length;
-        document.getElementById("commentCount").textContent = `(${count}) Comments`;
+        });
     }
 </script>
 </body>
