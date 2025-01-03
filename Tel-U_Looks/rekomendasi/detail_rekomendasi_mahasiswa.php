@@ -1,29 +1,21 @@
 <?php
 session_start();
-// Include file koneksi database
 include '../Layouts/main-navbar.php';
 include '../db.php';
 
-// Cek apakah ada ID yang diberikan di URL
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    // Ambil ID dari URL
     $id_rekomendasi = $_GET['id'];
 
-    // Persiapkan query untuk mengambil data berdasarkan ID
     $query = "SELECT id_rekomendasi, nama_fashion, deskripsi_fashion, harga, link_affiliate_shopee, 
               link_affiliate_tokopedia, link_affiliate_lazada, image, kategori 
               FROM rekomendasi WHERE id_rekomendasi = ?";
     $stmt = mysqli_prepare($conn, $query);
-
-    // Bind parameter dan eksekusi query
     mysqli_stmt_bind_param($stmt, 'i', $id_rekomendasi);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
-    // Jika data ditemukan
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        // Ambil data dan sanitasi untuk output HTML
         $nama_fashion = htmlspecialchars($row['nama_fashion']);
         $deskripsi_fashion = htmlspecialchars($row['deskripsi_fashion']);
         $harga = number_format($row['harga'], 0, ',', '.');
@@ -37,16 +29,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         exit();
     }
 
-    // Tutup statement
     mysqli_stmt_close($stmt);
 } else {
     echo "ID tidak valid!";
     exit();
 }
-
-// Cek status login pengguna
-$isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
-$userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
 ?>
 
 <!DOCTYPE html>
@@ -55,18 +42,13 @@ $userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Detail - <?= $nama_fashion; ?> | Tel-U Looks</title>
-
-  <!-- Tambahkan SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Tambahkan Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
   <main class="main">
-
-    <!-- Detail Section -->
     <section class="detail section">
       <div class="container">
         <div class="row">
@@ -78,14 +60,13 @@ $userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
             <p><strong>Deskripsi:</strong> <?= $deskripsi_fashion; ?></p>
             <p><strong>Harga:</strong> Rp <?= $harga; ?></p>
             <p><strong>Kategori:</strong> <?= $kategori; ?></p>
-                <button class="btn mt-3" style="background-color:white; color:#059ea3; border-color:#059ea3" onclick="addToWishlist(<?php echo $id_rekomendasi; ?>)">Tambah ke Wishlist</button>
-                <button class="btn mt-3" style="background-color:#059ea3; color:white" data-bs-toggle="modal" data-bs-target="#platformModal">Beli Sekarang</button>
+            <button class="btn mt-3" style="background-color:white; color:#059ea3; border-color:#059ea3" onclick="addToWishlist(<?php echo $id_rekomendasi; ?>)">Tambah ke Wishlist</button>
+            <button class="btn mt-3" style="background-color:#059ea3; color:white" data-bs-toggle="modal" data-bs-target="#platformModal">Beli Sekarang</button>
           </div>
         </div>
       </div>
-    </section><!-- /Detail Section -->
+    </section>
 
-    <!-- Modal Pilihan Platform -->
     <div class="modal fade" id="platformModal" tabindex="-1" aria-labelledby="platformModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -112,80 +93,61 @@ $userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
     </div>
 
   </main>
+
   <script>
-        function addToWishlist() {
-        const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
+    function addToWishlist() {
         const productId = <?= json_encode($id_rekomendasi) ?>;
 
-        if (!isLoggedIn) {
-            Swal.fire({
-                title: 'Gagal',
-                text: 'Silakan login terlebih dahulu untuk menambahkan produk ke wishlist.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Login',
-                cancelButtonText: 'Nanti Saja'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '../users/login_user.php';
-                }
-            });
-        } else {
-            fetch('../rekomendasi/wishlist.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ productId: productId }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    Swal.fire({
-                        title: 'Berhasil',
-                        text: data.message,
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    });
-                } else {
-                    Swal.fire({
-                        title: 'Gagal',
-                        text: data.message,
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
+        fetch('../rekomendasi/wishlist.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ productId: productId }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
                 Swal.fire({
-                    title: 'Error',
-                    text: 'Terjadi kesalahan saat menambahkan ke wishlist.',
+                    title: 'Berhasil',
+                    text: data.message,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire({
+                    title: 'Gagal',
+                    text: data.message,
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Terjadi kesalahan saat menambahkan ke wishlist.',
+                icon: 'error',
+                confirmButtonText: 'OK'
             });
-        }
+        });
     }
-    </script>
-    <!-- Contoh kode HTML -->
+  </script>
+
 <div class="container mt-5">
     <h4 id="commentCount">Komentar</h4>
     
-    <!-- Form komentar -->
     <div id="commentForm" class="form-floating mb-4">
         <textarea class="form-control" placeholder="Tulis Komentar..." id="floatingTextarea" style="height: 100px;"></textarea>
         <label for="floatingTextarea">Tuliskan komentar anda disini...</label>
         <button class="btn btn-primary mt-2" id="submitComment">Submit</button>
     </div>
     
-    <!-- Area komentar -->
     <div id="commentSection">
-        <!-- Komentar akan dirender secara dinamis di sini -->
     </div>
 </div>
 
-<!-- Modal Notifikasi -->
 <div class="modal" tabindex="-1" id="alertModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -203,7 +165,6 @@ $userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
     </div>
 </div>
 
-<!-- Bootstrap & Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -211,8 +172,8 @@ $userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    let isLoggedIn = false; // Ubah ini menjadi 'true' jika pengguna sudah login
-    const userId = "user123"; // Ganti dengan ID pengguna yang sedang login
+    let isLoggedIn = false;
+    const userId = "user123"; 
 
     document.getElementById("submitComment").addEventListener("click", function() {
         if (!isLoggedIn) {
@@ -302,6 +263,5 @@ $userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
 </html>
 
 <?php
-// Memasukkan Footer
 include '../Layouts/footer.php';
 ?>

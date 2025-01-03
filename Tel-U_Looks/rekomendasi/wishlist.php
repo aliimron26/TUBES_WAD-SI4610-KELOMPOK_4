@@ -1,22 +1,14 @@
 <?php 
 session_start();
-include '../Layouts/main-navbar.php';
 include '../db.php';
+include '../Layouts/main-navbar.php';
 
-if (!isset($_SESSION['wishlist']) || empty($_SESSION['wishlist'])) {
-    echo "<p>Wishlist kosong.</p>";
-    exit;
-}
-
-// Ambil produk dari database berdasarkan ID di wishlist
-$ids = implode(',', $_SESSION['wishlist']);
-$sql = "SELECT * FROM rekomendasi WHERE id_rekomendasi IN ($ids)";
-$result = $conn->query($sql);;
-
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['success' => false, 'message' => 'Anda harus login untuk menambahkan ke wishlist.']);
-    exit;
-}
+$query = "SELECT r.nama_fashion, r.harga, r.image 
+          FROM wishlist w 
+          JOIN rekomendasi r ON w.id_rekomendasi = r.id_rekomendasi";
+$stmt = mysqli_prepare($conn, $query);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 ?>
 
 <!DOCTYPE html>
@@ -270,17 +262,23 @@ if (!isset($_SESSION['user_id'])) {
         function removeFromWishlist(productId) {
             fetch('../rekomendasi/remove_from_wishlist.php', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ productId })
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ productId: productId }),
             })
             .then(response => response.json())
             .then(data => {
-                Swal.fire(data.success ? 'Berhasil' : 'Gagal', data.message, data.success ? 'success' : 'error')
-                    .then(() => location.reload());
+                if (data.success) {
+                    alert('Produk berhasil dihapus dari wishlist.');
+                    location.reload();
+                } else {
+                    alert('Gagal menghapus produk.');
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
-                Swal.fire('Error', 'Terjadi kesalahan.', 'error');
+                alert('Terjadi kesalahan.');
             });
         }
     </script>

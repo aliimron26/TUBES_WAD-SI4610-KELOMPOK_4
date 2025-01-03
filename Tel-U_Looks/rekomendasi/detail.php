@@ -1,28 +1,21 @@
 <?php
-// Include file koneksi database
+session_start();
 include '../Layouts/navbar.php';
 include '../db.php';
 
-// Cek apakah ada ID yang diberikan di URL
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    // Ambil ID dari URL
     $id_rekomendasi = $_GET['id'];
 
-    // Persiapkan query untuk mengambil data berdasarkan ID
     $query = "SELECT id_rekomendasi, nama_fashion, deskripsi_fashion, harga, link_affiliate_shopee, 
               link_affiliate_tokopedia, link_affiliate_lazada, image, kategori 
               FROM rekomendasi WHERE id_rekomendasi = ?";
     $stmt = mysqli_prepare($conn, $query);
-
-    // Bind parameter dan eksekusi query
     mysqli_stmt_bind_param($stmt, 'i', $id_rekomendasi);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
-    // Jika data ditemukan
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        // Ambil data dan sanitasi untuk output HTML
         $nama_fashion = htmlspecialchars($row['nama_fashion']);
         $deskripsi_fashion = htmlspecialchars($row['deskripsi_fashion']);
         $harga = number_format($row['harga'], 0, ',', '.');
@@ -36,16 +29,42 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         exit();
     }
 
-    // Tutup statement
     mysqli_stmt_close($stmt);
 } else {
     echo "ID tidak valid!";
     exit();
 }
 
-// Cek status login pengguna
-$isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
-//$userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    if (isset($data['productId'])) {
+        $productId = $data['productId'];
+
+        $checkQuery = "SELECT * FROM wishlist WHERE id_rekomendasi = ?";
+        $checkStmt = mysqli_prepare($conn, $checkQuery);
+        mysqli_stmt_bind_param($checkStmt, 'i', $productId);
+        mysqli_stmt_execute($checkStmt);
+        $checkResult = mysqli_stmt_get_result($checkStmt);
+
+        if (mysqli_num_rows($checkResult) > 0) {
+            echo json_encode(['success' => false, 'message' => 'Produk sudah ada dalam wishlist.']);
+        } else {
+            $insertQuery = "INSERT INTO wishlist (id_rekomendasi) VALUES (?)";
+            $insertStmt = mysqli_prepare($conn, $insertQuery);
+            mysqli_stmt_bind_param($insertStmt, 'i', $productId);
+            if (mysqli_stmt_execute($insertStmt)) {
+                echo json_encode(['success' => true, 'message' => 'Produk berhasil ditambahkan ke wishlist.']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Gagal menambahkan produk ke wishlist.']);
+            }
+            mysqli_stmt_close($insertStmt);
+        }
+        mysqli_stmt_close($checkStmt);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Produk tidak valid.']);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -113,57 +132,42 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
   </main>
   <script>
         function addToWishlist() {
-        const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
+        const productId = <?= json_encode($id_rekomendasi) ?>;
 
-        if (!isLoggedIn) {
-            Swal.fire({
-                title: 'Gagal',
-                text: 'Silakan login terlebih dahulu untuk menambahkan produk ke wishlist.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Login',
-                cancelButtonText: 'Nanti Saja'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '../users/login_user.php';
-                }
-            });
-        } else {
-            fetch('../rekomendasi/wishlist.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ productId: productId }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    Swal.fire({
-                        title: 'Berhasil',
-                        text: data.message,
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    });
-                } else {
-                    Swal.fire({
-                        title: 'Gagal',
-                        text: data.message,
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
+        fetch('../rekomendasi/wishlist.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ productId: productId }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
                 Swal.fire({
-                    title: 'Error',
-                    text: 'Terjadi kesalahan saat menambahkan ke wishlist.',
+                    title: 'Berhasil',
+                    text: data.message,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire({
+                    title: 'Gagal',
+                    text: data.message,
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Terjadi kesalahan saat menambahkan ke wishlist.',
+                icon: 'error',
+                confirmButtonText: 'OK'
             });
-        }
+        });
     }
     </script>
     <!-- Contoh kode HTML -->

@@ -76,3 +76,9 @@ CREATE TABLE profil (
 );
 
 SELECT * FROM articles ORDER BY created_at DESC;
+
+CREATE TABLE wishlist (
+    id_wishlist INT AUTO_INCREMENT PRIMARY KEY,
+    id_rekomendasi INT,
+    FOREIGN KEY (id_rekomendasi) REFERENCES rekomendasi(id_rekomendasi)
+);
