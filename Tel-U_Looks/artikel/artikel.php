@@ -15,9 +15,13 @@ $result = $conn->query($query);
                 <?php while ($article = $result->fetch_assoc()): ?>
                     <div class="col-lg-4 col-md-6">
                         <div class="article-item">
-                            <img src="<?php echo htmlspecialchars($article['image']); ?>" alt="<?php echo htmlspecialchars($article['title']); ?>" class="img-fluid">
+                            <?php if (!empty($article['image'])): ?>
+                                <img src="<?php echo 'assets/img/articles/' . htmlspecialchars($article['image']); ?>" alt="<?php echo htmlspecialchars($article['title']); ?>" class="img-fluid">
+                            <?php else: ?>
+                                <img src="assets/img/default-image.png" alt="Default Image" class="img-fluid"> <!-- Gambar default jika tidak ada -->
+                            <?php endif; ?>
                             <h3><?php echo htmlspecialchars($article['title']); ?></h3>
-                            <p><?php echo htmlspecialchars(substr($article['content'], 0, 100)) . '...'; ?></p>
+                            <p><?php echo substr($article['content'], 0, 100) . '...'; ?></p>
                             <div class="d-flex justify-content-between">
                                 <a href="view_article.php?id=<?php echo $article['id']; ?>" class="btn btn-primary">Baca Selengkapnya</a>
                                 <!-- Tombol Edit dan Hapus dihilangkan -->
