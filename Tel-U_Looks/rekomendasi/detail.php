@@ -185,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="d-flex align-items-center mb-2">
             <img src="https://i.imgur.com/bDLhJiP.jpg" class="rounded-circle me-3 img-fluid" alt="Avatar" style="width: 40px; height: 40px; object-fit: cover;">
                 <div>
-                    <strong>Arya Nugraha</strong> <small class="text-muted">01/01/2025, 12:00 PM</small>
+                    <strong>Arya Nugraha</strong> <small class="text-muted">01/01/2025, 12:00:00 PM</small>
                 </div>
             </div>
             <p>Kombinasi warna dan gaya yang sangat menarik! Terlihat sangat stylish!</p>
@@ -246,7 +246,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         window.location.href = "users\login_user.php";
     }
 </script>
-
+</body>
 
 </html>
 
