@@ -1,21 +1,20 @@
 <?php
 session_start();
 
-include '../db.php'; // Koneksi ke database
+include '../db.php'; 
 
-// Periksa apakah pengguna sudah login
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../login_user.php");
     exit;
 }
 
-// Ambil data dari sesi dengan nilai default jika tidak ada
+// untuk mengambil data dari sesi dengan nilai default jika tidak ada
 $user_id = $_SESSION['user_id'];
-$username = $_SESSION['username'] ?? ""; // Default ke string kosong
-$email = $_SESSION['email'] ?? "";       // Default ke string kosong
-$name = $_SESSION['name'] ?? "";         // Default ke string kosong
-$bio = $_SESSION['bio'] ?? "";           // Default ke string kosong
-$interest = isset($_SESSION['interest']) ? explode(",", $_SESSION['interest']) : []; // Default ke array kosong
+$username = $_SESSION['username'] ?? ""; 
+$email = $_SESSION['email'] ?? "";       
+$name = $_SESSION['name'] ?? "";         
+$bio = $_SESSION['bio'] ?? "";           
+$interest = isset($_SESSION['interest']) ? explode(",", $_SESSION['interest']) : []; 
 
 ?>
 
@@ -177,7 +176,7 @@ $interest = isset($_SESSION['interest']) ? explode(",", $_SESSION['interest']) :
                                         var interests = [];
                                         var badges = document.querySelectorAll("#interest-list .badge");
                                         badges.forEach(function(badge) {
-                                            interests.push(badge.textContent.trim().slice(0, -1)); // Remove the '×' symbol
+                                            interests.push(badge.textContent.trim().slice(0, -1)); 
                                         });
                                         document.cookie = "interest-fashion=" + encodeURIComponent(interests.join(",")) + "; path=/";
                                     }
@@ -267,7 +266,7 @@ $interest = isset($_SESSION['interest']) ? explode(",", $_SESSION['interest']) :
             <button type="button" class="btn btn-custom" onclick="saveChanges()">Save changes</button>&nbsp;
             <script>
                 function saveChanges() {
-                    // Implement the save functionality here
+                    // untuk menyimpan perubahan
                     alert('Changes have been saved successfully.');
                 }
             </script>
