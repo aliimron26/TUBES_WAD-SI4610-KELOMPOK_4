@@ -6,17 +6,32 @@ session_start();
 include '../Layouts/navbar.php';
 include '../db.php';
 
-$sql = "SELECT * FROM rekomendasi";
-$result = $conn->query($sql);
+// Ambil ID produk dari URL
+$id_rekomendasi = isset($_GET['id_rekomendasi']) ? (int) $_GET['id_rekomendasi'] : 0;
 
-// Cek status login pengguna
-$isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
-//$userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
+// Query untuk mengambil data produk berdasarkan ID
+$sql = "SELECT * FROM rekomendasi WHERE id_rekomendasi = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id_rekomendasi);
+$stmt->execute();
+$result = $stmt->get_result();
+$detail = $result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
+
+// Periksa apakah produk ditemukan
+if (!$detail) {
+    echo "<div class='container mt-5'><h3>Produk tidak ditemukan!</h3></div>";
+    exit;
+}
 
 // Link affiliate (pastikan link ini tersedia)
 $linkShopee = isset($detail['link_affiliate_shopee']) ? htmlspecialchars($detail['link_affiliate_shopee']) : '#';
 $linkTokopedia = isset($detail['link_affiliate_tokopedia']) ? htmlspecialchars($detail['link_affiliate_tokopedia']) : '#';
 $linkLazada = isset($detail['link_affiliate_lazada']) ? htmlspecialchars($detail['link_affiliate_lazada']) : '#';
+
+// Cek status login pengguna
+$isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
+//$userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
 ?>
 
 <!DOCTYPE html>
@@ -32,26 +47,16 @@ $linkLazada = isset($detail['link_affiliate_lazada']) ? htmlspecialchars($detail
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<div class="container mt-5">
-        <h2 class="mb-4">Produk Rekomendasi</h2>
+    <div class="container mt-5">
         <div class="row">
-            <?php if ($result->num_rows > 0): ?>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($row['nama']); ?>">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo htmlspecialchars($row['nama_fashion']); ?></h5>
-                                <p class="card-text"><?php echo htmlspecialchars($row['deskripsi_fashion']); ?></p>
-                                <p class="card-text"><strong>Harga:</strong> <?php echo htmlspecialchars($row['harga']); ?></p>
-                                <button class="btn btn-primary" onclick="addToWishlist(<?php echo $row['id_rekomendasi']; ?>)">Tambah ke Wishlist</button>
-                            </div>
-                        </div>
-                    </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p class="text-center">Tidak ada produk yang tersedia.</p>
-            <?php endif; ?>
+            <div class="col-md-5">
+                <img src="<?php echo htmlspecialchars($detail['image']); ?>" alt="<?php echo htmlspecialchars($detail['nama_fashion']); ?>" class="img-fluid">
+            </div>
+            <div class="col-md-7">
+                <h2><?php echo htmlspecialchars($detail['nama_fashion']); ?></h2>
+                <p><?php echo htmlspecialchars($detail['deskripsi_fashion']); ?></p>
+                <p><strong>Harga:</strong> <?php echo htmlspecialchars($detail['harga']); ?></p>
+            </div>
         </div>
     </div>
 
