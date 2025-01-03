@@ -170,24 +170,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     }
     </script>
-    <!-- Contoh kode HTML -->
+
 <div class="container mt-5">
     <h4 id="commentCount">Komentar</h4>
     
-    <!-- Form komentar -->
     <div id="commentForm" class="form-floating mb-4">
         <textarea class="form-control" placeholder="Tulis Komentar..." id="floatingTextarea" style="height: 100px;"></textarea>
         <label for="floatingTextarea">Tuliskan komentar anda disini...</label>
-        <button class="btn btn-primary mt-2" id="submitComment">Submit</button>
+        <button class="btn btn-primary mt-2" id="submitComment">Kirim</button>
     </div>
     
-    <!-- Area komentar -->
     <div id="commentSection">
-        <!-- Komentar akan dirender secara dinamis di sini -->
     </div>
 </div>
 
-<!-- Modal Notifikasi -->
 <div class="modal" tabindex="-1" id="alertModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -205,7 +201,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 
-<!-- Bootstrap & Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -213,8 +208,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    let isLoggedIn = false; // Ubah ini menjadi 'true' jika pengguna sudah login
-    const userId = "user123"; // Ganti dengan ID pengguna yang sedang login
+    let isLoggedIn = false;
+    const userId = "user123";
 
     document.getElementById("submitComment").addEventListener("click", function() {
         if (!isLoggedIn) {

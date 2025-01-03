@@ -141,7 +141,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     <div id="commentForm" class="form-floating mb-4">
         <textarea class="form-control" placeholder="Tulis Komentar..." id="floatingTextarea" style="height: 100px;"></textarea>
         <label for="floatingTextarea">Tuliskan komentar anda disini...</label>
-        <button class="btn btn-primary mt-2" id="submitComment">Submit</button>
+        <button class="btn btn-primary mt-2" id="submitComment">Kirim</button>
     </div>
     
     <div id="commentSection">
@@ -172,8 +172,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    let isLoggedIn = false;
-    const userId = "user123"; 
+    let isLoggedIn = true;
+    const userId = "Arya Nugraha"; 
 
     document.getElementById("submitComment").addEventListener("click", function() {
         if (!isLoggedIn) {
