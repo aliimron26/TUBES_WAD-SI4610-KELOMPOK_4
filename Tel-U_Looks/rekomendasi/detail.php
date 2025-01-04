@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   </main>
   <script>
-        function addToWishlist() {
+        function addToWishlist(productId) {
         const productId = <?= json_encode($id_rekomendasi) ?>;
 
         fetch('../rekomendasi/wishlist.php', {
@@ -159,15 +159,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 });
             }
         })
-        .catch(error => {
-            console.error('Error:', error);
-            Swal.fire({
-                title: 'Error',
-                text: 'Terjadi kesalahan saat menambahkan ke wishlist.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        });
     }
     </script>
 
