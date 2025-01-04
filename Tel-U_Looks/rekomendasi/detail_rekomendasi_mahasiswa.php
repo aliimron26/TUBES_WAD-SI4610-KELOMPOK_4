@@ -53,7 +53,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <img src="../assets/rekomendasi/<?= $image; ?>" alt="<?= $nama_fashion; ?>" class="img-fluid">
+          <img src="../assets/rekomendasi/<?= htmlspecialchars($row['image']); ?>" alt="<?= htmlspecialchars($row['nama_fashion']); ?>" class="img-fluid">
           </div>
           <div class="col-md-6">
             <h2><?= $nama_fashion; ?></h2>
