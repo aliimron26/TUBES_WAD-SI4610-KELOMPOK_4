@@ -60,7 +60,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <p><strong>Deskripsi:</strong> <?= $deskripsi_fashion; ?></p>
             <p><strong>Harga:</strong> Rp <?= $harga; ?></p>
             <p><strong>Kategori:</strong> <?= $kategori; ?></p>
-            <button class="btn mt-3" style="background-color:white; color:#059ea3; border-color:#059ea3" onclick="addToWishlist(productId)">Tambah ke Wishlist</button>
+            <a href="add_wishlist.php?id=<?= $id_rekomendasi; ?>" class="btn mt-3" style="background-color:white; color:#059ea3; border-color:#059ea3">Tambah ke Wishlist</a>
             <button class="btn mt-3" style="background-color:#059ea3; color:white" data-bs-toggle="modal" data-bs-target="#platformModal">Beli Sekarang</button>
           </div>
         </div>

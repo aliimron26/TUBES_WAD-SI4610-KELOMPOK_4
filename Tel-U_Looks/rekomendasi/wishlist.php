@@ -231,7 +231,7 @@ $result = mysqli_stmt_get_result($stmt);
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <img src="<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top" alt="Produk">
+                            <img src="../assets/rekomendasi/<?= $image; ?>" alt="<?= $nama_fashion; ?>" class="img-fluid">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($row['nama_fashion']); ?></h5>
                                 <p class="card-text"><?php echo htmlspecialchars($row['deskripsi_fashion']); ?></p>
