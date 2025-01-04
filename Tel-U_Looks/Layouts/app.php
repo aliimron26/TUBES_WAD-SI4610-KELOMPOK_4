@@ -52,13 +52,6 @@ $result = mysqli_query($conn, $query);
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="#hero" class="active">Home</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" id="filterDropdown" role="button" data-bs-toggle="dropdown">Filter</a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="filterDropdown">
-                <li><a class="dropdown-item" href="#">Mahasiswa</a></li>
-                <li><a class="dropdown-item" href="#">Dosen</a></li>
-            </ul>
-          </li>
           <li><a href="../artikel/artikel.php">Artikel</a></li>
           <li><a href="#product">Rekomendasi</a></li>
           <li><a href="../rekomendasi/wishlist.php">Wishlist</a></li>

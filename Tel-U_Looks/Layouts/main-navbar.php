@@ -24,13 +24,6 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="../Layouts/app.php" data-sound="home">Home</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-white" id="filterDropdown" role="button" data-bs-toggle="dropdown" data-sound="filter">Filter</a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="filterDropdown">
-                <li><a class="dropdown-item" href="#" data-sound="mahasiswa">Mahasiswa</a></li>
-                <li><a class="dropdown-item" href="#" data-sound="dosen">Dosen</a></li>
-              </ul>
-            </li>
             <li class="nav-item"><a class="nav-link text-white" href="../artikel/artikel.php" data-sound="artikel">Artikel</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="#" data-sound="rekomendasi">Rekomendasi</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="../rekomendasi/wishlist.php" data-sound="wishlist">Wishlist</a></li>
