@@ -46,7 +46,7 @@ CREATE TABLE contact (
     nama_pengirim VARCHAR(100), 
     subjek TEXT NOT NULL,
     isi_pesan TEXT NOT NULL,
-    status VARCHAR(10)
+    status VARCHAR(10)
 );
 
 CREATE TABLE articles (

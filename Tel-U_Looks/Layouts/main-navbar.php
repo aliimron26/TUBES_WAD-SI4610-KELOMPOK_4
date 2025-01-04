@@ -9,7 +9,6 @@
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Poppins:wght@100;300;400;500;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/navbar.css">
-  <title>Navbar with Sound</title>
 </head>
 <body>
   <!-- Header Section -->
