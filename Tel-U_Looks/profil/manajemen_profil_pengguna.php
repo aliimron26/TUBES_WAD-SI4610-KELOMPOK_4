@@ -130,16 +130,6 @@ $interest = isset($_SESSION['interest']) ? explode(",", $_SESSION['interest']) :
                                         <textarea class="form-control" style="background-color: var(--base-variant); color: var(--text-color);" rows="5" name="bio" id="bio"><?= htmlspecialchars($bio ?? '') ?></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-custom" onclick="addBio()">Add Bio</button>
-                                        <script>
-                                            function addBio() {
-                                                var bio = document.getElementById("bio").value;
-                                                document.cookie = "bio=" + bio;
-                                                alert("Bio has been added successfully.");
-                                            }
-                                        </script>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="form-label" style="color: var(--text-color);">Interest Fashion</label>
                                         <select class="custom-select" id="interest-fashion" name="interest[]" multiple style="background-color: var(--base-variant); color: var(--text-color);">
                                             <?php
@@ -277,9 +267,27 @@ $interest = isset($_SESSION['interest']) ? explode(",", $_SESSION['interest']) :
             <script>
                 function saveChanges() {
                     // untuk menyimpan perubahan
-                    alert('Changes have been saved successfully.');
+                    var bio = document.getElementById('bio').value;
+                    var interests = [];
+                    var badges = document.querySelectorAll("#interest-list .badge");
+                    badges.forEach(function(badge) {
+                        interests.push(badge.textContent.trim().slice(0, -1)); 
+                    });
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.cookie = "bio=" + bio;
+                            document.cookie = "interest-fashion=" + encodeURIComponent(interests.join(",")) + "; path=/";
+                            alert('Changes have been saved successfully.');
+                        }
+                    };
+                    xhttp.open("POST", "update_profile.php", true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.send("bio=" + bio + "&interests=" + encodeURIComponent(interests.join(",")));
                 }
             </script>
+            
             <button id="resetButton" type="button" class="btn btn-default" onclick="resetToDefault()">Reset</button>
             <script>
                 // Nilai default
