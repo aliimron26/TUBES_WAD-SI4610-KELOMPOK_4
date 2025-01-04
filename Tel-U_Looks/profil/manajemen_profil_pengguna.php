@@ -130,6 +130,16 @@ $interest = isset($_SESSION['interest']) ? explode(",", $_SESSION['interest']) :
                                         <textarea class="form-control" style="background-color: var(--base-variant); color: var(--text-color);" rows="5" name="bio" id="bio"><?= htmlspecialchars($bio ?? '') ?></textarea>
                                     </div>
                                     <div class="form-group">
+                                        <button type="button" class="btn btn-custom" onclick="addBio()">Add Bio</button>
+                                        <script>
+                                            function addBio() {
+                                                var bio = document.getElementById("bio").value;
+                                                document.cookie = "bio=" + bio;
+                                                alert("Bio has been added successfully.");
+                                            }
+                                        </script>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-label" style="color: var(--text-color);">Interest Fashion</label>
                                         <select class="custom-select" id="interest-fashion" name="interest[]" multiple style="background-color: var(--base-variant); color: var(--text-color);">
                                             <?php
