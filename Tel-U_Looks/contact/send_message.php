@@ -1,36 +1,46 @@
 <?php
-include '../db.php'; // Pastikan file ini berisi koneksi ke database dan menggunakan variabel $conn
+include '../db.php'; // Pastikan koneksi database valid
 
-// Periksa apakah form telah disubmit
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Ambil data dari form dan hindari kesalahan dengan real_escape_string
-    $nama = $conn->real_escape_string($_POST['Nama']);
-    $subject = $conn->real_escape_string($_POST['subject']);
-    $message = $conn->real_escape_string($_POST['message']);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Ambil data dari form
+    $nama = trim($_POST['Nama'] ?? '');
+    $subject = trim($_POST['subject'] ?? '');
+    $message = trim($_POST['message'] ?? '');
     $status = 'Terkirim';
 
-    // Validasi data
-    if (!empty($nama) && !empty($subject) && !empty($message)) {
-        // Query untuk menyimpan data ke tabel contact
-        $sql = "INSERT INTO contact (nama_pengirim, subjek, isi_pesan, status) 
-                VALUES ('$nama', '$subject', '$message', '$status')";
-
-        if ($conn->query($sql) === TRUE) {
-            // Redirect ke halaman ../index.php setelah berhasil
-            header("Location: ../index.php#contact?status=success");
-            exit();
-        } else {
-            // Redirect dengan pesan kesalahan
-            header("Location: ../index.php#contact?status=error&message=" . urlencode($conn->error));
-            exit();
-        }
-    } else {
-        // Redirect jika ada field yang kosong
-        header("Location: ../index.php#contact?status=error&message=" . urlencode("Harap isi semua bidang."));
-        exit();
+    // Validasi input
+    if (empty($nama) || empty($subject) || empty($message)) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Semua field harus diisi.',
+        ]);
+        exit;
     }
-}
 
-// Tutup koneksi
-$conn->close();
+    // Gunakan prepared statement untuk keamanan
+    $stmt = $conn->prepare("INSERT INTO contact (nama_pengirim, subjek, isi_pesan, status) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $nama, $subject, $message, $status);
+
+    if ($stmt->execute()) {
+        echo json_encode([
+            'success' => true,
+            'message' => 'Pesan berhasil dikirim.',
+        ]);
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Gagal mengirim pesan. Silakan coba lagi.',
+        ]);
+    }
+
+    $stmt->close();
+    $conn->close();
+    exit;
+} else {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Metode tidak valid.',
+    ]);
+    exit;
+}
 ?>

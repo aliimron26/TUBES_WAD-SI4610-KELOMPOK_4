@@ -69,20 +69,6 @@ $result = mysqli_query($conn, $query);
   <audio id="kontak-sound" src="assets/audio/kontak.mp3"></audio>
   <audio id="login-sound" src="assets/audio/login.mp3"></audio>
 
-<!-- JavaScript for Sound Effect -->
-<script>
-  // Add sound effect on hover
-  document.querySelectorAll('[data-sound]').forEach(item => {
-    item.addEventListener('mouseover', () => {
-      const soundId = item.getAttribute('data-sound');
-      const sound = document.getElementById(soundId + '-sound');
-      if (sound) {
-        sound.play();
-      }
-    });
-  });
-</script>
-
 
 
   <main class="main">
@@ -213,32 +199,31 @@ $result = mysqli_query($conn, $query);
           </div>
 
           <div class="col-lg-8">
-            <form action="contact/send_message.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              <div class="row gy-4">
+            <form action="contact/send_message.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200" id="contactForm">
+                <div class="row gy-4">
 
-              <div class="col-md-12">
-                  <input type="text" class="form-control" name="Nama" placeholder="Nama" required="">
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" name="Nama" placeholder="Nama" required>
+                    </div>
+
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                    </div>
+
+                    <div class="col-md-12">
+                        <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <div id="loading" class="loading" style="display:none;">Loading...</div>
+                        <div id="sent-message" class="sent-message" style="display:none;">Your message has been sent. Thank you!</div>
+                        <div id="error-message" class="error-message" style="display:none;"></div>
+                        <button type="submit">Send Message</button>
+                    </div>
+
                 </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
             </form>
-          </div><!-- End Contact Form -->
+        </div>
 
         </div>
 
@@ -284,6 +269,40 @@ $result = mysqli_query($conn, $query);
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Mencegah form mengirim secara default
+        const form = e.target;
+        const formData = new FormData(form);
+
+        // Menampilkan loading
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('sent-message').style.display = 'none';
+        document.getElementById('error-message').style.display = 'none';
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('loading').style.display = 'none';
+            if (data.success) {
+                document.getElementById('sent-message').style.display = 'block';
+                form.reset(); // Mengosongkan form jika berhasil
+            } else {
+                document.getElementById('error-message').innerText = data.message || 'An error occurred.';
+                document.getElementById('error-message').style.display = 'block';
+            }
+        })
+        .catch(error => {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error-message').innerText = 'An error occurred. Please try again.';
+            document.getElementById('error-message').style.display = 'block';
+        });
+    });
+</script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
