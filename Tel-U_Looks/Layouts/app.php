@@ -140,7 +140,7 @@ $result = mysqli_query($conn, $query);
         <div class="row justify-content-center aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
           <div class="col-xl-10">
             <div class="text-center">
-              <a href="rekomendasi_halaman_dua.php" class="cta-btn">Lihat Lainnya</a>
+              <a href="../rekomendasi/full_rekomendasi.php" class="cta-btn">Lihat Lainnya</a>
             </div>
           </div>
         </div>
