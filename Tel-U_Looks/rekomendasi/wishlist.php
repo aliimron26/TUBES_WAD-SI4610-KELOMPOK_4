@@ -3,8 +3,8 @@ session_start();
 include '../db.php';
 include '../Layouts/main-navbar.php';
 
-$query = "SELECT r.nama_fashion, r.harga, r.image 
-          FROM wishlist w 
+$query = "SELECT r.id_rekomendasi, r.nama_fashion, r.harga, r.image, r.deskripsi_fashion 
+          FROM wishlist w
           JOIN rekomendasi r ON w.id_rekomendasi = r.id_rekomendasi";
 $stmt = mysqli_prepare($conn, $query);
 mysqli_stmt_execute($stmt);

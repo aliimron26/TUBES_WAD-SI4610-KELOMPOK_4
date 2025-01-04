@@ -42,25 +42,47 @@ $result = mysqli_query($conn, $query);
 <body class="index-page">
 
   <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+      <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a class="logo d-flex align-items-center">
-        <h1 class="sitename">Tel-U Looks</h1>
-      </a>
+        <a class="logo d-flex align-items-center">
+          <h1 class="sitename">Tel-U Looks</h1>
+        </a>
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">Tentang</a></li>
-          <li><a href="#product">Rekomendasi</a></li>
-          <li><a href="#contact">Kontak</a></li>
-          <li><a href="users/login_user.php">Login</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="#hero" class="active" data-sound="home">Home</a></li>
+            <li><a href="#about" data-sound="about">Tentang</a></li>
+            <li><a href="#product" data-sound="rekomendasi">Rekomendasi</a></li>
+            <li><a href="#contact" data-sound="kontak">Kontak</a></li>
+            <li><a href="users/login_user.php" data-sound="login">Login</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
 
-    </div>
+      </div>
   </header>
+
+  <!-- Audio Elements -->
+  <audio id="home-sound" src="assets/audio/home.mp3"></audio>
+  <audio id="about-sound" src="assets/audio/about.mp3"></audio>
+  <audio id="rekomendasi-sound" src="assets/audio/rekomendasi.mp3"></audio>
+  <audio id="kontak-sound" src="assets/audio/kontak.mp3"></audio>
+  <audio id="login-sound" src="assets/audio/login.mp3"></audio>
+
+<!-- JavaScript for Sound Effect -->
+<script>
+  // Add sound effect on hover
+  document.querySelectorAll('[data-sound]').forEach(item => {
+    item.addEventListener('mouseover', () => {
+      const soundId = item.getAttribute('data-sound');
+      const sound = document.getElementById(soundId + '-sound');
+      if (sound) {
+        sound.play();
+      }
+    });
+  });
+</script>
+
 
 
   <main class="main">
@@ -255,8 +277,6 @@ $result = mysqli_query($conn, $query);
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
