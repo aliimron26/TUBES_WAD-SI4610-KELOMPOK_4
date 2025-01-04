@@ -290,7 +290,7 @@ $result = mysqli_query($conn, $query);
             document.getElementById('loading').style.display = 'none';
             if (data.success) {
                 document.getElementById('sent-message').style.display = 'block';
-                form.reset(); // Mengosongkan form jika berhasil
+                form.reset(); 
             } else {
                 document.getElementById('error-message').innerText = data.message || 'An error occurred.';
                 document.getElementById('error-message').style.display = 'block';
@@ -299,7 +299,6 @@ $result = mysqli_query($conn, $query);
         .catch(error => {
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error-message').innerText = 'An error occurred. Please try again.';
-            document.getElementById('error-message').style.display = 'block';
         });
     });
 </script>
