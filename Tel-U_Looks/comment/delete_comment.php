@@ -4,43 +4,38 @@ include('db.php');
 
 // Cek apakah pengguna sudah login
 if (!isset($_SESSION['id_user'])) {
-    header("Location: login.php"); // Jika belum login, arahkan ke halaman login
+    echo json_encode(['status' => 'error', 'message' => 'Anda harus login untuk menghapus komentar.']);
     exit();
 }
 
-// Pastikan ada id_komentar yang dikirim melalui URL
-if (!isset($_GET['id_komentar'])) {
-    echo "ID komentar tidak ditemukan.";
-    exit();
-}
+// Pastikan metode adalah POST dan ID komentar diberikan
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_komentar'])) {
+    $id_user = $_SESSION['id_user'];
+    $id_komentar = mysqli_real_escape_string($conn, $_POST['id_komentar']);
 
-$id_komentar = $_GET['id_komentar']; // ID komentar yang ingin dihapus
+    // Periksa apakah komentar milik pengguna yang sedang login
+    $sql_check = "SELECT id_user FROM komentar WHERE id_komentar = '$id_komentar'";
+    $result_check = mysqli_query($conn, $sql_check);
 
-// Ambil komentar yang akan dihapus berdasarkan id_komentar
-$sql = "SELECT * FROM komentar WHERE id_komentar = '$id_komentar'";
-$result = mysqli_query($conn, $sql);
+    if ($result_check && mysqli_num_rows($result_check) > 0) {
+        $komentar = mysqli_fetch_assoc($result_check);
 
-if (mysqli_num_rows($result) > 0) {
-    $komentar = mysqli_fetch_assoc($result);
+        if ($komentar['id_user'] != $id_user) {
+            echo json_encode(['status' => 'error', 'message' => 'Anda tidak memiliki izin untuk menghapus komentar ini.']);
+            exit();
+        }
 
-    // Cek apakah komentar tersebut milik pengguna yang sedang login
-    if ($komentar['id_user'] != $_SESSION['id_user']) {
-        echo "Anda tidak memiliki izin untuk menghapus komentar ini.";
-        exit();
-    }
-
-    // Jika komentar milik pengguna, hapus komentar
-    $sql_delete = "DELETE FROM komentar WHERE id_komentar = '$id_komentar'";
-
-    if (mysqli_query($conn, $sql_delete)) {
-        echo "<p>Komentar berhasil dihapus!</p>";
+        // Hapus komentar
+        $sql_delete = "DELETE FROM komentar WHERE id_komentar = '$id_komentar'";
+        if (mysqli_query($conn, $sql_delete)) {
+            echo json_encode(['status' => 'success', 'message' => 'Komentar berhasil dihapus.']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Terjadi kesalahan saat menghapus komentar.']);
+        }
     } else {
-        echo "<p>Error: " . mysqli_error($conn) . "</p>";
+        echo json_encode(['status' => 'error', 'message' => 'Komentar tidak ditemukan.']);
     }
 } else {
-    echo "Komentar tidak ditemukan.";
-    exit();
+    echo json_encode(['status' => 'error', 'message' => 'Permintaan tidak valid.']);
 }
 ?>
-
-<a href="view_reviews.php?id_rekomendasi=<?php echo $komentar['id_rekomendasi']; ?>">Kembali ke halaman rekomendasi</a>
