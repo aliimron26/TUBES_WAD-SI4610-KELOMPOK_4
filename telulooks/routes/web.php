@@ -81,34 +81,34 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-// // Admin Routes
-// Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
-//     // Dashboard
-//     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
-//     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+// Admin Routes
+Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Dashboard
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-//     // Users Management
-//     Route::get('/users', [AdminController::class, 'listUsers'])->name('users.index');
+    // Users Management
+    Route::get('/users', [AdminController::class, 'listUsers'])->name('users.index');
 
-//     // Contact Management
-//     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-//     Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
-//     Route::put('/contact/{id}', [ContactController::class, 'updateStatus'])->name('contact.update');
-//     Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
+    // Contact Management
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
+    Route::put('/contact/{id}', [ContactController::class, 'updateStatus'])->name('contact.update');
+    Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
 
-//     // Article Management
-//     Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
-//     Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
-//     Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
-//     Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
-//     Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
-//     Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+    // Article Management
+    Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+    Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+    Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
+    Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 
-//     // Rekomendasi Management
-//     Route::get('/rekomendasi', [AdminController::class, 'listRekomendasi'])->name('rekomendasi.index');
-//     Route::get('/rekomendasi/create', [AdminController::class, 'createRekomendasi'])->name('rekomendasi.create');
-//     Route::post('/rekomendasi', [AdminController::class, 'storeRekomendasi'])->name('rekomendasi.store');
-//     Route::get('/rekomendasi/{id}/edit', [AdminController::class, 'updateRekomendasi'])->name('rekomendasi.edit');
-//     Route::put('/rekomendasi/{id}', [AdminController::class, 'saveUpdateRekomendasi'])->name('rekomendasi.update');
-//     Route::delete('/rekomendasi/{id}', [AdminController::class, 'deleteRekomendasi'])->name('rekomendasi.destroy');
-// });
+    // Rekomendasi Management
+    Route::get('/rekomendasi', [AdminController::class, 'listRekomendasi'])->name('rekomendasi.index');
+    Route::get('/rekomendasi/create', [AdminController::class, 'createRekomendasi'])->name('rekomendasi.create');
+    Route::post('/rekomendasi', [AdminController::class, 'storeRekomendasi'])->name('rekomendasi.store');
+    Route::get('/rekomendasi/{id}/edit', [AdminController::class, 'updateRekomendasi'])->name('rekomendasi.edit');
+    Route::put('/rekomendasi/{id}', [AdminController::class, 'saveUpdateRekomendasi'])->name('rekomendasi.update');
+    Route::delete('/rekomendasi/{id}', [AdminController::class, 'deleteRekomendasi'])->name('rekomendasi.destroy');
+});
